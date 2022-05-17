@@ -14,12 +14,13 @@ const tournamentSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare(title, description){
+      prepare(title, description, teamId){
           return{
               payload: {
                   id: nanoid(),
                   title,
-                  description
+                  description,
+                  teamId
               }
           }
       }

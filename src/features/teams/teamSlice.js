@@ -1,17 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = [
-    { id: '0', name: 'Takim 1' },
-    { id: '1', name: 'Takim 2' },
-    { id: '2', name: 'Takim 3' }
-]
+  { id: "0", name: "Takim 1" },
+  { id: "1", name: "Takim 2" },
+  { id: "2", name: "Takim 3" },
+];
 
 const teamSlice = createSlice({
-    name: 'users',
-    initialState,
-    reducers: {}
-})
+  name: "teams",
+  initialState,
+  reducers: {
+    teamAdded: {
+        reducer(state, action) {
+            state.push(action.payload);
+          },
+          prepare(name) {
+            return {
+              payload: {
+                id: nanoid(),
+                name,
+              },
+            };
+          },
+    }
+  },
+});
 
-export const selectAllUsers = (state) => state.users;
+export const selectAllTeams = (state) => state.teams;
 
-export default teamSlice.reducer
+export const {teamAdded} = teamSlice.actions
+export default teamSlice.reducer;
