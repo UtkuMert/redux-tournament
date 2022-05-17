@@ -1,10 +1,24 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../api/axios";
 
-const initialState = [
-  { id: "1", title: "Tournament 1", description: "First tournament" },
-  { id: "2", title: "Tournament 2", description: "Second tournament" },
-  { id: "3", title: "Tournament 3", description: "Third tournament" },
-];
+const initialState = {
+  tournaments: [{}],
+  status: "idle",
+  error: null,
+};
+
+export const fetchTournaments = createAsyncThunk(
+  "/tournaments/get/list",
+  async () => {
+    try {
+      const response = await axios.get("/tournaments/get/list");
+      //console.log(response?.data?.data[0].tournamentName);
+      return response.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 
 const tournamentSlice = createSlice({
   name: "tournaments",
@@ -12,22 +26,55 @@ const tournamentSlice = createSlice({
   reducers: {
     tournamentAdded: {
       reducer(state, action) {
-        state.push(action.payload);
+        state.tournaments.push(action.payload);
       },
-      prepare(title, description, teamId){
-          return{
-              payload: {
-                  id: nanoid(),
-                  title,
-                  description,
-                  teamId
-              }
-          }
-      }
+      prepare(title, description, teamId) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            description,
+            teamId,
+          },
+        };
+      },
     },
+  
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchTournaments.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTournaments.fulfilled, (state, action) => {
+        state.status = "succeeded";
+
+        state.tournaments = action?.payload?.data;
+
+      
+      })
+      .addCase(fetchTournaments.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+    // .addCase(addNewPost.fulfilled, (state, action) => {
+    //   action.payload.userId = Number(action.payload.userId);
+    //   action.payload.date = new Date().toISOString();
+    //   action.payload.reactions = {
+    //     thumbsUp: 0,
+    //     hooray: 0,
+    //     heart: 0,
+    //     rocket: 0,
+    //     eyes: 0,
+    //   };
+    //   console.log(action.payload);
+    //   state.posts.push(action.payload);
+    // });
   },
 });
-export const selectAllTournaments = (state) => state.tournaments;
+export const selectAllTournaments = (state) => state.tournaments.tournaments;
+export const getTournamentsStatus = (state) => state.tournaments.status;
+export const getTournamentsError = (state) => state.tournaments.error;
 
 export const { tournamentAdded } = tournamentSlice.actions;
 
