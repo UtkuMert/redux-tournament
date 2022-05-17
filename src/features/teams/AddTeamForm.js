@@ -1,27 +1,35 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { teamAdded } from "./teamSlice";
+import { addNewTeam } from "./teamSlice";
 
 export const AddTeamForm = () => {
+  const dispatch = useDispatch();
 
-    const [name, setName] = useState("")
-    const dispatch = useDispatch();
+  const [teamName, setTeamName] = useState("");
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-    const onNameChange = (e) => setName(e.target.value);
+  const onNameChange = (e) => setTeamName(e.target.value);
 
+  const canSave =
+    [teamName].every(Boolean) && addRequestStatus === "idle";
     const onSaveTournamentClicked = () => {
-        if (name) {
-          dispatch(
-            teamAdded(name) // burada uzun yazmak yerine reducer ile bu bilgiler almayi sagladik
-          );
-          setName(""); // sonrasinda sayfayi temizlemek icin
-          
+      if (canSave) {
+        try {
+          setAddRequestStatus("pending");
+          dispatch(addNewTeam({ teamName})).unwrap();
+  
+          setTeamName("");
+        } catch (error) {
+          console.error("Failed to save the post", error);
+        } finally {
+          setAddRequestStatus("idle");
         }
-      };
-      const canSave = Boolean(name);
+      }
+    };
+  
   return (
-     <section>
+    <section>
       <h2>Add a New Team</h2>
       <form className="flex flex-direction">
         <label htmlFor="teamName">Team Name:</label>
@@ -29,7 +37,7 @@ export const AddTeamForm = () => {
           type="text"
           id="teamName"
           name="teamName"
-          value={name}
+          value={teamName}
           onChange={onNameChange}
           className="input input-bordered w-full max-w-xs"
         />
@@ -43,6 +51,5 @@ export const AddTeamForm = () => {
         </button>
       </form>
     </section>
-  )
-}
-
+  );
+};

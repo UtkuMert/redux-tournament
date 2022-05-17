@@ -1,30 +1,34 @@
-import { useSelector } from "react-redux";
-import { selectAllTeams } from "./teamSlice";
-
+import { useSelector, useDispatch} from "react-redux";
+import { selectAllTeams, getTeamsError, getTeamsStatus, fetchTeams } from "./teamSlice";
+import { useEffect } from "react";
+import {TeamExcerpt} from './TeamExcerpt'
 export const TeamList = () => {
+  const dispatch = useDispatch();
   const teams = useSelector(selectAllTeams);
+  const teamsStatus = useSelector(getTeamsStatus);
+  const teamsError = useSelector(getTeamsError);
 
-  const renderedTeams = teams.map((team) => (
-    <div key={team.id} className="card bg-base-100 shadow-xl w-96">
-      <figure>
-        <img
-          src="https://api.lorem.space/image/shoes?w=400&h=225"
-          alt="Shoes"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{team.name}</h2>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Team Details</button>
-        </div>
-      </div>
-    </div>
-  ));
+  useEffect(() => {
+    if (teamsStatus === "idle") {
+      dispatch(fetchTeams());
+    }
+  }, [teamsStatus, dispatch]);
+
+  let content;
+  if (teamsStatus === "loading") {
+    content = <p>"Loading"</p>;
+  } else if (teamsStatus === "succeeded") {
+    content = teams.map((team) => (
+      <TeamExcerpt key={team.id} team={team} />
+    ));
+  } else if (teamsStatus === "failed") {
+    content = <p>{teamsError}</p>;
+  }
   return (
     <section>
       <h2 className="flex justify-items-center">Teams</h2>
       <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
-        {renderedTeams}
+        {content}
       </div>
     </section>
   );

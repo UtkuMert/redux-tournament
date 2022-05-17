@@ -2,7 +2,7 @@ import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 
 const initialState = {
-  tournaments: [{}],
+  tournaments: [],
   status: "idle",
   error: null,
 };
@@ -20,6 +20,20 @@ export const fetchTournaments = createAsyncThunk(
   }
 );
 
+export const addNewTournament = createAsyncThunk(
+  "/tournaments/save",
+  async (initialTournament) => {
+    try {
+      const response = await axios.post("/tournaments/save",initialTournament);
+      console.log(response?.data);
+      return response.data;
+      
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
 const tournamentSlice = createSlice({
   name: "tournaments",
   initialState,
@@ -31,7 +45,6 @@ const tournamentSlice = createSlice({
       prepare(title, description, teamId) {
         return {
           payload: {
-            id: nanoid(),
             title,
             description,
             teamId,
@@ -39,7 +52,6 @@ const tournamentSlice = createSlice({
         };
       },
     },
-  
   },
   extraReducers(builder) {
     builder
@@ -50,26 +62,15 @@ const tournamentSlice = createSlice({
         state.status = "succeeded";
 
         state.tournaments = action?.payload?.data;
-
-      
       })
       .addCase(fetchTournaments.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewTournament.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.tournaments.push(action.payload);
       });
-    // .addCase(addNewPost.fulfilled, (state, action) => {
-    //   action.payload.userId = Number(action.payload.userId);
-    //   action.payload.date = new Date().toISOString();
-    //   action.payload.reactions = {
-    //     thumbsUp: 0,
-    //     hooray: 0,
-    //     heart: 0,
-    //     rocket: 0,
-    //     eyes: 0,
-    //   };
-    //   console.log(action.payload);
-    //   state.posts.push(action.payload);
-    // });
   },
 });
 export const selectAllTournaments = (state) => state.tournaments.tournaments;
