@@ -24,8 +24,20 @@ export const addNewTournament = createAsyncThunk(
   "/tournaments/save",
   async (initialTournament) => {
     try {
-      const response = await axios.post("/tournaments/save", initialTournament);
-      console.log(response?.data);
+      const response = await axios.post("/tournaments/save", initialTournament); 
+      return response.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
+export const updateTournament = createAsyncThunk(
+  "/tournaments/update",
+  async (initialTournament) => {
+    try {
+      const {id} = initialTournament
+      const response = await axios.put("/tournaments/update/${id}", initialTournament);
       return response.data;
     } catch (err) {
       return err.message;
@@ -69,6 +81,18 @@ const tournamentSlice = createSlice({
       .addCase(addNewTournament.fulfilled, (state, action) => {
         console.log(action.payload);
         state.tournaments.push(action.payload);
+      })
+      .addCase(updateTournament.fulfilled, (state, action) => {
+        if(!action.payload?.id){
+          console.log("Update could not complete")
+          console.log(action.payload)
+          return;
+        }
+        const {id} = action.payload;
+        const tournaments = state.tournaments.filter(tournament => tournament.id !== id);
+        state.tournament = [...tournaments, action.payload]
+        console.log(action.payload);
+        
       });
   },
 });
@@ -76,11 +100,8 @@ export const selectAllTournaments = (state) => state.tournaments.tournaments;
 export const getTournamentsStatus = (state) => state.tournaments.status;
 export const getTournamentsError = (state) => state.tournaments.error;
 
-export const selectTournamentById = (state, id) => {
-  console.log(state.tournaments.tournaments.find((tournament) => tournament.id === id))
+export const selectTournamentById = (state, id) =>
   state.tournaments.tournaments.find((tournament) => tournament.id === id); //Turnuva bulunuyor.
-};
-
 export const { tournamentAdded } = tournamentSlice.actions;
 
 export default tournamentSlice.reducer;

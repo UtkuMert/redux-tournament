@@ -2,6 +2,7 @@ import { TournamentList } from "./features/tournaments/TournamentList";
 import { TeamList } from "./features/teams/TeamList.jsx";
 import { AddTournamentForm } from "./features/tournaments/AddTournamentForm";
 import { AddTeamForm } from "./features/teams/AddTeamForm";
+import { EditTournamentForm } from "./features/tournaments/EditTournamentForm";
 
 import { SingleTournamentPage } from "./features/tournaments/SingleTournamentPage";
 import { SingleTeamPage } from "./features/teams/SingleTeamPage";
@@ -12,12 +13,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<TeamList />} />
+        <Route index element={<TournamentList />} />
         
         <Route path="tournament">
           <Route index element={<AddTournamentForm />} />
           <Route path=":id" element={<SingleTournamentPage />} />
-          {/* <Route path="edit/:postId" element={<EditPostForm />} /> */}
+          <Route path="edit/:id" element={<EditTournamentForm />} />
         </Route>
 
         <Route path="team">

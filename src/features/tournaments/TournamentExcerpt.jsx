@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 
 export const TournamentExcerpt = ({ tournament }) => {
   return (
-    <div className="card bg-base-100 shadow-xl w-96">
+    <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <figure>
         <img
           src="https://api.lorem.space/image/shoes?w=400&h=225"
-          alt="Shoes"
+          className="rounded-t-lg"
+          alt="Tournament"
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{tournament.tournamentName}</h2>
-        <p>{tournament.description}</p>
+      <div className="p-5">
+        <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{tournament.tournamentName}</h2>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{tournament.description}</p>
         <Link to={`tournament/${tournament.id}`}>View Tournament</Link>
         <div className="card-actions justify-end">
           <button className="btn btn-primary">Details</button>

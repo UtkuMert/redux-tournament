@@ -2,17 +2,13 @@ import { useSelector } from "react-redux";
 import { selectTournamentById } from "./tournamentSlice";
 
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const SingleTournamentPage = () => {
   const { id } = useParams();
-  console.log(id);
-  const tournament = useSelector((state) =>{
-      console.log('State', state);
-      return selectTournamentById(state, Number(id))
-  }
-  );
 
-  console.log(tournament);
+  const tournament = useSelector((state) => selectTournamentById(state, Number(id)))
+
   if (!tournament) {
     return (
       <section>
@@ -23,7 +19,7 @@ export const SingleTournamentPage = () => {
 
   return (
     <article>
-      <p>GIRDI</p>
+      <Link to={`/tournament/edit/${id}`}>Edit Tournament</Link>
       <h2>{tournament.tournamentName}</h2>
       <p>{tournament.description}</p>
     </article>
