@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
 export function TeamExcerpt({team}) {
   return (
@@ -11,6 +11,7 @@ export function TeamExcerpt({team}) {
     </figure>
     <div className="card-body">
       <h2 className="card-title">{team.teamName}</h2>
+      <Link to={`team/${team.id}`}>View Team</Link>
       <div className="card-actions justify-end">
         <button className="btn btn-primary">Team Details</button>
       </div>

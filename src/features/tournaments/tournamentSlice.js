@@ -24,10 +24,9 @@ export const addNewTournament = createAsyncThunk(
   "/tournaments/save",
   async (initialTournament) => {
     try {
-      const response = await axios.post("/tournaments/save",initialTournament);
+      const response = await axios.post("/tournaments/save", initialTournament);
       console.log(response?.data);
       return response.data;
-      
     } catch (err) {
       return err.message;
     }
@@ -76,6 +75,11 @@ const tournamentSlice = createSlice({
 export const selectAllTournaments = (state) => state.tournaments.tournaments;
 export const getTournamentsStatus = (state) => state.tournaments.status;
 export const getTournamentsError = (state) => state.tournaments.error;
+
+export const selectTournamentById = (state, id) => {
+  console.log(state.tournaments.tournaments.find((tournament) => tournament.id === id))
+  state.tournaments.tournaments.find((tournament) => tournament.id === id); //Turnuva bulunuyor.
+};
 
 export const { tournamentAdded } = tournamentSlice.actions;
 

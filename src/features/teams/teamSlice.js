@@ -13,7 +13,6 @@ export const fetchTeams = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get("/teams/get/list");
-      console.log(response);
       return response.data;
     } catch (err) {
       return err.message;
@@ -76,6 +75,11 @@ const teamSlice = createSlice({
 export const selectAllTeams = (state) => state.teams.teams;
 export const getTeamsStatus = (state) => state.teams.status;
 export const getTeamsError = (state) => state.teams.error;
+
+export const selectTeamById = (state, id) => {
+  console.log(state.teams.teams.find((team) => team.id === id))
+  state.tournaments.tournaments.find((team) => team.id === id); //Turnuva bulunuyor.
+};
 
 export const {teamAdded} = teamSlice.actions
 export default teamSlice.reducer;
