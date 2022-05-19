@@ -27,8 +27,8 @@ export const TournamentList = () => {
   if (tournamentsStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (tournamentsStatus === "succeeded") {
-    content = tournaments.map((tournament) => (
-      <TournamentExcerpt key={tournament.id} tournament={tournament} />
+    content = tournaments?.map((tournament) => (
+      <TournamentExcerpt key={tournament?.id} tournament={tournament} />
     ));
   } else if (tournamentsStatus === "failed") {
     content = <p>{error}</p>;

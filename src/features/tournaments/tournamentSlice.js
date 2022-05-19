@@ -12,8 +12,8 @@ export const fetchTournaments = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get("/tournaments/get/list");
-      //console.log(response?.data?.data[0].tournamentName);
-      return response.data;
+      console.log(response?.data);
+      return response?.data;
     } catch (err) {
       return err.message;
     }
@@ -36,8 +36,10 @@ export const updateTournament = createAsyncThunk(
   "/tournaments/update",
   async (initialTournament) => {
     try {
+      console.log(initialTournament)
       const {id} = initialTournament
-      const response = await axios.put("/tournaments/update/${id}", initialTournament);
+      console.log(id);
+      const response = await axios.put(`/tournaments/update/${id}`, initialTournament);
       return response.data;
     } catch (err) {
       return err.message;
