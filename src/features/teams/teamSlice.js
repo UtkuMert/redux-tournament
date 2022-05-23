@@ -24,9 +24,10 @@ export const addNewTeam = createAsyncThunk(
   "/teams/save/",
   async (initialTeam) => {
     try {
-      const response = await axios.post("/teams/save/1",initialTeam);
+      const {tournamentId} =initialTeam
+      const response = await axios.post(`/teams/save/${tournamentId}`,initialTeam);
       console.log(response?.data);
-      return response.data;
+      return response?.data.data;
       
     } catch (err) {
       return err.message;
@@ -66,8 +67,9 @@ const teamSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addNewTeam.fulfilled, (state, action) => {
+        
         console.log(action.payload);
-        state.teams.push(action.payload);
+        return {...state, teams: [...state.teams, action.payload]}
       });
   },
 });
@@ -76,10 +78,7 @@ export const selectAllTeams = (state) => state.teams.teams;
 export const getTeamsStatus = (state) => state.teams.status;
 export const getTeamsError = (state) => state.teams.error;
 
-export const selectTeamById = (state, id) => {
-  console.log(state.teams.teams.find((team) => team.id === id))
-  state.tournaments.tournaments.find((team) => team.id === id); //Turnuva bulunuyor.
-};
-
+export const selectTeamById = (state, id) =>
+  state.teams.teams.find((team) => team.id === id); //Turnuva bulunuyor.
 export const {teamAdded} = teamSlice.actions
 export default teamSlice.reducer;

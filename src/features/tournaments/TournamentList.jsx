@@ -15,8 +15,6 @@ export const TournamentList = () => {
   const tournamentsStatus = useSelector(getTournamentsStatus);
   const error = useSelector(getTournamentsError);
 
-
-
   useEffect(() => {
     if (tournamentsStatus === "idle") {
       dispatch(fetchTournaments());

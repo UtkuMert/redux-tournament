@@ -5,14 +5,10 @@ import { useParams } from "react-router-dom";
 
 export const SingleTeamPage = () => {
     const { id } = useParams();
-    console.log(id);
-    const team = useSelector((state) =>{
-        console.log('State', state.teams);
-        return selectTeamById(state, Number(id))
-    }
-    );
-  
-    console.log(team);
+    
+ 
+    const team = useSelector((state) => selectTeamById(state, Number(id)))
+   
     if (!team) {
       return (
         <section>

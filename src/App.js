@@ -3,18 +3,21 @@ import { TeamList } from "./features/teams/TeamList.jsx";
 import { AddTournamentForm } from "./features/tournaments/AddTournamentForm";
 import { AddTeamForm } from "./features/teams/AddTeamForm";
 import { EditTournamentForm } from "./features/tournaments/EditTournamentForm";
+import { PlayerList } from "./features/players/PlayerList";
 
 import { SingleTournamentPage } from "./features/tournaments/SingleTournamentPage";
 import { SingleTeamPage } from "./features/teams/SingleTeamPage";
 import { Layout } from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
+import { Select } from "@mantine/core";
 
 export default function App() {
   return (
+
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<TournamentList />} />
-        
+        <Route index element={<TeamList />} />
+
         <Route path="tournament">
           <Route index element={<AddTournamentForm />} />
           <Route path=":id" element={<SingleTournamentPage />} />
@@ -26,6 +29,7 @@ export default function App() {
           <Route path=":id" element={<SingleTeamPage />} />
           {/* <Route path="edit/:postId" element={<EditPostForm />} /> */}
         </Route>
+
       </Route>
     </Routes>
   );

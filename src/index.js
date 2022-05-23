@@ -7,6 +7,13 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'flowbite';
 
+import { fetchTournaments } from "./features/tournaments/tournamentSlice";
+import { fetchTeams } from "./features/teams/teamSlice";
+
+
+store.dispatch(fetchTournaments());
+store.dispatch(fetchTeams());
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mantine/core": "^4.2.6",
+    "@mantine/form": "^4.2.6",
+    "@mantine/hooks": "^4.2.6",
+    "@mantine/modals": "^4.2.6",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

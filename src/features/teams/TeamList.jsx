@@ -2,6 +2,7 @@ import { useSelector, useDispatch} from "react-redux";
 import { selectAllTeams, getTeamsError, getTeamsStatus, fetchTeams } from "./teamSlice";
 import { useEffect } from "react";
 import {TeamExcerpt} from './TeamExcerpt'
+
 export const TeamList = () => {
   const dispatch = useDispatch();
   const teams = useSelector(selectAllTeams);

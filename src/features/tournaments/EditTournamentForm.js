@@ -37,7 +37,7 @@ export const EditTournamentForm = () => {
     if (canSave) {
       try {
         setRequestStatus("pending");
-        dispatch(updateTournament({ tournamentName, description })).unwrap();
+        dispatch(updateTournament({ id,tournamentName, description })).unwrap();
 
         setTournamentName("");
         setDescription("");
