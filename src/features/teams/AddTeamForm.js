@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { addNewTeam } from "./teamSlice";
-import { selectAllTournaments } from "../tournaments/tournamentSlice";
-import { useNavigate } from "react-router-dom";
+import { selectAllTournaments,selectTournamentById } from "../tournaments/tournamentSlice";
+
 export const AddTeamForm = () => {
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  const tournament = useSelector((state) =>
+  selectTournamentById(state, Number(id))
+);
+const [tournamentName, setTournamentName] = useState(
+  tournament?.tournamentName
+);
 
   const [teamName, setTeamName] = useState("");
   const [tournamentId, setTournamentId] = useState("");
@@ -19,16 +27,16 @@ export const AddTeamForm = () => {
   const onTournamentChanged = (e) => setTournamentId(e.target.value);
 
   const canSave =
-    [teamName, tournamentId].every(Boolean) && addRequestStatus === "idle";
+    [teamName,id ].every(Boolean) && addRequestStatus === "idle";
 
   const onSaveTournamentClicked = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(addNewTeam({ teamName, tournamentId })).unwrap();
+        dispatch(addNewTeam({ teamName, id })).unwrap();
 
         setTeamName("");
-        setTournamentId("");
+        //setTournamentId("");
         navigate("/")
       } catch (error) {
         console.error("Failed to save the team", error);
@@ -37,11 +45,11 @@ export const AddTeamForm = () => {
       }
     }
   };
-  const tournamentsOptions = tournaments.map((tournament) => (
-    <option key={tournament?.id} value={tournament?.id}>
-      {tournament?.tournamentName}
-    </option>
-  ));
+  // const tournamentsOptions = tournaments.map((tournament) => (
+  //   <option key={tournament?.id} value={tournament?.id}>
+  //     {tournament?.tournamentName}
+  //   </option>
+  // ));
   return (
     <section>
       <h2>Add a New Team</h2>
@@ -56,14 +64,15 @@ export const AddTeamForm = () => {
           className="input input-bordered w-full max-w-xs"
         />
         <label htmlFor="tournament">Tournament:</label>
-        <select
+        <input readOnly value={tournamentName} />
+        {/* <select
           id="tournament"
           value={tournamentId}
           onChange={onTournamentChanged}
         >
           <option value=""></option>
           {tournamentsOptions}
-        </select>
+        </select> */}
         <button
           type="button"
           onClick={onSaveTournamentClicked}

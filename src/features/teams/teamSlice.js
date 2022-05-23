@@ -24,8 +24,8 @@ export const addNewTeam = createAsyncThunk(
   "/teams/save/",
   async (initialTeam) => {
     try {
-      const {tournamentId} =initialTeam
-      const response = await axios.post(`/teams/save/${tournamentId}`,initialTeam);
+      const {id} =initialTeam
+      const response = await axios.post(`/teams/save/${id}`,initialTeam);
       console.log(response?.data);
       return response?.data.data;
       

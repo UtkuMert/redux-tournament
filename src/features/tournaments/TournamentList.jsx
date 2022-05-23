@@ -20,14 +20,12 @@ export const TournamentList = () => {
       dispatch(fetchTournaments());
     }
   }, [tournamentsStatus, dispatch]);
- 
+
   let content;
   if (tournamentsStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (tournamentsStatus === "succeeded") {
-    content = tournaments?.map((tournament) => (
-      <TournamentExcerpt key={tournament?.id} tournament={tournament} />
-    ));
+    content = <TournamentExcerpt tournaments={tournaments} />;
   } else if (tournamentsStatus === "failed") {
     content = <p>{error}</p>;
   }

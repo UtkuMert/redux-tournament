@@ -19,9 +19,9 @@ export const TeamList = () => {
   if (teamsStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (teamsStatus === "succeeded") {
-    content = teams.map((team) => (
-      <TeamExcerpt key={team.id} team={team} />
-    ));
+    content  = (
+      <TeamExcerpt teams={teams} />
+    );
   } else if (teamsStatus === "failed") {
     content = <p>{teamsError}</p>;
   }

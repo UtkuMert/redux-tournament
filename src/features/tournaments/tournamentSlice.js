@@ -1,5 +1,5 @@
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
-import { useParams } from "react-router-dom";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import axios from "../../api/axios";
 
 const initialState = {
@@ -106,7 +106,6 @@ const tournamentSlice = createSlice({
 });
 export const selectAllTournaments = (state) => state?.tournaments?.tournaments;
 export const getTournamentsStatus = (state) => state?.tournaments?.status;
-console.log(getTournamentsStatus)
 export const getTournamentsError = (state) => state?.tournaments?.error;
 
 export const selectTournamentById = (state, id) =>
