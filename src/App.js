@@ -10,8 +10,9 @@ import { SingleTeamPage } from "./features/teams/SingleTeamPage";
 import { Layout } from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
-import EditTeamForm from "./features/teams/EditTeamForm";
-import AddPlayerForm from "./features/players/AddPlayerForm";
+import {EditTeamForm} from "./features/teams/EditTeamForm";
+import {AddPlayerForm} from "./features/players/AddPlayerForm";
+import {EditPlayerForm} from "./features/players/EditPlayerForm";
 
 export default function App() {
   return (
@@ -31,6 +32,13 @@ export default function App() {
           <Route index element={<TeamList />} />
           <Route path=":id" element={<SingleTeamPage />} />
           <Route path="edit/:id" element={<EditTeamForm />} />
+          <Route path="addplayer/:id" element={<AddPlayerForm />}/>
+        </Route>
+
+        <Route path="player">
+          <Route index element={<PlayerList />} />
+          {/* <Route path=":id" element={<SinglePlay />} /> */}
+          <Route path="edit/:id" element={<EditPlayerForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />}/>
         </Route>
 

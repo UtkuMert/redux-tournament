@@ -27,6 +27,19 @@ export const addNewPlayer = createAsyncThunk(
     try {
       const { id } = initialPlayer;
       const response = await axios.post(`/playertoadd/save/${id}`, initialPlayer);
+      return response?.data?.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
+export const updateNewPlayer = createAsyncThunk(
+  "/playertoadd/update/{id}",
+  async (initialPlayer) => {
+    try {
+      const { id } = initialPlayer;
+      const response = await axios.put(`/playertoadd/update/${id}`, initialPlayer);
       return response.data;
     } catch (err) {
       return err.message;
@@ -54,6 +67,17 @@ const playerSlice = createSlice({
       .addCase(addNewPlayer.fulfilled, (state, action) => {
         console.log(action.payload);
         return { ...state, players: [...state.players, action.payload] };
+      })
+      .addCase(updateNewPlayer.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Update could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const players = state.players.filter((player) => player.id !== id);
+        state.player = [...players, action.payload];
+        console.log(action.payload);
       });
   },
 });
@@ -61,5 +85,8 @@ const playerSlice = createSlice({
 export const selectAllPlayers = (state) => state?.players?.players;
 export const getPlayersStatus = (state) => state?.players?.status;
 export const getPlayersError = (state) => state?.teams?.error;
+
+export const selectPlayerById = (state, id) =>
+  state.players.players.find((player) => player.id === id); //Takim bulunuyor.
 
 export default playerSlice.reducer;

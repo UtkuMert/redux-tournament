@@ -1,26 +1,43 @@
 import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { selectPlayerById } from "./playerSlice";
 import { selectTeamById } from "../teams/teamSlice";
-import { addNewPlayer } from "./playerSlice";
+import { updateNewPlayer } from "./playerSlice";
+
 import { Box, TextInput, Button, Group } from "@mantine/core";
 
-export const AddPlayerForm = () => {
-  const dispatch = useDispatch();
+export const EditPlayerForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  
 
-  const team = useSelector((state) => selectTeamById(state, Number(id)));
+  const player = useSelector((state) => selectPlayerById(state, Number(id)));
 
+  const [playerFirstName, setPlayerFirstName] = useState(
+    player?.playerFirstName
+  );
+  const [playerLastName, setPlayerLastName] = useState(player?.playerLastName);
+  const [playerAddress, setPlayerAddress] = useState(player?.playerAddress);
+  const [position, setPosition] = useState(player?.position);
+
+  const team = useSelector((state) =>
+    selectTeamById(state, Number(player?.teamId))
+  );
   const [teamName, setTeamName] = useState(team?.teamName);
 
-  const [playerFirstName, setPlayerFirstName] = useState("");
-  const [playerLastName, setPlayerLastName] = useState("");
-  const [playerAddress, setPlayerAddress] = useState("");
-  const [position, setPosition] = useState("");
+  const [requestStatus, setRequestStatus] = useState("idle");
 
-  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+  const dispatch = useDispatch();
+
+  if (!player) {
+    return (
+      <section>
+        <h2>player not found!</h2>
+      </section>
+    );
+  }
 
   const onFirstNameChange = (e) => setPlayerFirstName(e.target.value);
   const onLastNameChange = (e) => setPlayerLastName(e.target.value);
@@ -29,14 +46,14 @@ export const AddPlayerForm = () => {
 
   const canSave =
     [playerFirstName, playerLastName, playerAddress, position].every(Boolean) &&
-    addRequestStatus === "idle";
+    requestStatus === "idle";
 
   const onSavePlayerClicked = () => {
     if (canSave) {
       try {
-        setAddRequestStatus("pending");
+        setRequestStatus("pending");
         dispatch(
-          addNewPlayer({
+          updateNewPlayer({
             playerFirstName,
             playerLastName,
             playerAddress,
@@ -51,22 +68,13 @@ export const AddPlayerForm = () => {
         setPosition("");
         navigate("/");
       } catch (error) {
-        console.error("Failed to save the player", error);
+        console.error("Failed to update the player", error);
       } finally {
-        setAddRequestStatus("idle");
+        setRequestStatus("idle");
       }
     }
   };
-  //   const form = useForm<{ firstName: playerFirstName, lastName: playerLastName, address: playerAddress, position: position }>({
-  //     initialValues: { name: '', age: undefined },
-  //     validate: (values) => ({
-  //         firstName: values.firstName.length < 2 ? 'Too short firstname' : null,
-  //         lastName: values.lastName.length < 2 ? 'Too short lastname' : null,
-  //         playerAddress: values.playerAddress.length < 2 ? 'Too short adress' : null,
-  //         position: values.position.length < 2 ? 'Too short position' : null,
 
-  //     }),
-  //   });
   return (
     <div>
       <Box sx={{ maxWidth: 340 }} mx="auto">
@@ -115,10 +123,9 @@ export const AddPlayerForm = () => {
               onClick={onSavePlayerClicked}
               type="button"
               disabled={!canSave}
-              color="teal"
               className="btn btn-active"
             >
-              Add Player
+              Update Player
             </Button>
           </Group>
         </form>

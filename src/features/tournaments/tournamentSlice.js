@@ -26,7 +26,7 @@ export const addNewTournament = createAsyncThunk(
   async (initialTournament) => {
     try {
       const response = await axios.post("/tournaments/save", initialTournament); 
-      return response.data;
+      return response?.data?.data;
     } catch (err) {
       return err.message;
     }
@@ -47,11 +47,11 @@ export const updateTournament = createAsyncThunk(
 );
 export const deleteTournament = createAsyncThunk(
   "/delete/{tournamentId}",
-  async (initialPost) => {
-    const { id } = initialPost;
+  async (initialTournament) => {
+    const { id } = initialTournament;
     try {
       const response = await axios.delete(`/delete/${id}`);
-      if (response?.status === 200) return initialPost;
+      if (response?.status === 200) return initialTournament;
       return `${response?.status}: ${response?.statusText}`;
     } catch (err) {
       return err.message;

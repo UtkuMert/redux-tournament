@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useNavigate, useParams } from "react-router-dom";
 import { addNewTournament } from "./tournamentSlice";
 
 export const AddTournamentForm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [tournamentName, setTournamentName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -25,6 +25,7 @@ export const AddTournamentForm = () => {
 
         setTournamentName("");
         setDescription("");
+        navigate("/");
       } catch (error) {
         console.error("Failed to save the post", error);
       } finally {

@@ -23,7 +23,7 @@ export const PlayerExcerpt = ({ players }) => {
             <td>{player.position}</td>
             <td>
               {" "}
-              <Link to={`player/${player.id}`}>Edit Player</Link>
+              <Link to={`player/edit/${player.id}`}>Edit Player</Link>
             </td>
             <td>Buraya Delete Gelecek</td>
           </tr>
