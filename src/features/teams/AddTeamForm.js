@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { addNewTeam } from "./teamSlice";
-import { selectAllTournaments,selectTournamentById } from "../tournaments/tournamentSlice";
+import {
+  selectAllTournaments,
+  selectTournamentById,
+} from "../tournaments/tournamentSlice";
 
 export const AddTeamForm = () => {
   const dispatch = useDispatch();
@@ -11,23 +14,18 @@ export const AddTeamForm = () => {
   const navigate = useNavigate();
 
   const tournament = useSelector((state) =>
-  selectTournamentById(state, Number(id))
-);
-const [tournamentName, setTournamentName] = useState(
-  tournament?.tournamentName
-);
+    selectTournamentById(state, Number(id))
+  );
+  const [tournamentName, setTournamentName] = useState(
+    tournament?.tournamentName
+  );
 
   const [teamName, setTeamName] = useState("");
-  const [tournamentId, setTournamentId] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-  const tournaments = useSelector(selectAllTournaments);
-
   const onNameChange = (e) => setTeamName(e.target.value);
-  const onTournamentChanged = (e) => setTournamentId(e.target.value);
 
-  const canSave =
-    [teamName,id ].every(Boolean) && addRequestStatus === "idle";
+  const canSave = [teamName].every(Boolean) && addRequestStatus === "idle";
 
   const onSaveTournamentClicked = () => {
     if (canSave) {
@@ -36,8 +34,7 @@ const [tournamentName, setTournamentName] = useState(
         dispatch(addNewTeam({ teamName, id })).unwrap();
 
         setTeamName("");
-        //setTournamentId("");
-        navigate("/")
+        navigate("/");
       } catch (error) {
         console.error("Failed to save the team", error);
       } finally {
@@ -45,11 +42,7 @@ const [tournamentName, setTournamentName] = useState(
       }
     }
   };
-  // const tournamentsOptions = tournaments.map((tournament) => (
-  //   <option key={tournament?.id} value={tournament?.id}>
-  //     {tournament?.tournamentName}
-  //   </option>
-  // ));
+
   return (
     <section>
       <h2>Add a New Team</h2>
@@ -65,14 +58,7 @@ const [tournamentName, setTournamentName] = useState(
         />
         <label htmlFor="tournament">Tournament:</label>
         <input readOnly value={tournamentName} />
-        {/* <select
-          id="tournament"
-          value={tournamentId}
-          onChange={onTournamentChanged}
-        >
-          <option value=""></option>
-          {tournamentsOptions}
-        </select> */}
+
         <button
           type="button"
           onClick={onSaveTournamentClicked}

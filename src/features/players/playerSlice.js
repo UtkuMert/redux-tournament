@@ -24,7 +24,8 @@ export const addNewPlayer = createAsyncThunk(
   "/playertoadd/save/{teamId}",
   async (initialPlayer) => {
     try {
-      const response = await axios.post("/playertoadd/save/1", initialPlayer);
+      const { id } = initialPlayer;
+      const response = await axios.post(`/playertoadd/save/${id}`, initialPlayer);
       return response.data;
     } catch (err) {
       return err.message;
@@ -48,6 +49,10 @@ const playerSlice = createSlice({
       .addCase(fetchPlayers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewPlayer.fulfilled, (state, action) => {
+        console.log(action.payload);
+        return { ...state, players: [...state.players, action.payload] };
       });
   },
 });

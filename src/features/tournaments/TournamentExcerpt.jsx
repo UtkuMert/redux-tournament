@@ -12,6 +12,8 @@ export const TournamentExcerpt = ({ tournaments }) => {
           <th>Tournament Id</th>
           <th>Tournament Name</th>
           <th>Tournament Description</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
