@@ -10,11 +10,25 @@ const initialState = {
 export const fetchTeams = createAsyncThunk("/teams/get/list", async () => {
   try {
     const response = await axios.get("/teams/get/list");
+    console.log(response?.data);
     return response.data;
   } catch (err) {
     return err.message;
   }
 });
+
+export const fetchTeamsByTournamentId = createAsyncThunk(
+  "/teams/get/list/tournamentId",
+  async (initialTeam) => {
+    try {
+      const { id } = initialTeam;
+      const response = await axios.get(`/teams/get/list/${id}`, initialTeam);
+      return response.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 
 export const addNewTeam = createAsyncThunk(
   "/teams/save/",
@@ -74,6 +88,18 @@ const teamSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(fetchTeamsByTournamentId.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTeamsByTournamentId.fulfilled, (state, action) => {
+        state.status = "succeeded";
+
+        state.teams = action?.payload?.data;
+      })
+      .addCase(fetchTeamsByTournamentId.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
       .addCase(addNewTeam.fulfilled, (state, action) => {
         console.log(action.payload);
         return { ...state, teams: [...state.teams, action.payload] };
@@ -85,9 +111,7 @@ const teamSlice = createSlice({
           return;
         }
         const { id } = action.payload;
-        const teams = state.teams.filter(
-          (team) => team.id !== id
-        );
+        const teams = state.teams.filter((team) => team.id !== id);
         state.team = [...teams, action.payload];
         console.log(action.payload);
       });
@@ -100,5 +124,8 @@ export const getTeamsError = (state) => state.teams.error;
 
 export const selectTeamById = (state, id) =>
   state.teams.teams.find((team) => team.id === id); //Takim bulunuyor.
+
+export const selectTeamByTournamentId = (state, id) =>
+  state.teams.teams.filter((team) => team.tournamentId === id); //Turnuva idsine gore team geliyor.
 export const { teamAdded } = teamSlice.actions;
 export default teamSlice.reducer;

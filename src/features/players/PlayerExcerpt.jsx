@@ -1,18 +1,34 @@
 import { Link } from "react-router-dom";
-import { Table } from "flowbite";
+import { Table } from "@mantine/core";
 
-export const PlayerExcerpt = ({ player }) => {
+export const PlayerExcerpt = ({ players }) => {
   return (
-    <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-      <div className="p-5">
-        <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {player.playerFirstName}
-        </h2>
-      <p>{player.playerAddress}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Details</button>
-        </div>
-      </div>
-    </div>
+    <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
+      <thead>
+        <tr>
+          <th>Player Id</th>
+          <th>Player Name</th>
+          <th>Team id</th>
+          <th>Player Address</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        {players?.map((player) => (
+          <tr key={player.id}>
+            <td>{player.id}</td>
+            <td>{player.playerFirstName + " " + player.playerLastName}</td>
+            <td>{player.teamId}</td>
+            <td>{player.playerAddress}</td>
+            <td>{player.position}</td>
+            <td>
+              {" "}
+              <Link to={`player/${player.id}`}>Edit Player</Link>
+            </td>
+            <td>Buraya Delete Gelecek</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 };

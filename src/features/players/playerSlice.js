@@ -20,6 +20,7 @@ export const fetchPlayers = createAsyncThunk(
   }
 );
 
+
 export const addNewPlayer = createAsyncThunk(
   "/playertoadd/save/{teamId}",
   async (initialPlayer) => {

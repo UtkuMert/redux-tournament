@@ -13,14 +13,8 @@ export const PlayerList = () => {
   const players = useSelector(selectAllPlayers);
   const playersStatus = useSelector(getPlayersStatus);
   const playersError = useSelector(getPlayersError);
-  
-  console.log(players)
-  console.log(playersStatus)
-  console.log(playersError)
- 
+
   useEffect(() => {
-      console.log("Girdi")
-      console.log(playersStatus)
     if (playersStatus === "idle") {
       dispatch(fetchPlayers());
     }
@@ -30,9 +24,9 @@ export const PlayerList = () => {
   if (playersStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (playersStatus === "succeeded") {
-    content = players?.map((player) => (
-      <PlayerExcerpt key={player?.id} player={player} />
-    ));
+    content  = (
+      <PlayerExcerpt players={players} />
+    );
   } else if (playersStatus === "failed") {
     content = <p>{playersError}</p>;
   }

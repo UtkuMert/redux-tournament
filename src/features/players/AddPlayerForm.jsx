@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectTeamById } from "../teams/teamSlice";
 import { addNewPlayer } from "./playerSlice";
-import { useForm } from "@mantine/form";
 import { Box, TextInput, Button, Group } from "@mantine/core";
 const AddPlayerForm = () => {
   const dispatch = useDispatch();
@@ -17,29 +16,29 @@ const AddPlayerForm = () => {
 
   const [playerFirstName, setPlayerFirstName] = useState("");
   const [playerLastName, setPlayerLastName] = useState("");
-  const [playerAdress, setPlayerAdress] = useState("");
+  const [playerAddress, setPlayerAddress] = useState("");
   const [position, setPosition] = useState("");
 
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const onFirstNameChange = (e) => setPlayerFirstName(e.target.value);
   const onLastNameChange = (e) => setPlayerLastName(e.target.value);
-  const onPlayerAdressChange = (e) => setPlayerAdress(e.target.value);
+  const onplayerAddressChange = (e) => setPlayerAddress(e.target.value);
   const onPositionChange = (e) => setPosition(e.target.value);
 
   const canSave =
-    [playerFirstName, playerLastName, playerAdress, position].every(Boolean) &&
+    [playerFirstName, playerLastName, playerAddress, position].every(Boolean) &&
     addRequestStatus === "idle";
 
   const onSavePlayerClicked = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(addNewPlayer({ playerFirstName, playerLastName, playerAdress, position, id })).unwrap();
+        dispatch(addNewPlayer({ playerFirstName, playerLastName, playerAddress, position, id })).unwrap();
 
         setPlayerFirstName("");
         setPlayerLastName("");
-        setPlayerAdress("");
+        setPlayerAddress("");
         setPosition("");
         navigate("/");
       } catch (error) {
@@ -49,12 +48,12 @@ const AddPlayerForm = () => {
       }
     }
   };
-  //   const form = useForm<{ firstName: playerFirstName, lastName: playerLastName, address: playerAdress, position: position }>({
+  //   const form = useForm<{ firstName: playerFirstName, lastName: playerLastName, address: playerAddress, position: position }>({
   //     initialValues: { name: '', age: undefined },
   //     validate: (values) => ({
   //         firstName: values.firstName.length < 2 ? 'Too short firstname' : null,
   //         lastName: values.lastName.length < 2 ? 'Too short lastname' : null,
-  //         playerAdress: values.playerAdress.length < 2 ? 'Too short adress' : null,
+  //         playerAddress: values.playerAddress.length < 2 ? 'Too short adress' : null,
   //         position: values.position.length < 2 ? 'Too short position' : null,
 
   //     }),
@@ -84,8 +83,8 @@ const AddPlayerForm = () => {
             id="address"
             label="Adress"
             placeholder="Address"
-            value={playerAdress}
-            onChange={onPlayerAdressChange}
+            value={playerAddress}
+            onChange={onplayerAddressChange}
           />
           <TextInput
             type="text"
