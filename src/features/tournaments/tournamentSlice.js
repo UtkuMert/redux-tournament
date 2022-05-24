@@ -50,7 +50,7 @@ export const deleteTournament = createAsyncThunk(
   async (initialTournament) => {
     const { id } = initialTournament;
     try {
-      const response = await axios.delete(`/delete/${id}`);
+      const response = await axios.delete(`/tournaments/delete/${id}`);
       if (response?.status === 200) return initialTournament;
       return `${response?.status}: ${response?.statusText}`;
     } catch (err) {

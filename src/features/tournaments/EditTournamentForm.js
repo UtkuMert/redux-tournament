@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTournamentById, updateTournament } from "./tournamentSlice";
+import { selectTournamentById, updateTournament, deleteTournament } from "./tournamentSlice";
 import { useParams, useNavigate } from "react-router-dom";
 
 export const EditTournamentForm = () => {
@@ -52,20 +52,20 @@ export const EditTournamentForm = () => {
     }
   };
 
-  //   const onDeleteTournamentClicked = () => {
-  //     try {
-  //       setRequestStatus("pending");
-  //       dispatch(deleteTournament({ id })).unwrap();
+    const onDeleteTournamentClicked = () => {
+      try {
+        setRequestStatus("pending");
+        dispatch(deleteTournament({ id })).unwrap();
 
-  //       setTournamentName("");
-  //       setDescription("");
-  //       navigate("/");
-  //     } catch (err) {
-  //       console.error("Failed to delete the post", err);
-  //     } finally {
-  //       setRequestStatus("idle");
-  //     }
-  //   };
+        setTournamentName("");
+        setDescription("");
+        navigate("/");
+      } catch (err) {
+        console.error("Failed to delete the post", err);
+      } finally {
+        setRequestStatus("idle");
+      }
+    };
 
   return (
     <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -114,6 +114,14 @@ export const EditTournamentForm = () => {
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Save Tournament
+        </button>
+
+        <button
+          type="button"
+          onClick={onDeleteTournamentClicked}
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Delete Tournament
         </button>
       </form>
     </div>

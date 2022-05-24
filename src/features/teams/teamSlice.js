@@ -50,7 +50,7 @@ export const updateTeam = createAsyncThunk(
     try {
       const { id } = initialTeam;
       const response = await axios.put(`/teams/update/${id}`, initialTeam);
-      return response.data;
+      return response?.data;
     } catch (err) {
       return err.message;
     }

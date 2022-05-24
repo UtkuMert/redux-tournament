@@ -20,6 +20,18 @@ export const fetchPlayers = createAsyncThunk(
   }
 );
 
+export const fetchPlayersByTeamId = createAsyncThunk(
+  "/teams/get/list/tournamentId",
+  async (initialTeam) => {
+    try {
+      const { id } = initialTeam;
+      const response = await axios.get(`/teams/get/list/${id}`, initialTeam);
+      return response.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 
 export const addNewPlayer = createAsyncThunk(
   "/playertoadd/save/{teamId}",
