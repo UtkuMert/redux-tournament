@@ -6,7 +6,6 @@ import { addTeamToStage } from "./stageTeamSlice";
 
 import { selectAllTeams } from "../teams/teamSlice";
 import { selectAllStages } from "../stages/stageSlice";
-import { selectAllStageTeams } from "../stageTeam/stageTeamSlice";
 
 export const AddStageTeamsForm = () => {
   const dispatch = useDispatch();

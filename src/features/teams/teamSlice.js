@@ -57,23 +57,24 @@ export const updateTeam = createAsyncThunk(
   }
 );
 
+export const deleteTeam = createAsyncThunk(
+  "/delete/{teamId}",
+  async (initiaTeam) => {
+    const { id } = initiaTeam;
+    try {
+      const response = await axios.delete(`/teams/delete/${id}`);
+      if (response?.status === 200) return initiaTeam;
+      return `${response?.status}: ${response?.statusText}`;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
 const teamSlice = createSlice({
   name: "teams",
   initialState,
-  reducers: {
-    teamAdded: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare(name) {
-        return {
-          payload: {
-            name,
-          },
-        };
-      },
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchTeams.pending, (state, action) => {
@@ -114,6 +115,18 @@ const teamSlice = createSlice({
         const teams = state.teams.filter((team) => team.id !== id);
         state.team = [...teams, action.payload];
         console.log(action.payload);
+      })
+      .addCase(deleteTeam.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Delete could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const teams = state.teams.filter(
+          (team) => team?.id !== id
+        );
+        state.teams = teams;
       });
   },
 });
@@ -127,5 +140,4 @@ export const selectTeamById = (state, id) =>
 
 export const selectTeamByTournamentId = (state, id) =>
   state.teams.teams.filter((team) => team.tournamentId === id); //Turnuva idsine gore team geliyor.
-export const { teamAdded } = teamSlice.actions;
 export default teamSlice.reducer;

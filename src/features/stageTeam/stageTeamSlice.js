@@ -59,7 +59,7 @@ const stageTeamSlice = createSlice({
 });
 
 export const selectAllStageTeams = (state) => state?.stageTeams?.stageTeams;
-export const getTournamentsStatus = (state) => state?.stageTeams?.status;
-export const getTournamentsError = (state) => state?.stageTeams?.error;
+export const getStageTeamsStatus = (state) => state?.stageTeams?.status;
+export const getStageTeamsError = (state) => state?.stageTeams?.error;
 
 export default stageTeamSlice.reducer;

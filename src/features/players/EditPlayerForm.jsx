@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { selectPlayerById } from "./playerSlice";
+import { deletePlayer, selectPlayerById } from "./playerSlice";
 import { selectTeamById } from "../teams/teamSlice";
 import { updateNewPlayer } from "./playerSlice";
 
@@ -75,6 +75,24 @@ export const EditPlayerForm = () => {
     }
   };
 
+  const onDeletePlayerClicked = () => {
+    console.log("Girdi")
+    try {
+      setRequestStatus("pending");
+      dispatch(deletePlayer({ id })).unwrap();
+
+      setPlayerFirstName("");
+      setPlayerLastName("");
+      setPlayerAddress("");
+      setPosition("");
+      navigate("/");
+    } catch (err) {
+      console.error("Failed to delete the player", err);
+    } finally {
+      setRequestStatus("idle");
+    }
+  };
+
   return (
     <div>
       <Box sx={{ maxWidth: 340 }} mx="auto">
@@ -126,6 +144,14 @@ export const EditPlayerForm = () => {
               className="btn btn-active"
             >
               Update Player
+            </Button>
+            <Button
+              onClick={onDeletePlayerClicked}
+              type="button"
+              disabled={!canSave}
+              className="btn btn-active"
+            >
+              Delete Player
             </Button>
           </Group>
         </form>

@@ -1,4 +1,3 @@
-import { TournamentList } from "./features/tournaments/TournamentList";
 import { TeamList } from "./features/teams/TeamList.jsx";
 import { AddTournamentForm } from "./features/tournaments/AddTournamentForm";
 import { AddTeamForm } from "./features/teams/AddTeamForm";
@@ -14,8 +13,9 @@ import { EditTeamForm } from "./features/teams/EditTeamForm";
 import { AddPlayerForm } from "./features/players/AddPlayerForm";
 import { EditPlayerForm } from "./features/players/EditPlayerForm";
 import { StageList } from "./features/stages/StageList";
-import {AddStageTeamsForm} from "./features/stageTeam/AddStageTeamsForm";
-import {AddTeamsMatchForm} from "./features/gamePlay/AddTeamsMatchForm";
+import { AddStageTeamsForm } from "./features/stageTeam/AddStageTeamsForm";
+import { AddTeamsMatchForm } from "./features/gamePlay/AddTeamsMatchForm";
+import StageTeamList from "./features/stageTeam/StageTeamList";
 
 export default function App() {
   return (
@@ -47,6 +47,9 @@ export default function App() {
           <Route index element={<StageList />} />
           <Route path="addteamtostage" element={<AddStageTeamsForm />} />
           <Route path="matchteams" element={<AddTeamsMatchForm />} />
+        </Route>
+        <Route path="stageteam">
+          <Route index element={<StageTeamList />} />
         </Route>
       </Route>
     </Routes>

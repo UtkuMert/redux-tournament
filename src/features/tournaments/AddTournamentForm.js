@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addNewTournament } from "./tournamentSlice";
-
+import { Box, TextInput, Button, Group } from "@mantine/core";
 export const AddTournamentForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const AddTournamentForm = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        
+
         dispatch(addNewTournament({ tournamentName, description })).unwrap();
 
         setTournamentName("");
@@ -36,54 +36,41 @@ export const AddTournamentForm = () => {
   };
 
   return (
-    <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <form>
-        <div className="mb-6">
-          <label
-            htmlFor="tournamentName"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Tournament Name
-          </label>
-          <input
+    <div>
+      <h2>Add Tournament</h2>
+      <Box sx={{ maxWidth: 340 }} mx="auto">
+        <form>
+          <TextInput
             type="text"
             id="tournamentName"
-            name="tournamentName"
+            label="Tournament Name"
+            placeholder="Tournament Name"
             value={tournamentName}
             onChange={onTournamentNameChanged}
-            className="input input-bordered w-full max-w-xs"
-            placeholder="Enter A Tournament Name"
             required=""
           />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="tournamentDescription"
-            className="w-full max-w-xs"
-          >
-            Tournament Description
-          </label>
-          <input
+          <TextInput
             type="text"
-            id="tournamentDescription"
-            name="tournamentDescription"
+            id="description"
+            label="Description"
+            placeholder="Description"
             value={description}
             onChange={onDescriptionChanged}
-            className="input input-bordered w-full max-w-xs"
-            placeholder="Enter A Description"
-            required=""
           />
-        </div>
 
-        <button
-          type="button"
-          onClick={onSaveTournamentClicked}
-          disabled={!canSave}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Add A Tournament
-        </button>
-      </form>
+          <Group position="right" mt="md">
+            <Button
+              onClick={onSaveTournamentClicked}
+              type="button"
+              disabled={!canSave}
+              color="teal"
+              className="btn btn-active"
+            >
+              Add Tournament
+            </Button>
+          </Group>
+        </form>
+      </Box>
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const fetchPlayersByTeamId = createAsyncThunk(
     try {
       const { id } = initialTeam;
       const response = await axios.get(`/teams/get/list/${id}`, initialTeam);
-      return response.data;
+      return response?.data;
     } catch (err) {
       return err.message;
     }
@@ -38,7 +38,10 @@ export const addNewPlayer = createAsyncThunk(
   async (initialPlayer) => {
     try {
       const { id } = initialPlayer;
-      const response = await axios.post(`/playertoadd/save/${id}`, initialPlayer);
+      const response = await axios.post(
+        `/playertoadd/save/${id}`,
+        initialPlayer
+      );
       return response?.data?.data;
     } catch (err) {
       return err.message;
@@ -51,8 +54,25 @@ export const updateNewPlayer = createAsyncThunk(
   async (initialPlayer) => {
     try {
       const { id } = initialPlayer;
-      const response = await axios.put(`/playertoadd/update/${id}`, initialPlayer);
+      const response = await axios.put(
+        `/playertoadd/update/${id}`,
+        initialPlayer
+      );
       return response.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
+export const deletePlayer = createAsyncThunk(
+  "/delete/{id}",
+  async (initialPlayer) => {
+    const { id } = initialPlayer;
+    try {
+      const response = await axios.delete(`/playertoadd/delete/${id}`);
+      if (response?.status === 200) return initialPlayer;
+      return `${response?.status}: ${response?.statusText}`;
     } catch (err) {
       return err.message;
     }
@@ -90,6 +110,18 @@ const playerSlice = createSlice({
         const players = state.players.filter((player) => player.id !== id);
         state.player = [...players, action.payload];
         console.log(action.payload);
+      })
+      .addCase(deletePlayer.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Delete could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const players = state.players.filter(
+          (player) => player?.id !== id
+        );
+        state.players = players;
       });
   },
 });

@@ -5,16 +5,17 @@ import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import 'flowbite';
+import "flowbite";
 
 import { fetchTournaments } from "./features/tournaments/tournamentSlice";
 import { fetchTeams } from "./features/teams/teamSlice";
 import { fetchStages } from "./features/stages/stageSlice";
 import { fetchStageTeams } from "./features/stageTeam/stageTeamSlice";
-
+import { fetchPlayers } from "./features/players/playerSlice";
 
 store.dispatch(fetchTournaments());
 store.dispatch(fetchTeams());
+store.dispatch(fetchPlayers());
 store.dispatch(fetchStages());
 store.dispatch(fetchStageTeams());
 

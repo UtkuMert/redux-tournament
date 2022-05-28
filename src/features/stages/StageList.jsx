@@ -13,14 +13,13 @@ export const StageList = () => {
   const stages = useSelector(selectAllStages);
   const stagesStatus = useSelector(getStagesStatus);
   const error = useSelector(getStagesError);
-  console.log(stages);
+
   useEffect(() => {
-    console.log("Girdi")
     if (stagesStatus === "idle") {
       dispatch(fetchStages());
-      console.log("Stages",stages);
+      console.log("Stages", stages);
     }
-  }, [fetchStages, dispatch]);
+  }, [stagesStatus, dispatch]);
 
   return (
     <div>
