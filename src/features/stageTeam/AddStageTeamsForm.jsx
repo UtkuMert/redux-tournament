@@ -6,8 +6,9 @@ import { addTeamToStage } from "./stageTeamSlice";
 
 import { selectAllTeams } from "../teams/teamSlice";
 import { selectAllStages } from "../stages/stageSlice";
+import { selectAllStageTeams } from "../stageTeam/stageTeamSlice";
 
-const AddStageTeamsForm = () => {
+export const AddStageTeamsForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,10 +17,7 @@ const AddStageTeamsForm = () => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const teams = useSelector(selectAllTeams);
-  
-
   const stages = useSelector(selectAllStages);
-
 
   const onTeamChange = (e) => setTeamId(e.target.value);
   const onStageChange = (e) => setStageId(e.target.value);
@@ -59,11 +57,11 @@ const AddStageTeamsForm = () => {
   return (
     <div>
       <div>
-        {teams.map((team) => (
+        {teams?.map((team) => (
           <p key={team?.id}>{team.teamName}</p>
         ))}
 
-        {stages.map((stage) => (
+        {stages?.map((stage) => (
           <p key={stage?.id}>{stage.stageName}</p>
         ))}
       </div>
@@ -93,5 +91,3 @@ const AddStageTeamsForm = () => {
     </div>
   );
 };
-
-export default AddStageTeamsForm;

@@ -14,7 +14,8 @@ import { EditTeamForm } from "./features/teams/EditTeamForm";
 import { AddPlayerForm } from "./features/players/AddPlayerForm";
 import { EditPlayerForm } from "./features/players/EditPlayerForm";
 import { StageList } from "./features/stages/StageList";
-import AddStageTeamsForm from "./features/stageTeam/AddStageTeamsForm";
+import {AddStageTeamsForm} from "./features/stageTeam/AddStageTeamsForm";
+import {AddTeamsMatchForm} from "./features/gamePlay/AddTeamsMatchForm";
 
 export default function App() {
   return (
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="stage">
           <Route index element={<StageList />} />
           <Route path="addteamtostage" element={<AddStageTeamsForm />} />
+          <Route path="matchteams" element={<AddTeamsMatchForm />} />
         </Route>
       </Route>
     </Routes>

@@ -12,7 +12,7 @@ export const AddPlayerForm = () => {
   const navigate = useNavigate();
 
   const team = useSelector((state) => selectTeamById(state, Number(id)));
-
+  
   const [teamName, setTeamName] = useState(team?.teamName);
 
   const [playerFirstName, setPlayerFirstName] = useState("");

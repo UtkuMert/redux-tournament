@@ -10,11 +10,13 @@ import 'flowbite';
 import { fetchTournaments } from "./features/tournaments/tournamentSlice";
 import { fetchTeams } from "./features/teams/teamSlice";
 import { fetchStages } from "./features/stages/stageSlice";
+import { fetchStageTeams } from "./features/stageTeam/stageTeamSlice";
 
 
 store.dispatch(fetchTournaments());
 store.dispatch(fetchTeams());
 store.dispatch(fetchStages());
+store.dispatch(fetchStageTeams());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
