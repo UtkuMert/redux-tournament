@@ -13,9 +13,9 @@ import { EditTeamForm } from "./features/teams/EditTeamForm";
 import { AddPlayerForm } from "./features/players/AddPlayerForm";
 import { EditPlayerForm } from "./features/players/EditPlayerForm";
 import { StageList } from "./features/stages/StageList";
-import { AddStageTeamsForm } from "./features/stageTeam/AddStageTeamsForm";
-import { AddTeamsMatchForm } from "./features/gamePlay/AddTeamsMatchForm";
-import StageTeamList from "./features/stageTeam/StageTeamList";
+import { AddStageTeamsForm } from "./features/stageTeams/AddStageTeamsForm";
+import { AddTeamsMatchForm } from "./features/gamePlays/AddTeamsMatchForm";
+import {StageTeamList} from "./features/stageTeams/StageTeamList";
 
 export default function App() {
   return (

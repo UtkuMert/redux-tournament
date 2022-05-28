@@ -37,7 +37,7 @@ export const addNewTeam = createAsyncThunk(
       const { id } = initialTeam;
       const response = await axios.post(`/teams/save/${id}`, initialTeam);
       console.log(response?.data);
-      return response?.data.data;
+      return response?.data?.data;
     } catch (err) {
       return err.message;
     }

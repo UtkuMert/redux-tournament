@@ -33,7 +33,7 @@ export const matchTeams = createAsyncThunk(
   }
 );
 
-const gamePlaySlice = createSlice({
+const gamePlaysSlice = createSlice({
   name: "gamePlays",
   initialState,
   reducers: {},
@@ -60,4 +60,4 @@ const gamePlaySlice = createSlice({
 
 
 
-export default gamePlaySlice.reducer;
+export default gamePlaysSlice.reducer;

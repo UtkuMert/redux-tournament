@@ -10,7 +10,7 @@ import "flowbite";
 import { fetchTournaments } from "./features/tournaments/tournamentSlice";
 import { fetchTeams } from "./features/teams/teamSlice";
 import { fetchStages } from "./features/stages/stageSlice";
-import { fetchStageTeams } from "./features/stageTeam/stageTeamSlice";
+import { fetchStageTeams } from "./features/stageTeams/stageTeamsSlice";
 import { fetchPlayers } from "./features/players/playerSlice";
 
 store.dispatch(fetchTournaments());

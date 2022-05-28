@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { Box, TextInput, Button, Group } from "@mantine/core";
 
 import { addNewTeam } from "./teamSlice";
 import {
@@ -27,7 +28,7 @@ export const AddTeamForm = () => {
 
   const canSave = [teamName].every(Boolean) && addRequestStatus === "idle";
 
-  const onSaveTournamentClicked = () => {
+  const onSaveTeamClicked = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
@@ -44,7 +45,44 @@ export const AddTeamForm = () => {
   };
 
   return (
-    <section>
+    <div>
+      <h2>Add Team</h2>
+      <Box sx={{ maxWidth: 340 }} mx="auto">
+        <form>
+          <TextInput
+            type="text"
+            id="teamName"
+            label="Team Name"
+            placeholder="Team Name"
+            value={teamName}
+            onChange={onNameChange}
+            required=""
+          />
+          <TextInput
+            label="Team"
+            placeholder="Team Name"
+            readOnly
+            value={tournamentName}
+          />
+          <Group position="right" mt="md">
+            <Button
+              onClick={onSaveTeamClicked}
+              type="button"
+              disabled={!canSave}
+              color="teal"
+              className="btn btn-active"
+            >
+              Add Team
+            </Button>
+          </Group>
+        </form>
+      </Box>
+    </div>
+  );
+};
+
+{
+  /* <section>
       <h2>Add a New Team</h2>
       <form className="flex flex-direction">
         <label htmlFor="teamName">Team Name:</label>
@@ -68,6 +106,5 @@ export const AddTeamForm = () => {
           Save Team
         </button>
       </form>
-    </section>
-  );
-};
+    </section> */
+}

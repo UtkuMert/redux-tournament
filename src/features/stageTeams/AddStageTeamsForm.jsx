@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { addTeamToStage } from "./stageTeamSlice";
+import { addTeamToStage } from "./stageTeamsSlice";
 
 import { selectAllTeams } from "../teams/teamSlice";
 import { selectAllStages } from "../stages/stageSlice";

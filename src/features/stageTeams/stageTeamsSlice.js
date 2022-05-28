@@ -33,7 +33,7 @@ export const addTeamToStage = createAsyncThunk(
   }
 );
 
-const stageTeamSlice = createSlice({
+const stageTeamsSlice = createSlice({
   name: "stageTeams",
   initialState,
   reducers: {},
@@ -62,4 +62,4 @@ export const selectAllStageTeams = (state) => state?.stageTeams?.stageTeams;
 export const getStageTeamsStatus = (state) => state?.stageTeams?.status;
 export const getStageTeamsError = (state) => state?.stageTeams?.error;
 
-export default stageTeamSlice.reducer;
+export default stageTeamsSlice.reducer;

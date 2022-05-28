@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { useEffect } from "react";
-import { fetchStageTeams, getStageTeamsError, selectAllStageTeams } from "./stageTeamSlice";
+import { fetchStageTeams, getStageTeamsError, selectAllStageTeams } from "./stageTeamsSlice";
 
-const StageTeamList = () => {
+export const StageTeamList = () => {
   const dispatch = useDispatch();
 
-  const stageTeams = useSelector(selectAllStageTeams);
+  const stageTeams = useSelector((state) => state?.stageTeams?.stageTeams);
   const stageTeamsStatus = useSelector(getStageTeamsError);
   const error = useSelector(getStageTeamsError);
   console.log("Stages", stageTeams);
@@ -29,4 +29,4 @@ const StageTeamList = () => {
   );
 };
 
-export default StageTeamList;
+

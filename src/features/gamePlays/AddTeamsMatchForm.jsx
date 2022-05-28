@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { matchTeams } from "./gamePlaySlice";
+import { matchTeams } from "./gamePlaysSlice";
 
-import {fetchStageTeams, selectAllStageTeams} from "../stageTeam/stageTeamSlice"
+import {fetchStageTeams, selectAllStageTeams} from "../stageTeams/stageTeamsSlice"
 
 export const AddTeamsMatchForm = () => {
 
