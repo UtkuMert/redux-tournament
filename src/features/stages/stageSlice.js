@@ -80,7 +80,6 @@ const stageSlice = createSlice({
       })
       .addCase(fetchStages.fulfilled, (state, action) => {
         state.status = "succeeded";
-
         state.stages = action?.payload?.data;
       })
       .addCase(fetchStages.rejected, (state, action) => {

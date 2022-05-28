@@ -9,21 +9,24 @@ import { useEffect } from "react";
 
 export const StageList = () => {
   const dispatch = useDispatch();
+
   const stages = useSelector(selectAllStages);
   const stagesStatus = useSelector(getStagesStatus);
   const error = useSelector(getStagesError);
 
-  console.log(stages);
+  
   useEffect(() => {
+    console.log("Girdi")
     if (stagesStatus === "idle") {
       dispatch(fetchStages());
+      console.log("Stages",stages);
     }
   }, [fetchStages, dispatch]);
 
   return (
     <div>
       {stages?.map((stage) => (
-        <p>{stages?.stageName}</p>
+        <p key={stage?.id}>{stage?.stageName}</p>
       ))}
     </div>
   );

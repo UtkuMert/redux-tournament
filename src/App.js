@@ -10,40 +10,41 @@ import { SingleTeamPage } from "./features/teams/SingleTeamPage";
 import { Layout } from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
-import {EditTeamForm} from "./features/teams/EditTeamForm";
-import {AddPlayerForm} from "./features/players/AddPlayerForm";
-import {EditPlayerForm} from "./features/players/EditPlayerForm";
+import { EditTeamForm } from "./features/teams/EditTeamForm";
+import { AddPlayerForm } from "./features/players/AddPlayerForm";
+import { EditPlayerForm } from "./features/players/EditPlayerForm";
 import { StageList } from "./features/stages/StageList";
+import AddStageTeamsForm from "./features/stageTeam/AddStageTeamsForm";
 
 export default function App() {
   return (
-
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        
+
         <Route path="tournament">
           <Route index element={<AddTournamentForm />} />
           <Route path=":id" element={<SingleTournamentPage />} />
           <Route path="edit/:id" element={<EditTournamentForm />} />
-          <Route path="addteam/:id" element={<AddTeamForm />}/>
+          <Route path="addteam/:id" element={<AddTeamForm />} />
         </Route>
 
         <Route path="team">
           <Route index element={<TeamList />} />
           <Route path=":id" element={<SingleTeamPage />} />
           <Route path="edit/:id" element={<EditTeamForm />} />
-          <Route path="addplayer/:id" element={<AddPlayerForm />}/>
+          <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
         <Route path="player">
           <Route index element={<PlayerList />} />
           <Route path="edit/:id" element={<EditPlayerForm />} />
-          <Route path="addplayer/:id" element={<AddPlayerForm />}/>
+          <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
         <Route path="stage">
           <Route index element={<StageList />} />
+          <Route path="addteamtostage" element={<AddStageTeamsForm />} />
         </Route>
       </Route>
     </Routes>
