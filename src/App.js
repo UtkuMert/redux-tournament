@@ -13,6 +13,7 @@ import { Home } from "./components/Home";
 import {EditTeamForm} from "./features/teams/EditTeamForm";
 import {AddPlayerForm} from "./features/players/AddPlayerForm";
 import {EditPlayerForm} from "./features/players/EditPlayerForm";
+import { StageList } from "./features/stages/StageList";
 
 export default function App() {
   return (
@@ -37,11 +38,13 @@ export default function App() {
 
         <Route path="player">
           <Route index element={<PlayerList />} />
-          {/* <Route path=":id" element={<SinglePlay />} /> */}
           <Route path="edit/:id" element={<EditPlayerForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />}/>
         </Route>
 
+        <Route path="stage">
+          <Route index element={<StageList />} />
+        </Route>
       </Route>
     </Routes>
   );

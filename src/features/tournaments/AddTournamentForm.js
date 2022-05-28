@@ -21,6 +21,7 @@ export const AddTournamentForm = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
+        
         dispatch(addNewTournament({ tournamentName, description })).unwrap();
 
         setTournamentName("");
@@ -50,7 +51,7 @@ export const AddTournamentForm = () => {
             name="tournamentName"
             value={tournamentName}
             onChange={onTournamentNameChanged}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="input input-bordered w-full max-w-xs"
             placeholder="Enter A Tournament Name"
             required=""
           />
@@ -58,7 +59,7 @@ export const AddTournamentForm = () => {
         <div className="mb-6">
           <label
             htmlFor="tournamentDescription"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="w-full max-w-xs"
           >
             Tournament Description
           </label>
@@ -68,7 +69,8 @@ export const AddTournamentForm = () => {
             name="tournamentDescription"
             value={description}
             onChange={onDescriptionChanged}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="input input-bordered w-full max-w-xs"
+            placeholder="Enter A Description"
             required=""
           />
         </div>

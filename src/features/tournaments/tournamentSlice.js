@@ -104,6 +104,8 @@ const tournamentSlice = createSlice({
       });
   },
 });
+
+
 export const selectAllTournaments = (state) => state?.tournaments?.tournaments;
 export const getTournamentsStatus = (state) => state?.tournaments?.status;
 export const getTournamentsError = (state) => state?.tournaments?.error;
