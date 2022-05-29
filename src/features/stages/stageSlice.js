@@ -33,9 +33,10 @@ export const fetchStagesById = createAsyncThunk(
   }
 );
 
-export const addNewStage = createAsyncThunk("/stages/save", async () => {
+export const addNewStage = createAsyncThunk("/stages/save", async (initialStage) => {
   try {
-    const response = await axios.post("/stages/save");
+    const { id } = initialStage 
+    const response = await axios.post(`/stages/save/${id}`, initialStage);
     return response?.data?.data;
   } catch (err) {
     return err.message;

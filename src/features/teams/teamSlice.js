@@ -123,9 +123,7 @@ const teamSlice = createSlice({
           return;
         }
         const { id } = action.payload;
-        const teams = state.teams.filter(
-          (team) => team?.id !== id
-        );
+        const teams = state.teams.filter((team) => team?.id !== id);
         state.teams = teams;
       });
   },

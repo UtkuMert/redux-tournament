@@ -24,6 +24,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
           <td>{tournament.description}</td>
           <td> <Link to={`tournament/${tournament.id}`}>View Tournament</Link></td>
           <td><Link to={`tournament/addteam/${tournament.id}`}>Add Team</Link></td>
+          <td><Link to={`tournament/addstage/${tournament.id}`}>Add Stage</Link></td>
         </tr>
         ))}
       </tbody>

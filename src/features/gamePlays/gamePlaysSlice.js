@@ -26,6 +26,7 @@ export const matchTeams = createAsyncThunk(
   async (initialMatch) => {
     try {
       const response = await axios.post("/gamestoplay/save", initialMatch);
+      console.log(response?.data)
       return response?.data?.data;
     } catch (err) {
       return err.message;
@@ -53,7 +54,7 @@ const gamePlaysSlice = createSlice({
       })
       .addCase(matchTeams.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.gamePlays.push(action.payload);
+        state?.gamePlays.push(action.payload);
       });
   },
 });
