@@ -30,6 +30,8 @@ export default function App() {
           <Route path="edit/:id" element={<EditTournamentForm />} />
           <Route path="addteam/:id" element={<AddTeamForm />} />
           <Route path="addstage/:id" element={<AddStageFrom />} />
+          <Route path=":id/stage" element={<StageList />} />
+
         </Route>
 
         <Route path="team">
@@ -45,13 +47,14 @@ export default function App() {
           <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
-        <Route path="stage">
+        {/* <Route path="stage">
           <Route index element={<StageList />} />
           <Route path="addteamtostage" element={<AddStageTeamsForm />} />
           <Route path="matchteams" element={<AddTeamsMatchForm />} />
-        </Route>
+        </Route> */}
         <Route path="stageteam">
           <Route index element={<StageTeamList />} />
+          <Route path="addteamtostage" element={<AddStageTeamsForm />} />
         </Route>
       </Route>
     </Routes>

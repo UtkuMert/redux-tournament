@@ -33,6 +33,7 @@ export const SingleTournamentPage = () => {
   return (
     <article>
       <Link to={`/tournament/edit/${id}`}>Edit Tournament</Link>
+      <Link to={`/tournament/${id}/stage`}>Stage</Link>
       <h2>{tournament.tournamentName}</h2>
       <p>{tournament.description}</p>
       <TeamExcerpt teams={teams} />
