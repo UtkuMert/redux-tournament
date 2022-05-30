@@ -19,8 +19,7 @@ export const AddStageFrom = ({tournamentId}) => {
 
   const [stageName, setStageName] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-  const [opened, setOpened] = useState(false);
-
+ 
   const onNameChange = (e) => setStageName(e.target.value);
 
   const canSave = [stageName].every(Boolean) && addRequestStatus === "idle";

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import axios from "axios";
+import axios from "../../api/axios";
 
 const initialState = {
   gamePerformances: [],
@@ -26,7 +26,7 @@ export const addGamePerformance = createAsyncThunk(
   async (initialPerformance) => {
     try {
       const response = await axios.post(
-        "/gamesperformed/save",
+        "/gamesperformed",
         initialPerformance
       );
       return response?.data?.data;

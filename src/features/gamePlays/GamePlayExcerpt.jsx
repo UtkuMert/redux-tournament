@@ -4,7 +4,9 @@ import { AddGamePerformanceForm } from "../gamePerformances/AddGamePerformanceFo
 
 export const GamePlayExcerpt = ({ gamePlays }) => {
   const [opened, setOpened] = useState(false);
-  const [gamePlayId, setGamePlayId] = useState("");
+  const [gameToPlayId, setGameToPlayId] = useState("");
+  const [firstTeamName, setFirstTeamName] = useState("");
+  const [secondTeamName, setSecondTeamName] = useState("");
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -27,16 +29,18 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
                 onClose={() => setOpened(false)}
                 title="Introduce yourself!"
               >
-                <AddGamePerformanceForm />
+                <AddGamePerformanceForm gameToPlayId={gameToPlayId} firstTeamName={firstTeamName} secondTeamName={secondTeamName}/>
               </Modal>
               <Group position="center">
                 <Button
                   onClick={() => {
                     setOpened(true);
-                    setGamePlayId(gamePlay?.id);
+                    setGameToPlayId(gamePlay?.id);
+                    setFirstTeamName(gamePlay?.firstTeamName)
+                    setSecondTeamName(gamePlay?.secondTeamName)
                   }}
                 >
-                  Add Stage
+                  Edit Score
                 </Button>
               </Group>
             </td>
