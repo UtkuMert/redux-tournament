@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Table, Modal, Button, Group } from "@mantine/core";
+import { AddGamePerformanceForm } from "../gamePerformances/AddGamePerformanceForm";
 
 export const GamePlayExcerpt = ({ gamePlays }) => {
   const [opened, setOpened] = useState(false);
@@ -26,7 +27,7 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
                 onClose={() => setOpened(false)}
                 title="Introduce yourself!"
               >
-                Hello
+                <AddGamePerformanceForm />
               </Modal>
               <Group position="center">
                 <Button
