@@ -66,18 +66,22 @@ export const AddStageTeamsForm = () => {
       </div>
 
       <h3>ADD TEAM TO STAGE</h3>
-      <form action="">
-        <label htmlFor="teamName">Team</label>
-        <select id="teamName" value={teamId} onChange={onTeamChange}>
-          <option value=""></option>
-          {teamsOptions}
-        </select>
 
-        <label htmlFor="stageName">Stage</label>
-        <select id="stageName" value={stageId} onChange={onStageChange}>
-          <option value=""></option>
-          {stagesOptions}
-        </select>
+      <form action="">
+        <div>
+          <label htmlFor="teamName">Team</label>
+          <select id="teamName" value={teamId} onChange={onTeamChange}>
+            <option value=""></option>
+            {teamsOptions}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="stageName">Stage</label>
+          <select id="stageName" value={stageId} onChange={onStageChange}>
+            <option value=""></option>
+            {stagesOptions}
+          </select>
+        </div>
 
         <button
           type="button"

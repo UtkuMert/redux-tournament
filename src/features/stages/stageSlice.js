@@ -43,6 +43,7 @@ export const fetchStagesById = createAsyncThunk(
 export const addNewStage = createAsyncThunk("/stages/save", async (initialStage) => {
   try {
     const { tournamentId } = initialStage 
+    console.log(tournamentId)
     const response = await axios.post(`/stages/save/${tournamentId}`, initialStage);
     return response?.data?.data;
   } catch (err) {

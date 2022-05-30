@@ -12,12 +12,10 @@ import { useParams } from "react-router-dom";
 export const StageList = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
   const stages = useSelector(selectAllStages);
   const stagesStatus = useSelector(getStagesStatus);
   const error = useSelector(getStagesError);
-  console.log(stagesStatus);
-  console.log(error);
+
 
   useEffect(() => {
     dispatch(fetchStages(id));

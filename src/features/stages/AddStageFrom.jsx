@@ -10,7 +10,6 @@ export const AddStageFrom = ({tournamentId}) => {
   const dispatch = useDispatch();
   //const { id } = useParams();
   const navigate = useNavigate();
-  console.log(tournamentId)
   const tournament = useSelector((state) =>
     selectTournamentById(state, Number(tournamentId))
   );

@@ -14,26 +14,28 @@ export const AddTeamsMatchForm = () => {
   //const { id } = useParams();
   const navigate = useNavigate();
 
-  const [firstTeamId, setFirstTeamId] = useState("");
-  const [secondTeamId, setSecondTeamId] = useState("");
+  const [firstStageTeamId, setFirstStageTeamId] = useState("");
+  const [secondStageTeamId, setSecondStageTeamId] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-
+  const [date, setDate] = useState("Yarin");
   const stagesTeams = useSelector(selectAllStageTeams);
-  console.log(stagesTeams)
-  const onFirstTeamChange = (e) => setFirstTeamId(e.target.value);
-  const onSecondTeamChange = (e) => setSecondTeamId(e.target.value);
+  console.log(stagesTeams);
+  const onFirstTeamChange = (e) => setFirstStageTeamId(e.target.value);
+  const onSecondTeamChange = (e) => setSecondStageTeamId(e.target.value);
 
   const canSave =
-    [firstTeamId, secondTeamId].every(Boolean) && addRequestStatus === "idle";
-
+    [firstStageTeamId, secondStageTeamId].every(Boolean) &&
+    addRequestStatus === "idle";
+  console.log(firstStageTeamId);
+  console.log(secondStageTeamId);
   const onMatchTeamsClicked = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(matchTeams({ firstTeamId, secondTeamId })).unwrap();
+        dispatch(matchTeams({ firstStageTeamId, secondStageTeamId, date })).unwrap();
 
-        setFirstTeamId("");
-        setSecondTeamId("");
+        setFirstStageTeamId("");
+        setSecondStageTeamId("");
         navigate("/");
       } catch (error) {
         console.error("Failed to match the team", error);
@@ -45,7 +47,7 @@ export const AddTeamsMatchForm = () => {
 
   const teamsOptions = stagesTeams?.map((stagesTeam) => (
     <option key={stagesTeam?.id} value={stagesTeam?.id}>
-      {stagesTeam?.teamName}
+      {stagesTeam?.id}
     </option>
   ));
 
@@ -55,7 +57,7 @@ export const AddTeamsMatchForm = () => {
         <label htmlFor="firstTeamName">Team 1</label>
         <select
           id="firstTeamName"
-          value={firstTeamId}
+          value={firstStageTeamId}
           onChange={onFirstTeamChange}
         >
           <option value=""></option>
@@ -65,19 +67,15 @@ export const AddTeamsMatchForm = () => {
         <label htmlFor="secondTeamName">Team 2</label>
         <select
           id="secondTeamName"
-          value={secondTeamId}
+          value={secondStageTeamId}
           onChange={onSecondTeamChange}
         >
           <option value=""></option>
           {teamsOptions}
         </select>
 
-        <button
-          type="button"
-          onClick={onMatchTeamsClicked}
-          disabled={!canSave}
-        >
-          Match Team 
+        <button type="button" onClick={onMatchTeamsClicked} disabled={!canSave}>
+          Match Team
         </button>
       </form>
     </div>

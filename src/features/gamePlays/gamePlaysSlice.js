@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 
 const initialState = {
-  gameToPlay: [],
+  gamePlays: [],
   status: "idle",
   error: null,
 };
@@ -12,7 +12,7 @@ export const fetchGameToPlay = createAsyncThunk(
   "/gametoplay/get/list",
   async () => {
     try {
-      const response = await axios.get("/gametoplay/get/list");
+      const response = await axios.get("/gamestoplay/get/list");
       console.log(response?.data);
       return response?.data;
     } catch (err) {
@@ -25,6 +25,7 @@ export const matchTeams = createAsyncThunk(
   "/gamestoplay/save",
   async (initialMatch) => {
     try {
+      console.log(initialMatch);
       const response = await axios.post("/gamestoplay/save", initialMatch);
       console.log(response?.data)
       return response?.data?.data;
@@ -54,11 +55,13 @@ const gamePlaysSlice = createSlice({
       })
       .addCase(matchTeams.fulfilled, (state, action) => {
         console.log(action.payload);
-        state?.gamePlays.push(action.payload);
+        state?.gamePlays?.push(action.payload);
       });
   },
 });
 
 
-
+export const selectAllGamePlays = (state) => state?.gamePlays?.gamePlays;
+export const getGamePlaysStatus = (state) => state?.gamePlays?.status;
+export const getGamePlaysError = (state) => state?.gamePlays?.error;
 export default gamePlaysSlice.reducer;
