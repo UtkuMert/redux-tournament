@@ -13,7 +13,6 @@ export const fetchGamePerformances = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get("/gamesperformed/get/list");
-      console.log(response?.data);
       return response?.data;
     } catch (err) {
       return err.message;

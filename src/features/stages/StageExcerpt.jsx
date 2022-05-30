@@ -1,36 +1,64 @@
-import React from "react";
-import { Table } from "@mantine/core";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
-export const StageExcerpt = ({stages}) => {
+import { Table, Modal, Button, Group } from "@mantine/core";
+import { AddStageTeamsForm } from "../stageTeams/AddStageTeamsForm";
+export const StageExcerpt = ({ stages }) => {
+  const [opened, setOpened] = useState(false);
+  const [stageId, setStageId] = useState("");
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
-    <thead>
-      <tr>
-        <th>Tournament Id</th>
-        <th>Stage Name</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {stages?.map(stage => (
-        <tr key={stage.id}>
-        <td>{stage.id}</td>
-        <td>{stage.stageName}</td>
-        <td></td>
-        <td> <Link to={`tournament/stage/${stage.id}`}>View Stage</Link></td>
-        <td><Link to={`tournament/addteam/${stage.id}`}>Add Team To Stage</Link></td>
-      </tr>
-      ))}
-    </tbody>
-  </Table>
+      <thead>
+        <tr>
+          <th>Stage Id</th>
+          <th>Stage Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {stages?.map((stage) => (
+          <>
+            <Modal
+              opened={opened}
+              onClose={() => setOpened(false)}
+              title="Add Team To Stage"
+            >
+              <AddStageTeamsForm stageId={stageId} />
+            </Modal>
+
+            <tr key={stage.id}>
+              <td>{stage.id}</td>
+              <td>{stage.stageName}</td>
+              <td></td>
+              <td>
+                {" "}
+                <Link to={`${stage.id}`}>View Stage</Link>
+              </td>{" "}
+              <td>
+                <Group position="center">
+                  <Button
+                    onClick={() => {
+                      setOpened(true);
+                      setStageId(stage?.id);
+                    }}
+                  >
+                    Add Team To Stage
+                  </Button>
+                </Group>
+              </td>
+            </tr>
+          </>
+        ))}
+      </tbody>
+    </Table>
   );
 };
 
-{/* <div>
+{
+  /* <div>
 {stages?.map((stage) => (
   <p key={stage?.id}>{stage?.stageName}</p>
 ))}
-</div> */}
+</div> */
+}

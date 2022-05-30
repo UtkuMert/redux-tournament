@@ -21,10 +21,10 @@ export function TeamExcerpt({ teams }) {
             <td>{team.tournamentId}</td>
             <td>
               {" "}
-              <Link to={`team/${team.id}`}>View Team</Link>
+              <Link to={`/team/${team.id}`}>View Team</Link>
             </td>
             <td>
-              <Link to={`team/addplayer/${team.id}`}>Add Player</Link>
+              <Link to={`/team/addplayer/${team.id}`}>Add Player</Link>
             </td>
           </tr>
         ))}

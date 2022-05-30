@@ -8,30 +8,19 @@ const initialState = {
   error: null,
 };
 
-export const fetchStages = createAsyncThunk("/stages/get/list", async (initialStage) => {
-  try {
-   const tournamentId = initialStage
-   if(tournamentId){
-    const response = await axios.get(`/stages/get/list?tournamentId=${tournamentId}`);
-    console.log(response?.data);
-    return response?.data;
-   }
-    const response = await axios.get(`/stages/get/list`);
-    console.log(response?.data);
-    return response?.data;
-  } catch (err) {
-    return err.message;
-  }
-});
-
-export const fetchStagesById = createAsyncThunk(
+export const fetchStages = createAsyncThunk(
   "/stages/get/list",
   async (initialStage) => {
     try {
-      const { tournamentId } = initialStage;
-      console.log(tournamentId);
-      const response = await axios.get(`/stages/get/list/
-      ${tournamentId}`,initialStage);
+      const tournamentId = initialStage;
+      if (tournamentId) {
+        const response = await axios.get(
+          `/stages/get/list?tournamentId=${tournamentId}`
+        );
+        console.log(response?.data);
+        return response?.data;
+      }
+      const response = await axios.get(`/stages/get/list`);
       console.log(response?.data);
       return response?.data;
     } catch (err) {
@@ -40,16 +29,41 @@ export const fetchStagesById = createAsyncThunk(
   }
 );
 
-export const addNewStage = createAsyncThunk("/stages/save", async (initialStage) => {
-  try {
-    const { tournamentId } = initialStage 
-    console.log(tournamentId)
-    const response = await axios.post(`/stages/save/${tournamentId}`, initialStage);
-    return response?.data?.data;
-  } catch (err) {
-    return err.message;
+export const fetchStagesById = createAsyncThunk(
+  "/stages/get/list",
+  async (initialStage) => {
+    try {
+      const { tournamentId } = initialStage;
+      console.log(tournamentId);
+      const response = await axios.get(
+        `/stages/get/list/
+      ${tournamentId}`,
+        initialStage
+      );
+      console.log(response?.data);
+      return response?.data;
+    } catch (err) {
+      return err.message;
+    }
   }
-});
+);
+
+export const addNewStage = createAsyncThunk(
+  "/stages/save",
+  async (initialStage) => {
+    try {
+      const { tournamentId } = initialStage;
+      console.log(tournamentId);
+      const response = await axios.post(
+        `/stages/save/${tournamentId}`,
+        initialStage
+      );
+      return response?.data?.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 
 export const updateStage = createAsyncThunk(
   "/stages/update",
@@ -128,7 +142,8 @@ export const getStagesStatus = (state) => state?.stages?.status;
 export const getStagesError = (state) => state?.stages?.error;
 
 export const selectStageById = (state, id) =>
-  state.stages.stages.find((stage) => stage.id === id); //Turnuva bulunuyor.
-  export const selectStageByTournamentId = (state, id) =>
-  state?.stages?.stages?.filter((stage) => stage?.tournamentId === id); //Turnuva idsine gore team geliyor.
+  state.stages.stages.find((stage) => stage.id === id);
+
+export const selectStageByTournamentId = (state, id) =>
+  state?.stages?.stages?.filter((stage) => stage?.tournamentId === id);
 export default stageSlice.reducer;

@@ -17,7 +17,8 @@ export const AddTeamForm = () => {
   const [tournamentName, setTournamentName] = useState(
     tournament?.tournamentName
   );
-
+console.log(tournament);
+console.log(tournamentName);
   const [teamName, setTeamName] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 

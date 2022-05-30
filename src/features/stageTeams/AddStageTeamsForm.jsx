@@ -4,93 +4,110 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { addTeamToStage } from "./stageTeamsSlice";
 
-import { selectAllTeams } from "../teams/teamSlice";
-import { selectAllStages } from "../stages/stageSlice";
+import { selectTeamByTournamentId } from "../teams/teamSlice";
+import { selectStageById } from "../stages/stageSlice";
+import { Box, MultiSelect, TextInput, Button, Group } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
-export const AddStageTeamsForm = () => {
+export const AddStageTeamsForm = ({ stageId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [teamId, setTeamId] = useState("");
-  const [stageId, setStageId] = useState("");
+
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-  const teams = useSelector(selectAllTeams);
-  const stages = useSelector(selectAllStages);
+  const stage = useSelector((state) => selectStageById(state, Number(stageId)));
+
+  const [stageName, setStageName] = useState(stage?.stageName);
+  const [tournamentId, setTournamentId] = useState(stage?.tournamentId);
+
+  const teams = useSelector((state) =>
+    selectTeamByTournamentId(state, Number(tournamentId))
+  );
 
   const onTeamChange = (e) => setTeamId(e.target.value);
-  const onStageChange = (e) => setStageId(e.target.value);
 
-  const canSave =
-    [teamId, stageId].every(Boolean) && addRequestStatus === "idle";
 
-  const onSaveTeamToStageClicked = () => {
-    if (canSave) {
-      try {
-        setAddRequestStatus("pending");
-        dispatch(addTeamToStage({ teamId, stageId })).unwrap();
+  const onSaveTeamToStageClicked = (values) => {
+    try {
+      setAddRequestStatus("pending");
+      console.log(values);
+      values?.teams?.map((value) =>
+        dispatch(addTeamToStage({ value, stageId })).unwrap()
+      );
 
-        setTeamId("");
-        setStageId("");
-        navigate("/");
-      } catch (error) {
-        console.error("Failed to save the team", error);
-      } finally {
-        setAddRequestStatus("idle");
-      }
+      setTeamId("");
+
+      navigate(`/tournament/${tournamentId}/stage`);
+    } catch (error) {
+      console.error("Failed to save the team", error);
+    } finally {
+      setAddRequestStatus("idle");
     }
   };
 
-  const teamsOptions = teams?.map((team) => (
-    <option key={team?.id} value={team?.id}>
-      {team?.teamName}
-    </option>
-  ));
+  const data = [];
+  teams?.map((team) => data.push({ value: team?.id, label: team?.teamName }));
 
-  const stagesOptions = stages?.map((stage) => (
-    <option key={stage?.id} value={stage?.id}>
-      {stage?.stageName}
-    </option>
-  ));
+  const form = useForm({
+    initialValues: {
+      teams: "",
+    },
+
+    validate: {
+      teams: (value) => value.length > 1 ? null : 'You have to select teams',
+    },
+  });
 
   return (
     <div>
-      <div>
-        {teams?.map((team) => (
-          <p key={team?.id}>{team.teamName}</p>
-        ))}
-
-        {stages?.map((stage) => (
-          <p key={stage?.id}>{stage.stageName}</p>
-        ))}
-      </div>
-
-      <h3>ADD TEAM TO STAGE</h3>
-
-      <form action="">
-        <div>
-          <label htmlFor="teamName">Team</label>
-          <select id="teamName" value={teamId} onChange={onTeamChange}>
-            <option value=""></option>
-            {teamsOptions}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="stageName">Stage</label>
-          <select id="stageName" value={stageId} onChange={onStageChange}>
-            <option value=""></option>
-            {stagesOptions}
-          </select>
-        </div>
-
-        <button
-          type="button"
-          onClick={onSaveTeamToStageClicked}
-          disabled={!canSave}
+      <Box sx={{ maxWidth: 340 }} mx="auto">
+        <form
+          onSubmit={form.onSubmit((values) => onSaveTeamToStageClicked(values))}
         >
-          Save Team To Stage
-        </button>
-      </form>
+          <MultiSelect
+            key={teams?.map((team) => team.teamId)}
+            mt="md"
+            data={data}
+            label="deneem"
+            {...form.getInputProps("teams")}
+          />
+          <TextInput readOnly label="Stage" value={stageName} />
+
+          <Group position="right" mt="md">
+            <Button type="submit">Submit</Button>
+          </Group>
+        </form>
+      </Box>
     </div>
   );
 };
+
+{
+  /* <form action="">
+  <div>
+    <label htmlFor="teamName">Team</label>
+    <select id="teamName" value={teamId} onChange={onTeamChange}>
+      <option value=""></option>
+      {teamsOptions}
+    </select>
+  </div>
+  <div>
+  <TextInput
+      label="Stage"
+      placeholder="Stage Name"
+      readOnly
+      value={stageName}
+    />
+  </div>
+
+  <button
+    type="button"
+    onClick={onSaveTeamToStageClicked}
+    disabled={!canSave}
+  >
+    Save Team To Stage
+  </button>
+</form> */
+}
