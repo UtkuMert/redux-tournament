@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { Box, TextInput, Button, Group } from "@mantine/core";
+import { Box, TextInput, Button, Modal, Group } from "@mantine/core";
 
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 import { addNewStage } from "./stageSlice";
-const AddStageFrom = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const navigate = useNavigate();
 
+export const AddStageFrom = ({tournamentId}) => {
+  const dispatch = useDispatch();
+  //const { id } = useParams();
+  const navigate = useNavigate();
+  console.log(tournamentId)
   const tournament = useSelector((state) =>
-    selectTournamentById(state, Number(id))
+    selectTournamentById(state, Number(tournamentId))
   );
   const [tournamentName, setTournamentName] = useState(
     tournament?.tournamentName
@@ -19,6 +20,7 @@ const AddStageFrom = () => {
 
   const [stageName, setStageName] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
+  const [opened, setOpened] = useState(false);
 
   const onNameChange = (e) => setStageName(e.target.value);
 
@@ -28,7 +30,7 @@ const AddStageFrom = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(addNewStage({ stageName, id })).unwrap();
+        dispatch(addNewStage({ stageName, tournamentId })).unwrap();
 
         setStageName("");
         navigate("/");
@@ -42,7 +44,6 @@ const AddStageFrom = () => {
 
   return (
     <div>
-      <h2>Add Team</h2>
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form>
           <TextInput
@@ -76,5 +77,3 @@ const AddStageFrom = () => {
     </div>
   );
 };
-
-export default AddStageFrom;

@@ -10,9 +10,9 @@ const initialState = {
 
 export const fetchStages = createAsyncThunk("/stages/get/list", async (initialStage) => {
   try {
-   const id = initialStage
-   if(id){
-    const response = await axios.get(`/stages/get/list?tournamentId=${id}`);
+   const tournamentId = initialStage
+   if(tournamentId){
+    const response = await axios.get(`/stages/get/list?tournamentId=${tournamentId}`);
     console.log(response?.data);
     return response?.data;
    }
@@ -28,9 +28,10 @@ export const fetchStagesById = createAsyncThunk(
   "/stages/get/list",
   async (initialStage) => {
     try {
-      const { id } = initialStage;
+      const { tournamentId } = initialStage;
+      console.log(tournamentId);
       const response = await axios.get(`/stages/get/list/
-      ${id}`,initialStage);
+      ${tournamentId}`,initialStage);
       console.log(response?.data);
       return response?.data;
     } catch (err) {
@@ -41,8 +42,8 @@ export const fetchStagesById = createAsyncThunk(
 
 export const addNewStage = createAsyncThunk("/stages/save", async (initialStage) => {
   try {
-    const { id } = initialStage 
-    const response = await axios.post(`/stages/save/${id}`, initialStage);
+    const { tournamentId } = initialStage 
+    const response = await axios.post(`/stages/save/${tournamentId}`, initialStage);
     return response?.data?.data;
   } catch (err) {
     return err.message;

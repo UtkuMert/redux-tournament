@@ -26,7 +26,6 @@ export const AddStageTeamsForm = () => {
 
   const onSaveTeamToStageClicked = () => {
     if (canSave) {
-      console.log("Girdi")
       try {
         setAddRequestStatus("pending");
         dispatch(addTeamToStage({ teamId, stageId })).unwrap();

@@ -62,4 +62,8 @@ export const selectAllStageTeams = (state) => state?.stageTeams?.stageTeams;
 export const getStageTeamsStatus = (state) => state?.stageTeams?.status;
 export const getStageTeamsError = (state) => state?.stageTeams?.error;
 
+export const selectStageTeamByStageId = (state, id) =>
+state?.stageTeams?.stageTeams?.filter((stageTeam) => stageTeam.stageId === id)
+
+
 export default stageTeamsSlice.reducer;
