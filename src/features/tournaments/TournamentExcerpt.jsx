@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { Table } from "@mantine/core";
 import { useState } from "react";
-import { Modal, Button, Group } from "@mantine/core";
+import { Table, Modal, Button, Group } from "@mantine/core";
 import { AddStageFrom } from "../stages/AddStageFrom";
 export const TournamentExcerpt = ({ tournaments }) => {
   const [opened, setOpened] = useState(false);
