@@ -6,12 +6,12 @@ import { deletePlayer, selectPlayerById } from "./playerSlice";
 import { selectTeamById } from "../teams/teamSlice";
 import { updateNewPlayer } from "./playerSlice";
 
-import { Box, TextInput, Button, Group } from "@mantine/core";
-
+import { Box, TextInput, Select, Button, Group } from "@mantine/core";
+import { useForm } from "@mantine/form";
 export const EditPlayerForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
 
   const player = useSelector((state) => selectPlayerById(state, Number(id)));
 
@@ -29,54 +29,36 @@ export const EditPlayerForm = () => {
 
   const [requestStatus, setRequestStatus] = useState("idle");
 
-  const dispatch = useDispatch();
+  const onSavePlayerClicked = (value) => {
+    try {
+      setRequestStatus("pending");
+      const playerFirstName = value.playerFirstName;
+      const playerLastName = value.playerLastName;
+      const playerAddress = value.playerAddress;
+      const position = value.position;
+      dispatch(
+        updateNewPlayer({
+          playerFirstName,
+          playerLastName,
+          playerAddress,
+          position,
+          id,
+        })
+      ).unwrap();
 
-  if (!player) {
-    return (
-      <section>
-        <h2>player not found!</h2>
-      </section>
-    );
-  }
-
-  const onFirstNameChange = (e) => setPlayerFirstName(e.target.value);
-  const onLastNameChange = (e) => setPlayerLastName(e.target.value);
-  const onplayerAddressChange = (e) => setPlayerAddress(e.target.value);
-  const onPositionChange = (e) => setPosition(e.target.value);
-
-  const canSave =
-    [playerFirstName, playerLastName, playerAddress, position].every(Boolean) &&
-    requestStatus === "idle";
-
-  const onSavePlayerClicked = () => {
-    if (canSave) {
-      try {
-        setRequestStatus("pending");
-        dispatch(
-          updateNewPlayer({
-            playerFirstName,
-            playerLastName,
-            playerAddress,
-            position,
-            id,
-          })
-        ).unwrap();
-
-        setPlayerFirstName("");
-        setPlayerLastName("");
-        setPlayerAddress("");
-        setPosition("");
-        navigate("/");
-      } catch (error) {
-        console.error("Failed to update the player", error);
-      } finally {
-        setRequestStatus("idle");
-      }
+      setPlayerFirstName("");
+      setPlayerLastName("");
+      setPlayerAddress("");
+      setPosition("");
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to update the player", error);
+    } finally {
+      setRequestStatus("idle");
     }
   };
 
   const onDeletePlayerClicked = () => {
-    console.log("Girdi")
     try {
       setRequestStatus("pending");
       dispatch(deletePlayer({ id })).unwrap();
@@ -92,42 +74,70 @@ export const EditPlayerForm = () => {
       setRequestStatus("idle");
     }
   };
+  const [data, setData] = useState(["Kaleci", "Defans", "Orta Saha", "Forvet"]);
+  const form = useForm({
+    initialValues: {
+      playerFirstName: playerFirstName,
+      playerLastName: playerLastName,
+      playerAddress: playerAddress,
+      position: position,
+    },
+
+    validate: {
+      playerFirstName: (value) =>
+        value.length > 2 ? null : "Player First Name must be least 3 character",
+      playerLastName: (value) =>
+        value.length > 1 ? null : "Player Last Name must be least 2 character",
+      playerAddress: (value) =>
+        value.length > 1 ? null : "Player Address must be least 2 character",
+      position: (value) => (value.length > 1 ? null : "Select Position"),
+    },
+  });
+
+  if (!player) {
+    return (
+      <section>
+        <h2>player not found!</h2>
+      </section>
+    );
+  }
 
   return (
     <div>
       <Box sx={{ maxWidth: 340 }} mx="auto">
-        <form>
+        <form onSubmit={form.onSubmit((value) => onSavePlayerClicked(value))}>
           <TextInput
+            required
             type="text"
             id="firstName"
             label="First Name"
             placeholder="First Name"
-            value={playerFirstName}
-            onChange={onFirstNameChange}
+            {...form.getInputProps("playerFirstName")}
           />
           <TextInput
+            required
             type="text"
             id="lastName"
             label="Last Name"
             placeholder="Last Name"
-            value={playerLastName}
-            onChange={onLastNameChange}
+            {...form.getInputProps("playerLastName")}
           />
           <TextInput
+            required
             type="text"
             id="address"
             label="Adress"
             placeholder="Address"
-            value={playerAddress}
-            onChange={onplayerAddressChange}
+            {...form.getInputProps("playerAddress")}
           />
-          <TextInput
-            type="text"
-            id="position"
+          <Select
             label="Position"
-            placeholder="Position"
-            value={position}
-            onChange={onPositionChange}
+            data={data}
+            placeholder="Select Position"
+            nothingFound="Nothing found"
+            searchable
+            required=""
+            {...form.getInputProps("position")}
           />
           <TextInput
             label="Team"
@@ -137,20 +147,8 @@ export const EditPlayerForm = () => {
           />
 
           <Group position="right" mt="md">
-            <Button
-              onClick={onSavePlayerClicked}
-              type="button"
-              disabled={!canSave}
-              className="btn btn-active"
-            >
-              Update Player
-            </Button>
-            <Button
-              onClick={onDeletePlayerClicked}
-              type="button"
-              disabled={!canSave}
-              className="btn btn-active"
-            >
+            <Button type="submit">Update Player</Button>
+            <Button onClick={onDeletePlayerClicked} type="button">
               Delete Player
             </Button>
           </Group>

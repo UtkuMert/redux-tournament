@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { matchTeams } from "./gamePlaysSlice";
-
+import { useForm } from "@mantine/form";
 import {
   fetchStageTeams,
   selectAllStageTeams,
@@ -32,7 +32,9 @@ export const AddTeamsMatchForm = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(matchTeams({ firstStageTeamId, secondStageTeamId, date })).unwrap();
+        dispatch(
+          matchTeams({ firstStageTeamId, secondStageTeamId, date })
+        ).unwrap();
 
         setFirstStageTeamId("");
         setSecondStageTeamId("");
@@ -50,7 +52,19 @@ export const AddTeamsMatchForm = () => {
       {stagesTeam?.id}
     </option>
   ));
+  const form = useForm({
+    initialValues: {
+      firstStageTeamId: null,
+      secondStageTeamId: null,
+    },
 
+    validate: {
+      tournamentName: (value) =>
+        value.length > 2 ? null : "Tournament Name must be least 3 character",
+      description: (value) =>
+        value.length > 2 ? null : "Description Name must be least 3 character",
+    },
+  });
   return (
     <div>
       <form action="">
