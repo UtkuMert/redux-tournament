@@ -1,18 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { GamePerformancesList } from "../gamePerformances/GamePerformancesList";
+import { GamePlayList } from "../gamePlays/GamePlayList";
+import { selectStageTeamByStageId } from "../stageTeams/stageTeamsSlice";
+import { TeamExcerpt } from "../teams/TeamExcerpt";
 
-const SingleStagePage = () => {
+export const SingleStagePage = () => {
+  const { stageId } = useParams();
+
+  const teams = useSelector((state) =>
+    selectStageTeamByStageId(state, Number(stageId))
+  );
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <h1> I am centered </h1>
-    </div>
+    <>
+      <div className="w-96">
+        <TeamExcerpt teams={teams} />
+        <div className="w-48">
+          <GamePlayList />
+          <GamePerformancesList />
+        </div>
+      </div>
+    </>
   );
 };
-
-export default SingleStagePage;

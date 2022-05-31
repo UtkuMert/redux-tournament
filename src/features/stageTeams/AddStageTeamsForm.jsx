@@ -28,7 +28,6 @@ export const AddStageTeamsForm = ({ stageId }) => {
 
   const onTeamChange = (e) => setTeamId(e.target.value);
 
-
   const onSaveTeamToStageClicked = (values) => {
     try {
       setAddRequestStatus("pending");
@@ -56,7 +55,7 @@ export const AddStageTeamsForm = ({ stageId }) => {
     },
 
     validate: {
-      teams: (value) => value.length > 1 ? null : 'You have to select teams',
+      teams: (value) => (value.length > 0 ? null : "You have to select teams"),
     },
   });
 

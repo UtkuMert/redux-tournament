@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Table, Modal, Button, Group } from "@mantine/core";
 import { AddStageTeamsForm } from "../stageTeams/AddStageTeamsForm";
+
 export const StageExcerpt = ({ stages }) => {
   const [opened, setOpened] = useState(false);
   const [stageId, setStageId] = useState("");
@@ -11,44 +12,36 @@ export const StageExcerpt = ({ stages }) => {
         <tr>
           <th>Stage Id</th>
           <th>Stage Name</th>
-          <th></th>
-          <th></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
         {stages?.map((stage) => (
-          <>
-            <Modal
-              opened={opened}
-              onClose={() => setOpened(false)}
-              title="Add Team To Stage"
-            >
-              <AddStageTeamsForm stageId={stageId} />
-            </Modal>
-
-            <tr key={stage.id}>
-              <td>{stage.id}</td>
-              <td>{stage.stageName}</td>
-              <td></td>
-              <td>
-                {" "}
-                <Link to={`${stage.id}`}>View Stage</Link>
-              </td>{" "}
-              <td>
-                <Group position="center">
-                  <Button
-                    onClick={() => {
-                      setOpened(true);
-                      setStageId(stage?.id);
-                    }}
-                  >
-                    Add Team To Stage
-                  </Button>
-                </Group>
-              </td>
-            </tr>
-          </>
+          <tr key={stage.id}>
+            <td>{stage.id}</td>
+            <td>{stage.stageName}</td>
+            <td>
+              <Link to={`${stage.id}`}>View Stage</Link>
+            </td>
+            <td>
+              <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Add Team To Stage"
+              >
+                <AddStageTeamsForm stageId={stageId} />
+              </Modal>
+              <Group position="center">
+                <Button
+                  onClick={() => {
+                    setOpened(true);
+                    setStageId(stage?.id);
+                  }}
+                >
+                  Add Team To Stage
+                </Button>
+              </Group>
+            </td>
+          </tr>
         ))}
       </tbody>
     </Table>

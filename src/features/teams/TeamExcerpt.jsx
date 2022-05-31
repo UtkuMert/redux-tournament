@@ -15,16 +15,16 @@ export function TeamExcerpt({ teams }) {
       </thead>
       <tbody>
         {teams?.map((team) => (
-          <tr key={team.id}>
-            <td>{team.id}</td>
-            <td>{team.teamName}</td>
-            <td>{team.tournamentId}</td>
+          <tr key={team?.id}>
+            <td>{team?.id}</td>
+            <td>{team?.teamName}</td>
+            <td>{team?.tournamentId}</td>
             <td>
               {" "}
-              <Link to={`/team/${team.id}`}>View Team</Link>
+              <Link to={`/team/${team?.id}`}>View Team</Link>
             </td>
             <td>
-              <Link to={`/team/addplayer/${team.id}`}>Add Player</Link>
+              <Link to={`/team/addplayer/${team?.id}`}>Add Player</Link>
             </td>
           </tr>
         ))}

@@ -18,7 +18,7 @@ import { AddTeamsMatchForm } from "./features/gamePlays/AddTeamsMatchForm";
 import { StageTeamList } from "./features/stageTeams/StageTeamList";
 import {AddStageFrom} from "./features/stages/AddStageFrom";
 import {GamePlayList} from "./features/gamePlays/GamePlayList";
-import SingleStagePage from "./features/stages/SingleStagePage.jsx";
+import {SingleStagePage} from "./features/stages/SingleStagePage.jsx";
 
 export default function App() {
   return (
