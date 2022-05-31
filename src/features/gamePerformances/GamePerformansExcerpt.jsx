@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Table, Modal, Button, Group } from "@mantine/core";
+import { AddScorePlayerForm } from "../scorePlayers/AddScorePlayerForm";
 
 export const GamePerformansExcerpt = ({ gamePerformances }) => {
+  const [opened, setOpened] = useState(false);
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -23,6 +25,24 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
               {gamePerformance.scoreOfSecondTeam}{" "}
             </td>
             <td>{gamePerformance?.secondTeamName}</td>
+            <td>
+              <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Add Team To Stage"
+              >
+                <AddScorePlayerForm  />
+              </Modal>
+              <Group position="center">
+                <Button
+                  onClick={() => {
+                    setOpened(true);
+                  }}
+                >
+                  Edit Match
+                </Button>
+              </Group>
+            </td>
           </tr>
         ))}
       </tbody>

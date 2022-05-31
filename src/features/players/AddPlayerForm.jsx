@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectTeamById } from "../teams/teamSlice";
-import { addNewPlayer } from "./playerSlice";
+import { addNewPlayer, addNewPlayerToPlayer } from "./playerSlice";
 import { Box, TextInput, Button, Group } from "@mantine/core";
 
 export const AddPlayerForm = () => {
@@ -37,6 +37,15 @@ export const AddPlayerForm = () => {
         setAddRequestStatus("pending");
         dispatch(
           addNewPlayer({
+            playerFirstName,
+            playerLastName,
+            playerAddress,
+            position,
+            id,
+          })
+        ).unwrap();
+        dispatch(
+          addNewPlayerToPlayer({
             playerFirstName,
             playerLastName,
             playerAddress,

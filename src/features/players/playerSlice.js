@@ -118,9 +118,7 @@ const playerSlice = createSlice({
           return;
         }
         const { id } = action.payload;
-        const players = state.players.filter(
-          (player) => player?.id !== id
-        );
+        const players = state.players.filter((player) => player?.id !== id);
         state.players = players;
       });
   },
