@@ -44,15 +44,7 @@ export const AddPlayerForm = () => {
             id,
           })
         ).unwrap();
-        dispatch(
-          addNewPlayerToPlayer({
-            playerFirstName,
-            playerLastName,
-            playerAddress,
-            position,
-            id,
-          })
-        ).unwrap();
+       
 
         setPlayerFirstName("");
         setPlayerLastName("");

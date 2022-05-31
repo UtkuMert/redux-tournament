@@ -1,22 +1,23 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
-    selectAllPlayers,
-    getPlayersStatus,
-    getPlayersError,
-  fetchPlayers,
-} from "./playerSlice";
+  selectAllPlayersList,
+  getPlayersListStatus,
+  getPlayersListError,
+  fetchPlayersList,
+} from "./playerListSlice";
 import { useEffect } from "react";
-import { PlayerExcerpt } from "./PlayerExcerpt";
+import ConfirmPlayerExcerpt from "./ConfirmPlayerExcerpt";
 
-export const PlayerList = () => {
+export const ConfirmedPlayerList = () => {
   const dispatch = useDispatch();
-  const players = useSelector(selectAllPlayers);
-  const playersStatus = useSelector(getPlayersStatus);
-  const playersError = useSelector(getPlayersError);
+  const players = useSelector(selectAllPlayersList);
+  const playersStatus = useSelector(getPlayersListStatus);
+  const playersError = useSelector(getPlayersListError);
+
   
   useEffect(() => {
     if (playersStatus === "idle") {
-      dispatch(fetchPlayers());
+      dispatch(fetchPlayersList());
     }
   }, [playersStatus, dispatch]);
 
@@ -24,13 +25,10 @@ export const PlayerList = () => {
   if (playersStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (playersStatus === "succeeded") {
-    content  = (
-      <PlayerExcerpt players={players} />
-    );
+    content = <ConfirmPlayerExcerpt players={players} />;
   } else if (playersStatus === "failed") {
     content = <p>{playersError}</p>;
   }
-
   return (
     <section>
       <h2 className="flex justify-items-center">Players</h2>
@@ -38,6 +36,7 @@ export const PlayerList = () => {
         {content}
       </div>
     </section>
-    
   );
 };
+
+

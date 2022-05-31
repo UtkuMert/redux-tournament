@@ -13,6 +13,7 @@ export const fetchStages = createAsyncThunk(
   async (initialStage) => {
     try {
       const tournamentId = initialStage;
+      console.log(tournamentId)
       if (tournamentId) {
         const response = await axios.get(
           `/stages/get/list?tournamentId=${tournamentId}`

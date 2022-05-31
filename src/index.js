@@ -12,13 +12,14 @@ import { fetchTeams } from "./features/teams/teamSlice";
 import { fetchStages } from "./features/stages/stageSlice";
 import { fetchStageTeams } from "./features/stageTeams/stageTeamsSlice";
 import { fetchPlayers } from "./features/players/playerSlice";
+import { fetchPlayersList } from "./features/playersList/playerListSlice";
 
 store.dispatch(fetchTournaments());
 store.dispatch(fetchTeams());
 store.dispatch(fetchPlayers());
 store.dispatch(fetchStages());
 store.dispatch(fetchStageTeams());
-
+store.dispatch(fetchPlayersList());
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

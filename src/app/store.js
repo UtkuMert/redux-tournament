@@ -6,11 +6,13 @@ import stageReducer from "../features/stages/stageSlice";
 import stageTeamsReducer from "../features/stageTeams/stageTeamsSlice";
 import gamePlaysReducer from "../features/gamePlays/gamePlaysSlice";
 import gamePerformancesReducer from "../features/gamePerformances/gamePerformances";
+import playerListReducer from "../features/playersList/playerListSlice"
 export const store = configureStore({
   reducer: {
     tournaments: tournamentsReducer,
     teams: teamsReducer, 
     players: playerReducer,
+    playersList: playerListReducer,
     stages: stageReducer,
     stageTeams: stageTeamsReducer,
     gamePlays: gamePlaysReducer,
