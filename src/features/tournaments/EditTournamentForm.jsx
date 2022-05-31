@@ -6,8 +6,9 @@ import {
   deleteTournament,
 } from "./tournamentSlice";
 import { useParams, useNavigate } from "react-router-dom";
+import { useForm } from "@mantine/form";
 
-import { Box, TextInput, Button, Group } from "@mantine/core";
+import { Box, TextInput, Textarea, Button, Group } from "@mantine/core";
 
 export const EditTournamentForm = () => {
   const { id } = useParams();
@@ -21,46 +22,31 @@ export const EditTournamentForm = () => {
     tournament?.tournamentName
   );
   const [description, setDescription] = useState(tournament?.description);
-  const [requestStatus, setRequestStatus] = useState("idle");
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const dispatch = useDispatch();
 
-  if (!tournament) {
-    return (
-      <section>
-        <h2>tournament not found!</h2>
-      </section>
-    );
-  }
+  const onSaveTournamentClicked = (values) => {
+    try {
+      setAddRequestStatus("pending");
 
-  const onTournamentNameChanged = (e) => setTournamentName(e.target.value);
-  const onDescriptionChanged = (e) => setDescription(e.target.value);
+      const tournamentName = values.tournamentName;
+      const description = values.description;
 
-  const canSave =
-    [tournamentName, description].every(Boolean) && requestStatus === "idle";
+      dispatch(updateTournament({ id, tournamentName, description })).unwrap();
 
-  const onSaveTournamentClicked = () => {
-    if (canSave) {
-      try {
-        setRequestStatus("pending");
-        dispatch(
-          updateTournament({ id, tournamentName, description })
-        ).unwrap();
-
-        setTournamentName("");
-        setDescription("");
-        navigate(`/tournament/${id}`);
-      } catch (error) {
-        console.error("Failed to save the tournament", error);
-      } finally {
-        setRequestStatus("idle");
-      }
+      setTournamentName("");
+      setDescription("");
+    } catch (error) {
+      console.error("Failed to save the tournament", error);
+    } finally {
+      setAddRequestStatus("idle");
     }
   };
 
   const onDeleteTournamentClicked = () => {
     try {
-      setRequestStatus("pending");
+      setAddRequestStatus("pending");
       dispatch(deleteTournament({ id })).unwrap();
 
       setTournamentName("");
@@ -69,52 +55,50 @@ export const EditTournamentForm = () => {
     } catch (err) {
       console.error("Failed to delete the tournament", err);
     } finally {
-      setRequestStatus("idle");
+      setAddRequestStatus("idle");
     }
   };
 
+  const form = useForm({
+    initialValues: {
+      tournamentName: tournamentName,
+      description: description,
+    },
+
+    validate: {
+      tournamentName: (value) =>
+        value.length > 2 ? null : "Tournament Name must be least 3 character",
+      description: (value) =>
+        value.length > 2 ? null : "Description Name must be least 3 character",
+    },
+  });
+
   return (
     <div>
-      <h2>Edit Tournament</h2>
+      <h2>Add Tournament</h2>
       <Box sx={{ maxWidth: 340 }} mx="auto">
-        <form>
+        <form
+          onSubmit={form.onSubmit((values) => onSaveTournamentClicked(values))}
+        >
           <TextInput
+            required
             type="text"
             id="tournamentName"
             label="Tournament Name"
             placeholder="Tournament Name"
-            value={tournamentName}
-            onChange={onTournamentNameChanged}
-            required=""
+            {...form.getInputProps("tournamentName")}
           />
-          <TextInput
+          <Textarea
+            required
             type="text"
             id="description"
             label="Description"
             placeholder="Description"
-            value={description}
-            onChange={onDescriptionChanged}
+            {...form.getInputProps("description")}
           />
-          
           <Group position="right" mt="md">
-            <Button
-              onClick={onSaveTournamentClicked}
-              type="button"
-              disabled={!canSave}
-              color="teal"
-              className="btn btn-active"
-            >
-             Save Tournament
-            </Button>
-            <Button
-              onClick={onDeleteTournamentClicked}
-              type="button"
-              disabled={!canSave}
-              color="teal"
-              className="btn btn-active"
-            >
-             Delete Tournament
-            </Button>
+            <Button type="submit">Submit</Button>
+            <Button onClick={onDeleteTournamentClicked}>Delete</Button>
           </Group>
         </form>
       </Box>

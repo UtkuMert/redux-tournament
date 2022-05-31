@@ -4,6 +4,8 @@ import { AddScorePlayerForm } from "../scorePlayers/AddScorePlayerForm";
 
 export const GamePerformansExcerpt = ({ gamePerformances }) => {
   const [opened, setOpened] = useState(false);
+  const [firstTeamId, setFirstTeamId] = useState("");
+  const [secondTeamId, setSecondTeamId] = useState("");
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>

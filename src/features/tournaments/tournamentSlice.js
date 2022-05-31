@@ -24,6 +24,7 @@ export const fetchTournaments = createAsyncThunk(
 export const addNewTournament = createAsyncThunk(
   "/tournaments/save",
   async (initialTournament) => {
+    console.log("eklendi", initialTournament);
     try {
       const response = await axios.post("/tournaments/save", initialTournament); 
       return response?.data?.data;

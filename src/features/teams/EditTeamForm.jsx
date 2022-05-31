@@ -4,10 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { deleteTeam, selectTeamById, updateTeam } from "./teamSlice";
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 import { Box, TextInput, Button, Group } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
 export const EditTeamForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const team = useSelector((state) => selectTeamById(state, Number(id)));
 
@@ -21,34 +23,18 @@ export const EditTeamForm = () => {
 
   const [requestStatus, setRequestStatus] = useState("idle");
 
-  const dispatch = useDispatch();
+  const onSaveTeamClicked = (value) => {
+    try {
+      const teamName = value.teamName;
+      setRequestStatus("pending");
+      dispatch(updateTeam({ teamName, id })).unwrap();
 
-  if (!team) {
-    return (
-      <section>
-        <h2>team not found!</h2>
-      </section>
-    );
-  }
-
-  const onTeamNameChanged = (e) => setTeamName(e.target.value);
-
-  const canSave = [teamName].every(Boolean) && requestStatus === "idle";
-
-  const onSaveTeamClicked = () => {
-    if (canSave) {
-      try {
-        setRequestStatus("pending");
-        dispatch(updateTeam({ id, teamName })).unwrap();
-
-        setTeamName("");
-
-        navigate(`/team/${id}`);
-      } catch (error) {
-        console.error("Failed to save the team", error);
-      } finally {
-        setRequestStatus("idle");
-      }
+      setTeamName("");
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to save the team", error);
+    } finally {
+      setRequestStatus("idle");
     }
   };
 
@@ -67,45 +53,46 @@ export const EditTeamForm = () => {
     }
   };
 
+  const form = useForm({
+    initialValues: {
+      teamName: teamName,
+    },
+
+    validate: {
+      teamName: (value) =>
+        value.length > 1 ? null : "Team Name must be least 2 character",
+    },
+  });
+
+  if (!team) {
+    return (
+      <section>
+        <h2>team not found!</h2>
+      </section>
+    );
+  }
   return (
     <div>
-      <h2>Add Team</h2>
+      <h2>Edit Team</h2>
       <Box sx={{ maxWidth: 340 }} mx="auto">
-        <form>
+        <form onSubmit={form.onSubmit((value) => onSaveTeamClicked(value))}>
           <TextInput
+            required
             type="text"
             id="teamName"
             label="Team Name"
             placeholder="Team Name"
-            value={teamName}
-            onChange={onTeamNameChanged}
-            required=""
+            {...form.getInputProps("teamName")}
           />
           <TextInput
             label="Team"
-            placeholder="Team Name"
+            placeholder="Tournament Name"
             readOnly
             value={tournamentName}
           />
           <Group position="right" mt="md">
-            <Button
-              onClick={onSaveTeamClicked}
-              type="button"
-              disabled={!canSave}
-              color="teal"
-              className="btn btn-active"
-            >
-              Update Team
-            </Button>
-            <Button
-              onClick={onDeleteTeamClicked}
-              type="button"
-              disabled={!canSave}
-              color="teal"
-              className="btn btn-active"
-            >
-              Delete Team
-            </Button>
+            <Button type="submit">Update Team</Button>
+            <Button onClick={onDeleteTeamClicked}>Delete Team</Button>
           </Group>
         </form>
       </Box>

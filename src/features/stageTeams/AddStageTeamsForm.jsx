@@ -83,30 +83,3 @@ export const AddStageTeamsForm = ({ stageId }) => {
   );
 };
 
-{
-  /* <form action="">
-  <div>
-    <label htmlFor="teamName">Team</label>
-    <select id="teamName" value={teamId} onChange={onTeamChange}>
-      <option value=""></option>
-      {teamsOptions}
-    </select>
-  </div>
-  <div>
-  <TextInput
-      label="Stage"
-      placeholder="Stage Name"
-      readOnly
-      value={stageName}
-    />
-  </div>
-
-  <button
-    type="button"
-    onClick={onSaveTeamToStageClicked}
-    disabled={!canSave}
-  >
-    Save Team To Stage
-  </button>
-</form> */
-}

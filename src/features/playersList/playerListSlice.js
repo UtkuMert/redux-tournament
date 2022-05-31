@@ -65,5 +65,9 @@ const playerListSlice = createSlice({
 export const selectAllPlayersList = (state) => state?.playersList?.playersList;
 export const getPlayersListStatus = (state) => state?.playersList?.status;
 export const getPlayersListError = (state) => state?.playersList?.error;
+export const selectPlayerListById = (state, id) =>
+  state.playersList.playersList.find((player) => player.id === id); //Takim bulunuyor.
 
+  export const selectPlayersListByTeamId = (state, id) =>
+  state?.playersList?.playersList?.filter((player) => player.teamId === id); //Turnuva idsine gore team geliyor.
 export default playerListSlice.reducer
