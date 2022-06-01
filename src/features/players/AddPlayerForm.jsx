@@ -24,7 +24,6 @@ export const AddPlayerForm = () => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const onSavePlayerClicked = (value) => {
-
     const playerFirstName = value.playerFirstName;
     const playerLastName = value.playerLastName;
     const playerAddress = value.playerAddress;
@@ -116,7 +115,9 @@ export const AddPlayerForm = () => {
           />
 
           <Group position="right" mt="md">
-            <Button type="submit">Add Player</Button>
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">
+              Add Player
+            </button>
           </Group>
         </form>
       </Box>

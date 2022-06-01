@@ -6,7 +6,7 @@ import {
   fetchPlayersList,
 } from "./playerListSlice";
 import { useEffect } from "react";
-import ConfirmPlayerExcerpt from "./ConfirmPlayerExcerpt";
+import {ConfirmPlayerExcerpt} from "./ConfirmPlayerExcerpt";
 
 export const ConfirmedPlayerList = () => {
   const dispatch = useDispatch();

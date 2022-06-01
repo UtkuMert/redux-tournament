@@ -36,6 +36,31 @@ export const ConfirmPlayers = createAsyncThunk(
   }
 );
 
+export const updateConfirmedPlayer = createAsyncThunk(
+  "/players/update/{id}",
+  async (initialPlayer) => {
+    try {
+      const { playerId } = initialPlayer;
+      const response = await axios.put(`/players/update/${playerId}`, initialPlayer);
+      return response?.data?.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+export const deleteConfirmedPlayer = createAsyncThunk(
+  "/delete/{id}",
+  async (initialPlayer) => {
+    const { playerId } = initialPlayer;
+    try {
+      const response = await axios.delete(`/players/delete/${playerId}`);
+      if (response?.status === 200) return initialPlayer;
+      return `${response?.status}: ${response?.statusText}`;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 const playerListSlice = createSlice({
   name: "playersList",
   initialState,
@@ -59,6 +84,29 @@ const playerListSlice = createSlice({
           ...state,
           playersList: [...state.playersList, action.payload],
         };
+      })
+      .addCase(updateConfirmedPlayer.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Update could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const playersList = state.playersList.filter(
+          (player) => player.id !== id
+        );
+        state.player = [...playersList, action.payload];
+        console.log(action.payload);
+      })
+      .addCase(deleteConfirmedPlayer.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Delete could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const playersList = state.playersList.filter((player) => player?.id !== id);
+        state.players = playersList;
       });
   },
 });

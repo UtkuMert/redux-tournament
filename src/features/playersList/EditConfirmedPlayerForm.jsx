@@ -1,31 +1,33 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-
-import { deletePlayer, selectPlayerById } from "./playerSlice";
 import { selectTeamById } from "../teams/teamSlice";
-import { updateNewPlayer } from "./playerSlice";
-
+import {
+  updateConfirmedPlayer,
+  selectPlayerListById,
+  deleteConfirmedPlayer,
+} from "./playerListSlice";
 import { Box, TextInput, Select, Button, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export const EditPlayerForm = () => {
-  const { id } = useParams();
+const EditConfirmedPlayerForm = ({playerId}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const player = useSelector((state) => selectPlayerById(state, Number(id)));
+  const player = useSelector((state) =>
+    selectPlayerListById(state, Number(playerId))
+  );
 
   const [playerFirstName, setPlayerFirstName] = useState(
     player?.playerFirstName
   );
   const [playerLastName, setPlayerLastName] = useState(player?.playerLastName);
-  const [playerAddress, setPlayerAddress] = useState(player?.playerAddress);
   const [position, setPosition] = useState(player?.position);
 
   const team = useSelector((state) =>
     selectTeamById(state, Number(player?.teamId))
   );
+
   const [teamName, setTeamName] = useState(team?.teamName);
 
   const [requestStatus, setRequestStatus] = useState("idle");
@@ -35,21 +37,18 @@ export const EditPlayerForm = () => {
       setRequestStatus("pending");
       const playerFirstName = value.playerFirstName;
       const playerLastName = value.playerLastName;
-      const playerAddress = value.playerAddress;
       const position = value.position;
       dispatch(
-        updateNewPlayer({
+        updateConfirmedPlayer({
           playerFirstName,
           playerLastName,
-          playerAddress,
           position,
-          id,
+          playerId,
         })
       ).unwrap();
-
       setPlayerFirstName("");
       setPlayerLastName("");
-      setPlayerAddress("");
+
       setPosition("");
       navigate("/");
     } catch (error) {
@@ -58,15 +57,13 @@ export const EditPlayerForm = () => {
       setRequestStatus("idle");
     }
   };
-
   const onDeletePlayerClicked = () => {
     try {
       setRequestStatus("pending");
-      dispatch(deletePlayer({ id })).unwrap();
+      dispatch(deleteConfirmedPlayer({ playerId })).unwrap();
 
       setPlayerFirstName("");
       setPlayerLastName("");
-      setPlayerAddress("");
       setPosition("");
       navigate("/");
     } catch (err) {
@@ -80,7 +77,6 @@ export const EditPlayerForm = () => {
     initialValues: {
       playerFirstName: playerFirstName,
       playerLastName: playerLastName,
-      playerAddress: playerAddress,
       position: position,
     },
 
@@ -89,12 +85,9 @@ export const EditPlayerForm = () => {
         value.length > 2 ? null : "Player First Name must be least 3 character",
       playerLastName: (value) =>
         value.length > 1 ? null : "Player Last Name must be least 2 character",
-      playerAddress: (value) =>
-        value.length > 1 ? null : "Player Address must be least 2 character",
       position: (value) => (value.length > 1 ? null : "Select Position"),
     },
   });
-
   if (!player) {
     return (
       <section>
@@ -122,14 +115,6 @@ export const EditPlayerForm = () => {
             label="Last Name"
             placeholder="Last Name"
             {...form.getInputProps("playerLastName")}
-          />
-          <TextInput
-            required
-            type="text"
-            id="address"
-            label="Adress"
-            placeholder="Address"
-            {...form.getInputProps("playerAddress")}
           />
           <Select
             label="Position"
@@ -167,3 +152,5 @@ export const EditPlayerForm = () => {
     </div>
   );
 };
+
+export default EditConfirmedPlayerForm;

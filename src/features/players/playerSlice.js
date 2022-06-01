@@ -58,7 +58,7 @@ export const updateNewPlayer = createAsyncThunk(
         `/playertoadd/update/${id}`,
         initialPlayer
       );
-      return response.data;
+      return response?.data?.data;
     } catch (err) {
       return err.message;
     }
