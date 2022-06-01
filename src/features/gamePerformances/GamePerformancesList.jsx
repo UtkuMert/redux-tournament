@@ -1,17 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {
-  selectAllGamePerformances,
+  selectGamePerformanceByStageIdId,
   getGamePerformancesStatus,
   getGamePerformancesError,
   fetchGamePerformances,
 } from "./gamePerformances";
 import { GamePerformansExcerpt } from "./GamePerformansExcerpt";
 
-export const GamePerformancesList = () => {
+export const GamePerformancesList = ({stageId}) => {
   const dispatch = useDispatch();
 
-  const gamePerformances = useSelector(selectAllGamePerformances);
+ 
+  const gamePerformances = useSelector((state) =>
+  selectGamePerformanceByStageIdId(state, Number(stageId))
+);
   const gamePerformancesStatus = useSelector(getGamePerformancesStatus);
   const error = useSelector(getGamePerformancesError);
 

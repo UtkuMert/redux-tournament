@@ -134,8 +134,8 @@ export const getTeamsStatus = (state) => state.teams.status;
 export const getTeamsError = (state) => state.teams.error;
 
 export const selectTeamById = (state, id) =>
-  state.teams.teams.find((team) => team.id === id); //Takim bulunuyor.
+  state.teams?.teams?.find((team) => team?.id === id); //Takim bulunuyor.
 
 export const selectTeamByTournamentId = (state, id) =>
-  state.teams.teams.filter((team) => team.tournamentId === id); //Turnuva idsine gore team geliyor.
+  state.teams?.teams?.filter((team) => team?.tournamentId === id); //Turnuva idsine gore team geliyor.
 export default teamSlice.reducer;

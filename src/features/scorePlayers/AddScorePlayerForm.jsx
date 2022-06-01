@@ -6,14 +6,17 @@ import React from "react";
 import { selectTeamById } from "../teams/teamSlice";
 import { selectPlayersListByTeamId } from "../playersList/playerListSlice";
 
-export const AddScorePlayerForm = () => {
+export const AddScorePlayerForm = ({ firstTeamId, secondTeamId }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [playerId, setPlayerId] = useState('')
-  const firstTeam = useSelector((state) => selectTeamById(state, 1));
-  const secondTeam = useSelector((state) => selectTeamById(state, 2));
 
+  const navigate = useNavigate();
+  const [playerId, setPlayerId] = useState("");
+  const firstTeam = useSelector((state) =>
+    selectTeamById(state, Number(firstTeamId))
+  );
+  const secondTeam = useSelector((state) =>
+    selectTeamById(state, Number(secondTeamId))
+  );
 
   const onFirstNameChange = (e) => setPlayerId(e.target.value);
 

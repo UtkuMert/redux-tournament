@@ -22,9 +22,6 @@ export const AddGamePerformanceForm = ({
   const [scoreOfSecondTeam, setScoreOfSecondTeam] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-  const onFirstScoreChange = (e) => setScoreOfFirstTeam(e.target.value);
-  const onSecondScoreChange = (e) => setScoreOfSecondTeam(e.target.value);
-
   const canSave =
     [scoreOfFirstTeam, scoreOfSecondTeam].every(Boolean) &&
     addRequestStatus === "idle";

@@ -64,4 +64,6 @@ export const selectAllGamePerformances = (state) =>
 export const getGamePerformancesStatus = (state) => state?.gamePerformances?.status;
 export const getGamePerformancesError = (state) => state?.gamePerformances?.error;
 
+export const selectGamePerformanceByStageIdId = (state, id) =>
+  state.gamePerformances?.gamePerformances?.filter((gamePerformance) => gamePerformance?.stageId === id); //Turnuva idsine gore team geliyor.
 export default gamePerformancesSlice.reducer;

@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getGamePlaysError, getGamePlaysStatus, selectAllGamePlays, fetchGameToPlay } from "./gamePlaysSlice";
+import { getGamePlaysError, getGamePlaysStatus, selectGamePlaysByStageId, fetchGameToPlay } from "./gamePlaysSlice";
 import {GamePlayExcerpt} from "./GamePlayExcerpt"
+import { useParams } from "react-router-dom";
 export const GamePlayList = () => {
     const dispatch = useDispatch();
-
-    const gamePlays = useSelector(selectAllGamePlays);
+    const {stageId} = useParams()
     const gamePlayStatus = useSelector(getGamePlaysStatus);
     const error = useSelector(getGamePlaysError);
 
-
+    const gamePlays = useSelector((state) => selectGamePlaysByStageId(state, Number(stageId)));
+    
     useEffect(() => {
         if (gamePlayStatus === "idle") {
           dispatch(fetchGameToPlay());

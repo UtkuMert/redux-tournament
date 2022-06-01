@@ -6,11 +6,12 @@ import { Box, TextInput, Button, Modal, Select, Group } from "@mantine/core";
 import { matchTeams } from "./gamePlaysSlice";
 import { useForm } from "@mantine/form";
 import {
-  fetchStageTeams,
+  selectStageTeamByStageId,
   selectAllStageTeams,
 } from "../stageTeams/stageTeamsSlice";
 
-export const AddTeamsMatchForm = () => {
+
+export const AddTeamsMatchForm = ({stageId}) => {
   const dispatch = useDispatch();
   //const { id } = useParams();
   const navigate = useNavigate();
@@ -19,7 +20,9 @@ export const AddTeamsMatchForm = () => {
   const [secondStageTeamId, setSecondStageTeamId] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [date, setDate] = useState("Yarin");
-  const stagesTeams = useSelector(selectAllStageTeams);
+
+  const stagesTeams = useSelector((state) => selectStageTeamByStageId(state, Number(stageId)));
+
 
   const onMatchTeamsClicked = (value) => {
     const firstStageTeamId = value.firstStageTeamId;
@@ -52,8 +55,6 @@ export const AddTeamsMatchForm = () => {
       firstStageTeamId: 0,
       secondStageTeamId: 0,
     },
-
-   
   });
   return (
     <div>

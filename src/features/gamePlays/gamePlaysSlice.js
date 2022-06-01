@@ -64,4 +64,7 @@ const gamePlaysSlice = createSlice({
 export const selectAllGamePlays = (state) => state?.gamePlays?.gamePlays;
 export const getGamePlaysStatus = (state) => state?.gamePlays?.status;
 export const getGamePlaysError = (state) => state?.gamePlays?.error;
+
+export const selectGamePlaysByStageId = (state, id) => state?.gamePlays?.gamePlays.filter((gamePlay) => gamePlay?.stageId === id);
+
 export default gamePlaysSlice.reducer;
