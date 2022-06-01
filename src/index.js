@@ -5,7 +5,7 @@ import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "flowbite";
+
 
 import { fetchTournaments } from "./features/tournaments/tournamentSlice";
 import { fetchTeams } from "./features/teams/teamSlice";

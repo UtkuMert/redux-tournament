@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
-import { Table } from "@mantine/core";
-
+import { Table, Group } from "@mantine/core";
+import { MdCancel } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { deleteTeam } from "./teamSlice";
 export function TeamExcerpt({ teams }) {
+  const dispatch = useDispatch();
+
+  const onDeleteTeamClicked = (id) => {
+    try {
+      dispatch(deleteTeam({ id })).unwrap();
+    } catch (err) {
+      console.error("Failed to delete the team", err);
+    }
+  };
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -25,6 +36,18 @@ export function TeamExcerpt({ teams }) {
             </td>
             <td>
               <Link to={`/team/addplayer/${team?.id}`}>Add Player</Link>
+            </td>
+            <td>
+              <Group position="center">
+                <button
+                  className="btn btn-sm"
+                  onClick={() => {
+                    onDeleteTeamClicked(team.id);
+                  }}
+                >
+                  <MdCancel />
+                </button>
+              </Group>
             </td>
           </tr>
         ))}

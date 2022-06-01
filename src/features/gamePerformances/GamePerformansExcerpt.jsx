@@ -33,14 +33,17 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                 onClose={() => setOpened(false)}
                 title="Add Team To Stage"
               >
-                <AddScorePlayerForm firstTeamId={firstTeamId} secondTeamId={secondTeamId} />
+                <AddScorePlayerForm
+                  firstTeamId={firstTeamId}
+                  secondTeamId={secondTeamId}
+                />
               </Modal>
               <Group position="center">
                 <Button
                   onClick={() => {
                     setOpened(true);
-                    setFirstTeamId(gamePerformance?.firstTeamId)
-                    setSecondTeamId(gamePerformance?.secondTeamId)
+                    setFirstTeamId(gamePerformance?.firstTeamId);
+                    setSecondTeamId(gamePerformance?.secondTeamId);
                   }}
                 >
                   Edit Match

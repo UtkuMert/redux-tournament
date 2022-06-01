@@ -25,7 +25,6 @@ export const addTeamToStage = createAsyncThunk(
   "/stageteam/save",
   async (initialStageTeam) => {
     try {
-      console.log('brooo', initialStageTeam)
       const response = await axios.post("/stageteam/save", {
         teamId: initialStageTeam?.value,
         stageId: initialStageTeam?.stageId
