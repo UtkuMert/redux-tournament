@@ -27,7 +27,7 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
 
-        <Route path="tournaments">
+        <Route path="tournament">
           <Route index element={<TournamentList />} />
           <Route path="addTournament" element={<AddTournamentForm />} />
           <Route path=":id" element={<SingleTournamentPage />} />
@@ -37,20 +37,20 @@ export default function App() {
           <Route path=":id/stage/:stageId" element={<SingleStagePage />} />
         </Route>
 
-        <Route path="teams">
+        <Route path="team">
           <Route index element={<TeamList />} />
           <Route path=":id" element={<SingleTeamPage />} />
           <Route path="edit/:id" element={<EditTeamForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
-        <Route path="players">
+        <Route path="player">
           <Route index element={<PlayerList />} />
           <Route path="edit/:id" element={<EditPlayerForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
-        <Route path="stages">
+        <Route path="stage">
           <Route index element={<StageList />} />
           <Route path="matchteams" element={<AddTeamsMatchForm />} />
         </Route>

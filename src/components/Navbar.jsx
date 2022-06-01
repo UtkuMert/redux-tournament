@@ -26,11 +26,11 @@ export const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Item 1</a>
+              <Link to={`tournament`}>Tournaments</Link>
             </li>
             <li tabIndex="0">
               <a className="justify-between">
-                Parent
+                Options
                 <svg
                   className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -43,10 +43,13 @@ export const Navbar = () => {
               </a>
               <ul className="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  <Link to={`team`}>Teams</Link>
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <Link to={`player`}>Players</Link>
+                </li>
+                <li>
+                  <Link to={`stage`}>Stages</Link>
                 </li>
               </ul>
             </li>
@@ -62,7 +65,7 @@ export const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <a>Item 1</a>
+            <Link to={`tournament`}>Tournaments</Link>
           </li>
           <li tabIndex="0">
             <a>
@@ -79,19 +82,13 @@ export const Navbar = () => {
             </a>
             <ul className="p-2">
               <li>
-              <Link to={`teams`}>
-                Teams
-              </Link>
+                <Link to={`team`}>Teams</Link>
               </li>
               <li>
-              <Link to={`teams`}>
-                Players
-              </Link>
+                <Link to={`player`}>Players</Link>
               </li>
               <li>
-              <Link to={`stages`}>
-                Stages
-              </Link>
+                <Link to={`stage`}>Stages</Link>
               </li>
             </ul>
           </li>
@@ -101,7 +98,7 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link to={`/tournaments/addTournament`}>
+        <Link to={`/tournament/addTournament`}>
           {" "}
           <button className="btn btn-sm btn-outline btn-accent">
             Add Tournament
