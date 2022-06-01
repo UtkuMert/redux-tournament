@@ -65,8 +65,8 @@ export const AddTeamForm = () => {
             readOnly
             value={tournamentName}
           />
-          <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+           <Group position="center" mt="md">
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">Add Team</button>
           </Group>
         </form>
       </Box>

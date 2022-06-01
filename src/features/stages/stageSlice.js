@@ -55,6 +55,7 @@ export const addNewStage = createAsyncThunk(
     try {
       const { tournamentId } = initialStage;
       console.log(tournamentId);
+      console.log(initialStage.stageName);
       const response = await axios.post(
         `/stages/save/${tournamentId}`,
         initialStage

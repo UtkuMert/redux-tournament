@@ -27,17 +27,21 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
               <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title="Introduce yourself!"
+                title="Edit Score"
               >
-                <AddGamePerformanceForm gameToPlayId={gameToPlayId} firstTeamName={firstTeamName} secondTeamName={secondTeamName}/>
+                <AddGamePerformanceForm
+                  gameToPlayId={gameToPlayId}
+                  firstTeamName={firstTeamName}
+                  secondTeamName={secondTeamName}
+                />
               </Modal>
               <Group position="center">
                 <Button
                   onClick={() => {
                     setOpened(true);
                     setGameToPlayId(gamePlay?.id);
-                    setFirstTeamName(gamePlay?.firstTeamName)
-                    setSecondTeamName(gamePlay?.secondTeamName)
+                    setFirstTeamName(gamePlay?.firstTeamName);
+                    setSecondTeamName(gamePlay?.secondTeamName);
                   }}
                 >
                   Edit Score
@@ -50,16 +54,3 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
     </Table>
   );
 };
-
-{
-  /* <div>
-      {" "}
-      <div>
-        {gamePlays.map((gamePlay) => (
-          <p key={gamePlay.id}>
-            {gamePlay.firstTeamName} --- {gamePlay.secondTeamName}
-          </p>
-        ))}
-      </div>
-    </div> */
-}

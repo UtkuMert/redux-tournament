@@ -23,6 +23,8 @@ export const AddStageFrom = ({ tournamentId }) => {
   const onSaveStageClicked = (value) => {
     try {
       const stageName = value.stageName;
+      console.log(stageName)
+      console.log(tournamentId)
       setAddRequestStatus("pending");
       dispatch(addNewStage({ stageName, tournamentId })).unwrap();
 

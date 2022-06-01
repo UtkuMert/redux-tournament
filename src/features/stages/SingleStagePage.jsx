@@ -17,7 +17,7 @@ export const SingleStagePage = () => {
     <>
       <div className="w-96">
         <TeamExcerpt teams={teams} />
-        <div className="w-48">
+        <div>
           <GamePlayList />
           <GamePerformancesList />
         </div>

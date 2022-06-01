@@ -31,9 +31,11 @@ export const TournamentList = () => {
   }
   return (
     <section>
-      <h2>Tournaments</h2>
-      <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
-        {content}
+      <div className="flex items-center justify-center container mx-auto px-4">
+        <h2>Tournaments</h2>
+        <div className="p-10 flex flex-wrap items-center">
+          {content}
+        </div>
       </div>
     </section>
   );
