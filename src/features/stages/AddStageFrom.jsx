@@ -9,7 +9,6 @@ import { addNewStage } from "./stageSlice";
 
 export const AddStageFrom = ({ tournamentId }) => {
   const dispatch = useDispatch();
-  //const { id } = useParams();
   const navigate = useNavigate();
   const tournament = useSelector((state) =>
     selectTournamentById(state, Number(tournamentId))

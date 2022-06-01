@@ -67,8 +67,8 @@ export const AddTournamentForm = () => {
             placeholder="Description"
             {...form.getInputProps("description")}
           />
-          <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+          <Group position="center" mt="md">
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">Add Tournament</button>
           </Group>
         </form>
       </Box>

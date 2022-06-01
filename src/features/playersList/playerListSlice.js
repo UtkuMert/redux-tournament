@@ -23,11 +23,12 @@ export const fetchPlayersList = createAsyncThunk(
 export const ConfirmPlayers = createAsyncThunk(
   "/players/save",
   async (initialPlayer) => {
-    console.log(initialPlayer)
-      const playerToAddDtoId = initialPlayer;
-      console.log("ben",playerToAddDtoId.value)
+    const playerToAddDtoId = initialPlayer?.playerId;
+
     try {
-      const response = await axios.post(`/players/save?playerToAddDtoId=${playerToAddDtoId}`);
+      const response = await axios.post(
+        `/players/save?playerToAddDtoId=${playerToAddDtoId}`
+      );
       return response?.data?.data;
     } catch (err) {
       return err.message;
@@ -68,6 +69,6 @@ export const getPlayersListError = (state) => state?.playersList?.error;
 export const selectPlayerListById = (state, id) =>
   state.playersList.playersList.find((player) => player.id === id); //Takim bulunuyor.
 
-  export const selectPlayersListByTeamId = (state, id) =>
+export const selectPlayersListByTeamId = (state, id) =>
   state?.playersList?.playersList?.filter((player) => player.teamId === id); //Turnuva idsine gore team geliyor.
-export default playerListSlice.reducer
+export default playerListSlice.reducer;

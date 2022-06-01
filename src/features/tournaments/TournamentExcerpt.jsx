@@ -25,10 +25,17 @@ export const TournamentExcerpt = ({ tournaments }) => {
             <td>{tournament.description}</td>
             <td>
               {" "}
-              <Link to={`tournament/${tournament.id}`}>View Tournament</Link>
+              <Link to={`tournament/${tournament.id}`}>
+                <button className="btn btn-sm btn-info">View Tournament</button>
+              </Link>
             </td>
             <td>
-              <Link to={`tournament/addteam/${tournament.id}`}>Add Team</Link>
+              <Link to={`tournament/addteam/${tournament.id}`}>
+                {" "}
+                <button className="btn btn-sm btn-outline btn-accent">
+                  Add Team
+                </button>
+              </Link>
             </td>
             <td>
               {" "}
@@ -40,10 +47,15 @@ export const TournamentExcerpt = ({ tournaments }) => {
                 <AddStageFrom tournamentId={tournamentId} />
               </Modal>
               <Group position="center">
-                <Button onClick={() => {
-                  setOpened(true);
-                  setTournamentId(tournament.id)
-                }}>Add Stage</Button>
+                <button
+                  className="btn btn-sm btn-outline btn-accent"
+                  onClick={() => {
+                    setOpened(true);
+                    setTournamentId(tournament.id);
+                  }}
+                >
+                  Add Stage
+                </button>
               </Group>
             </td>
           </tr>

@@ -97,8 +97,18 @@ export const EditTournamentForm = () => {
             {...form.getInputProps("description")}
           />
           <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
-            <Button onClick={onDeleteTournamentClicked}>Delete</Button>
+            <button
+              className="btn btn-sm btn-outline btn-warning"
+              type="submit"
+            >
+              Update Tournament
+            </button>
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={onDeleteTournamentClicked}
+            >
+              Delete Tournament
+            </button>
           </Group>
         </form>
       </Box>
