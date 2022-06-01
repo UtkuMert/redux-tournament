@@ -3,6 +3,8 @@ import { Table, Group } from "@mantine/core";
 import { MdCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteTeam } from "./teamSlice";
+import { IoIosAddCircle } from "react-icons/io";
+
 export function TeamExcerpt({ teams }) {
   const dispatch = useDispatch();
 
@@ -32,10 +34,19 @@ export function TeamExcerpt({ teams }) {
             <td>{team?.tournamentId}</td>
             <td>
               {" "}
-              <Link to={`/team/${team?.id}`}>View Team</Link>
+              <Link to={`/team/${team?.id}`}>
+                {" "}
+                <button className="btn btn-sm btn-info">View Team</button>
+              </Link>
             </td>
             <td>
-              <Link to={`/team/addplayer/${team?.id}`}>Add Player</Link>
+              <Link to={`/team/addplayer/${team?.id}`}>
+                {" "}
+                <button className="btn btn-sm btn-outline">
+                  Add Player
+                  <IoIosAddCircle />
+                </button>
+              </Link>
             </td>
             <td>
               <Group position="center">

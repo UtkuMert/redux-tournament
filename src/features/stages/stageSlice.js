@@ -72,7 +72,7 @@ export const updateStage = createAsyncThunk(
     try {
       const { stageId } = initialStage;
       const response = await axios.put(`/stages/update/${stageId}`, initialStage);
-      return response?.data;
+      return response?.data?.data;
     } catch (err) {
       return err.message;
     }

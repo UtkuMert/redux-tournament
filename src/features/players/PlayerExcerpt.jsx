@@ -3,14 +3,15 @@ import { Table, Button, Group } from "@mantine/core";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ConfirmPlayers } from "../playersList/playerListSlice";
+import { MdCancel } from "react-icons/md";
+import { deletePlayer } from "./playerSlice";
+
 export const PlayerExcerpt = ({ players }) => {
   const dispatch = useDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const onSavePlayerClicked = (playerId) => {
-    console.log("aloo", playerId)
     try {
-      
       setAddRequestStatus("pending");
       dispatch(ConfirmPlayers({ playerId })).unwrap();
     } catch (error) {
@@ -19,7 +20,13 @@ export const PlayerExcerpt = ({ players }) => {
       setAddRequestStatus("idle");
     }
   };
-
+  const onDeletePlayerClicked = (id) => {
+    try {
+      dispatch(deletePlayer({ id })).unwrap();
+    } catch (err) {
+      console.error("Failed to delete the tournament", err);
+    }
+  };
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -41,16 +48,37 @@ export const PlayerExcerpt = ({ players }) => {
             <td>{player.position}</td>
             <td>
               {" "}
-              <Link to={`player/edit/${player.id}`}>Edit Player</Link>
+              <Link to={`player/edit/${player.id}`}>
+                <button
+                  className="btn btn-sm btn-outline btn-warning"
+                  type="submit"
+                >
+                  Edit Player
+                </button>
+              </Link>
             </td>
             <td>
-              <Button
+              <button
+                className="btn btn-sm btn-outline btn-success"
                 onClick={() => {
                   onSavePlayerClicked(player?.id);
                 }}
               >
-                Add Stage
-              </Button>
+                Confirm The Player
+              </button>
+            </td>
+            <td>
+              <Group position="center">
+                <button
+                  className="btn btn-sm"
+                  onClick={() => {
+                    console.log(player?.id);
+                    onDeletePlayerClicked(player?.id);
+                  }}
+                >
+                  <MdCancel />
+                </button>
+              </Group>
             </td>
           </tr>
         ))}

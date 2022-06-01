@@ -11,7 +11,7 @@ export const fetchTeams = createAsyncThunk("/teams/get/list", async () => {
   try {
     const response = await axios.get("/teams/get/list");
     console.log(response?.data);
-    return response.data;
+    return response?.data;
   } catch (err) {
     return err.message;
   }

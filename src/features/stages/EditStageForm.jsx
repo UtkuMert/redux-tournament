@@ -13,7 +13,7 @@ const EditStageForm = ({ tournamentId, stageId }) => {
 
   const stage = useSelector((state) => selectStageById(state, Number(stageId)));
   const [stageName, setStageName] = useState(stage?.stageName);
-    console.log(stageName);
+    
   const tournament = useSelector((state) =>
     selectTournamentById(state, Number(tournamentId))
   );

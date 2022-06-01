@@ -21,11 +21,11 @@ export const AddScorePlayerForm = ({ firstTeamId, secondTeamId }) => {
   const onFirstNameChange = (e) => setPlayerId(e.target.value);
 
   const firstTeamPlayers = useSelector((state) =>
-    selectPlayersListByTeamId(state, Number(firstTeam.id))
+    selectPlayersListByTeamId(state, Number(firstTeam?.id))
   );
 
   const secondTeamPlayers = useSelector((state) =>
-    selectPlayersListByTeamId(state, Number(secondTeam.id))
+    selectPlayersListByTeamId(state, Number(secondTeam?.id))
   );
 
   const firsTeamPlayersOptions = firstTeamPlayers.map((firstTeamPlayer) => (

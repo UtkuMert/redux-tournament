@@ -147,10 +147,19 @@ export const EditPlayerForm = () => {
           />
 
           <Group position="right" mt="md">
-            <Button type="submit">Update Player</Button>
-            <Button onClick={onDeletePlayerClicked} type="button">
+            <button
+              className="btn btn-sm btn-outline btn-warning"
+              type="submit"
+            >
+              Update Player
+            </button>
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={onDeletePlayerClicked}
+              type="button"
+            >
               Delete Player
-            </Button>
+            </button>
           </Group>
         </form>
       </Box>
