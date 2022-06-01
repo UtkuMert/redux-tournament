@@ -19,6 +19,7 @@ import { StageTeamList } from "./features/stageTeams/StageTeamList";
 import {AddStageFrom} from "./features/stages/AddStageFrom";
 import {GamePlayList} from "./features/gamePlays/GamePlayList";
 import {SingleStagePage} from "./features/stages/SingleStagePage.jsx";
+import { TournamentList } from "./features/tournaments/TournamentList.jsx";
 
 export default function App() {
   return (
@@ -26,34 +27,33 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
 
-        <Route path="tournament">
-          <Route index element={<AddTournamentForm />} />
+        <Route path="tournaments">
+          <Route index element={<TournamentList />} />
+          <Route path="addTournament" element={<AddTournamentForm />} />
           <Route path=":id" element={<SingleTournamentPage />} />
           <Route path="edit/:id" element={<EditTournamentForm />} />
           <Route path="addteam/:id" element={<AddTeamForm />} />
-          <Route path="addstage/:id" element={<AddStageFrom />} />
           <Route path=":id/stage" element={<StageList />} />
           <Route path=":id/stage/:stageId" element={<SingleStagePage />} />
         </Route>
 
-        <Route path="team">
+        <Route path="teams">
           <Route index element={<TeamList />} />
           <Route path=":id" element={<SingleTeamPage />} />
           <Route path="edit/:id" element={<EditTeamForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
-        <Route path="player">
+        <Route path="players">
           <Route index element={<PlayerList />} />
           <Route path="edit/:id" element={<EditPlayerForm />} />
           <Route path="addplayer/:id" element={<AddPlayerForm />} />
         </Route>
 
-        {/* <Route path="stage">
+        <Route path="stages">
           <Route index element={<StageList />} />
-          <Route path="addteamtostage" element={<AddStageTeamsForm />} />
           <Route path="matchteams" element={<AddTeamsMatchForm />} />
-        </Route> */}
+        </Route>
         <Route path="stageteam">
           <Route index element={<StageTeamList />} />
           <Route path="addteamtostage" element={<AddStageTeamsForm />} />
