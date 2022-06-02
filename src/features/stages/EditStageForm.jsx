@@ -5,7 +5,7 @@ import { Box, TextInput, Button, Modal, Select, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { selectTournamentById } from "../tournaments/tournamentSlice";
-import { selectStageById, updateStage } from "./stageSlice";
+import { deleteStage, selectStageById, updateStage } from "./stageSlice";
 
 const EditStageForm = ({ tournamentId, stageId }) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const EditStageForm = ({ tournamentId, stageId }) => {
 
   const stage = useSelector((state) => selectStageById(state, Number(stageId)));
   const [stageName, setStageName] = useState(stage?.stageName);
-    
+
   const tournament = useSelector((state) =>
     selectTournamentById(state, Number(tournamentId))
   );
@@ -21,7 +21,6 @@ const EditStageForm = ({ tournamentId, stageId }) => {
     tournament?.tournamentName
   );
 
- 
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const onSaveStageClicked = (value) => {
@@ -38,7 +37,20 @@ const EditStageForm = ({ tournamentId, stageId }) => {
       setAddRequestStatus("idle");
     }
   };
+  const onDeleteStageClicked = () => {
+    try {
+      setAddRequestStatus("pending");
+      dispatch(deleteStage({ stageId })).unwrap();
 
+      setStageName("");
+      
+      navigate("/");
+    } catch (err) {
+      console.error("Failed to delete the tournament", err);
+    } finally {
+      setAddRequestStatus("idle");
+    }
+  };
   const [data, setData] = useState(["Son32", "Son16", "Son8", "Son4", "Son2"]);
 
   const form = useForm({
@@ -72,7 +84,18 @@ const EditStageForm = ({ tournamentId, stageId }) => {
             value={tournamentName}
           />
           <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+            <button
+              className="btn btn-sm btn-outline btn-warning"
+              type="submit"
+            >
+              Edit Stage
+            </button>
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={onDeleteStageClicked}
+            >
+              Delete Stage
+            </button>
           </Group>
         </form>
       </Box>

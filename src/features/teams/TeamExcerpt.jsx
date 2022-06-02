@@ -27,9 +27,9 @@ export function TeamExcerpt({ teams }) {
         </tr>
       </thead>
       <tbody>
-        {teams?.map((team) => (
+        {teams?.map((team,index) => (
           <tr key={team?.id}>
-            <td>{team?.id}</td>
+            <td>{index}</td>
             <td>{team?.teamName}</td>
             <td>{team?.tournamentId}</td>
             <td>

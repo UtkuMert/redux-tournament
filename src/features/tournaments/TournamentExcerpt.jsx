@@ -57,7 +57,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
               <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title="Introduce yourself!"
+                title="Add New Stage"
               >
                 <AddStageFrom tournamentId={tournamentId} />
               </Modal>

@@ -23,8 +23,8 @@ export const AddStageFrom = ({ tournamentId }) => {
   const onSaveStageClicked = (value) => {
     try {
       const stageName = value.stageName;
-      console.log(stageName)
-      console.log(tournamentId)
+      console.log(stageName);
+      console.log(tournamentId);
       setAddRequestStatus("pending");
       dispatch(addNewStage({ stageName, tournamentId })).unwrap();
 
@@ -45,8 +45,7 @@ export const AddStageFrom = ({ tournamentId }) => {
     },
 
     validate: {
-      stageName: (value) =>
-        value.length > 0 ? null : "Select Stage Name",
+      stageName: (value) => (value.length > 0 ? null : "Select Stage Name"),
     },
   });
   return (
@@ -69,8 +68,10 @@ export const AddStageFrom = ({ tournamentId }) => {
             readOnly
             value={tournamentName}
           />
-          <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+          <Group position="center" mt="md">
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">
+              Add Stage
+            </button>
           </Group>
         </form>
       </Box>
