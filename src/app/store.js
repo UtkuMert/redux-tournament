@@ -1,13 +1,13 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import tournamentsReducer from "../features/tournaments/tournamentSlice";
-import teamsReducer from "../features/teams/teamSlice";
-import playerReducer from "../features/players/playerSlice";
-import stageReducer from "../features/stages/stageSlice";
-import stageTeamsReducer from "../features/stageTeams/stageTeamsSlice";
-import gamePlaysReducer from "../features/gamePlays/gamePlaysSlice";
-import gamePerformancesReducer from "../features/gamePerformances/gamePerformances";
-import playerListReducer from "../features/playersList/playerListSlice"
-import scorePlayerReducer from "../features/scorePlayers/scorePlayerSlice"
+import tournamentsReducer from "../features/admin/tournaments/tournamentSlice";
+import teamsReducer from "../features/admin/teams/teamSlice";
+import playerReducer from "../features/admin/players/playerSlice";
+import stageReducer from "../features/admin/stages/stageSlice";
+import stageTeamsReducer from "../features/admin/stageTeams/stageTeamsSlice";
+import gamePlaysReducer from "../features/admin/gamePlays/gamePlaysSlice";
+import gamePerformancesReducer from "../features/admin/gamePerformances/gamePerformances";
+import playerListReducer from "../features/admin/playersList/playerListSlice"
+import scorePlayerReducer from "../features/admin/scorePlayers/scorePlayerSlice"
 export const store = configureStore({
   reducer: {
     tournaments: tournamentsReducer,

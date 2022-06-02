@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 
 import { addNewTeam } from "./teamSlice";
 import { selectTournamentById } from "../tournaments/tournamentSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 export const AddTeamForm = ({tournamentId}) => {
   const dispatch = useDispatch();
@@ -27,9 +28,10 @@ export const AddTeamForm = ({tournamentId}) => {
       const teamName = value.teamName;
       setAddRequestStatus("pending");
       dispatch(addNewTeam({ teamName, tournamentId })).unwrap();
-
+      toast('Takım Eklendi.')
       setTeamName("");
-      navigate("/");
+
+      navigate('/admin')
     } catch (error) {
       console.error("Failed to save the team", error);
     } finally {
@@ -48,6 +50,7 @@ export const AddTeamForm = ({tournamentId}) => {
   });
   return (
     <div>
+      <Toaster />
       <h2>Add Team</h2>
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onSaveTeamClicked(value))}>

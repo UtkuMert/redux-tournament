@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/axios";
+
+import axios from "../../../api/axios";
+
 
 const initialState = {
   playersList: [],

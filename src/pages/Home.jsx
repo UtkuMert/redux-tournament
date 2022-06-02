@@ -1,8 +1,8 @@
 import React from "react";
-import { TournamentList } from "../features/tournaments/TournamentList";
-import { TeamList } from "../features/teams/TeamList";
-import { PlayerList } from "../features/players/PlayerList";
-import { ConfirmedPlayerList } from "../features/playersList/ConfirmedPlayerList";
+import { TournamentList } from "../features/admin/tournaments/TournamentList";
+import { TeamList } from "../features/admin/teams/TeamList";
+import { PlayerList } from "../features/admin/players/PlayerList";
+import { ConfirmedPlayerList } from "../features/admin/playersList/ConfirmedPlayerList";
 export const Home = () => {
   return (
     <>
