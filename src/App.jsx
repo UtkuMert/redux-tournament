@@ -16,12 +16,15 @@ import { StageList } from "./features/admin/stages/StageList";
 import { AddStageTeamsForm } from "./features/admin/stageTeams/AddStageTeamsForm";
 import { AddTeamsMatchForm } from "./features/admin/gamePlays/AddTeamsMatchForm";
 import { StageTeamList } from "./features/admin/stageTeams/StageTeamList";
-import {AddStageFrom} from "./features/admin/stages/AddStageFrom";
-import {GamePlayList} from "./features/admin/gamePlays/GamePlayList";
-import {SingleStagePage} from "./features/admin/stages/SingleStagePage.jsx";
+import { AddStageFrom } from "./features/admin/stages/AddStageFrom";
+import { GamePlayList } from "./features/admin/gamePlays/GamePlayList";
+import { SingleStagePage } from "./features/admin/stages/SingleStagePage.jsx";
 import { TournamentList } from "./features/admin/tournaments/TournamentList.jsx";
 import { Admin } from "./pages/Admin.jsx";
 import { HomeLayout } from "./pages/HomeLayout.jsx";
+import HomeTournamentList from "./features/home/tournaments/HomeTournamentList.jsx";
+import HomeSingleTournament from "./features/home/tournaments/HomeSingleTournament.jsx";
+import { HomeTeamList } from "./features/home/teams/HomeTeamList.jsx";
 
 export default function App() {
   return (
@@ -64,7 +67,16 @@ export default function App() {
         <Route path="gameplay" element={<GamePlayList />} />
       </Route>
       <Route path="/" element={<HomeLayout />}>
+        <Route element={<Home />} />
 
+        <Route path="tournaments">
+          <Route index element={<HomeTournamentList />} />
+          <Route path=":id" element={<SingleTournamentPage />} />
+        </Route>
+        <Route path="teams">
+          <Route index element={<HomeTeamList />} />
+          <Route path=":id" element={<SingleTournamentPage />} />
+        </Route>
       </Route>
     </Routes>
   );

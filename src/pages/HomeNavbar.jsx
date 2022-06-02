@@ -9,16 +9,16 @@ export const HomeNavbar = () => {
         </p>
         <div className="flex items-end space-x-2 md:space-x-4 pl-6">
           <p className="text-white text-lg font-sans hover:text-gray-300">
-            <Link to={"/admin/tournament"}>Tournaments</Link>
+            <Link to={"/tournaments"}>Tournaments</Link>
           </p>
           <p className="text-white text-lg font-sans hover:text-gray-300">
-            <Link to={"/admin/team"}>Teams</Link>
+            <Link to={"/teams"}>Teams</Link>
           </p>
           <p className="text-white text-lg font-sans hover:text-gray-300">
-            <Link to={"/admin/player"}>Players</Link>
+            <Link to={"/players"}>Players</Link>
           </p>
           <p className="text-white text-lg font-sans hover:text-gray-300">
-            <Link to={"/admin/stage"}>Stages</Link>
+            <Link to={"/stages"}>Stages</Link>
           </p>
         </div>
       </div>

@@ -15,9 +15,9 @@ export const CardShow = ({ parameter }) => {
 
   const handleButtonClick = () => {
     if (parameter?.description) {
-      navigate(`/tournament/${parameter.id}`);
+      navigate(`/tournaments/${parameter.id}`);
     } else {
-      navigate(`/team/${parameter.id}`);
+      navigate(`/teams/${parameter.id}`);
     }
   };
   const theme = useMantineTheme();
