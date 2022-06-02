@@ -23,15 +23,19 @@ export const fetchStageTeams = createAsyncThunk(
 
 export const addTeamToStage = createAsyncThunk(
   "/stageteam/save",
-  async (initialStageTeam) => {
+  async (initialStageTeam, rejectWithValue) => {
     try {
       const response = await axios.post("/stageteam/save", {
         teamId: initialStageTeam?.value,
-        stageId: initialStageTeam?.stageId
+        stageId: initialStageTeam?.stageId,
       });
+      console.log(response?.data);
       return response?.data?.data;
     } catch (err) {
-      return err.message;
+      if (!err?.response) {
+        throw err;
+      }
+      return rejectWithValue(err?.response?.data);
     }
   }
 );
@@ -57,6 +61,10 @@ const stageTeamsSlice = createSlice({
       .addCase(addTeamToStage.fulfilled, (state, action) => {
         console.log(action.payload);
         state.stageTeams.push(action.payload);
+      })
+      .addCase(addTeamToStage.rejected, (state, action) => {
+        state.error = action.payload.message
+        
       });
   },
 });
@@ -66,7 +74,8 @@ export const getStageTeamsStatus = (state) => state?.stageTeams?.status;
 export const getStageTeamsError = (state) => state?.stageTeams?.error;
 
 export const selectStageTeamByStageId = (state, id) =>
-state?.stageTeams?.stageTeams?.filter((stageTeam) => stageTeam.stageId === id)
-
+  state?.stageTeams?.stageTeams?.filter(
+    (stageTeam) => stageTeam.stageId === id
+  );
 
 export default stageTeamsSlice.reducer;

@@ -2,109 +2,27 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
-    <div className="navbar bg-base-100">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex="0" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link to={`tournament`}>Tournaments</Link>
-            </li>
-            <li tabIndex="0">
-              <a className="justify-between">
-                Options
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <Link to={`team`}>Teams</Link>
-                </li>
-                <li>
-                  <Link to={`player`}>Players</Link>
-                </li>
-                <li>
-                  <Link to={`stage`}>Stages</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+    <div className="w-full h-max flex justify-between items-center py-6 px-5 bg-gray-700">
+      <div className="flex items-center space-x-6 divide-x-2 divide-white">
+        <p className="text-white text-2xl font-sans font-medium">
+          <Link to={"/admin"}>TURNUVAMVAR</Link>
+        </p>
+        <div className="flex items-end space-x-2 md:space-x-4 pl-6">
+          <p className="text-white text-lg font-sans hover:text-gray-300">
+            <Link to={"/admin/tournament"}>Tournaments</Link>
+          </p>
+          <p className="text-white text-lg font-sans hover:text-gray-300">
+            <Link to={"/admin/team"}>Teams</Link>
+          </p>
+          <p className="text-white text-lg font-sans hover:text-gray-300">
+            <Link to={"/admin/player"}>Players</Link>
+          </p>
+          <p className="text-white text-lg font-sans hover:text-gray-300">
+            <Link to={"/admin/stage"}>Stages</Link>
+          </p>
         </div>
-        <a className="btn btn-ghost normal-case text-xl " href="/">
-          TURNUVAMVAR
-        </a>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">
-          <li>
-            <Link to={`tournament`}>Tournaments</Link>
-          </li>
-          <li tabIndex="0">
-            <a>
-              Options
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </a>
-            <ul className="p-2">
-              <li>
-                <Link to={`team`}>Teams</Link>
-              </li>
-              <li>
-                <Link to={`player`}>Players</Link>
-              </li>
-              <li>
-                <Link to={`stage`}>Stages</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <Link to={`/tournament/addTournament`}>
-          {" "}
-          <button className="btn btn-sm btn-outline btn-accent">
-            Add Tournament
-          </button>
-        </Link>
-      </div>
+      <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans"><Link to={"/admin/tournament/addTournament"}>Add Tournament</Link> </button>
     </div>
   );
 };

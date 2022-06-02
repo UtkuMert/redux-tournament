@@ -30,13 +30,13 @@ export const TournamentList = () => {
     content = <p>{error}</p>;
   }
   return (
-    <section>
-      <div className="flex items-center justify-center container mx-auto px-4">
-        <h2>Tournaments</h2>
+    
+      <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2">
+        <p className="text-2xl font-sans font-medium pb-4">Tournaments</p>
         <div className="p-10 flex flex-wrap items-center">
           {content}
         </div>
       </div>
-    </section>
+  
   );
 };

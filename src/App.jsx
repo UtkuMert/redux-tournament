@@ -24,7 +24,7 @@ import { TournamentList } from "./features/tournaments/TournamentList.jsx";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/admin" element={<Layout />}>
         <Route index element={<Home />} />
 
         <Route path="tournament">
