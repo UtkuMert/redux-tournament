@@ -34,8 +34,8 @@ export const addNewTeam = createAsyncThunk(
   "/teams/save/",
   async (initialTeam) => {
     try {
-      const { id } = initialTeam;
-      const response = await axios.post(`/teams/save/${id}`, initialTeam);
+      const { tournamentId } = initialTeam;
+      const response = await axios.post(`/teams/save/${tournamentId}`, initialTeam);
       console.log(response?.data);
       return response?.data?.data;
     } catch (err) {
@@ -48,9 +48,9 @@ export const updateTeam = createAsyncThunk(
   "/teams/update",
   async (initialTeam) => {
     try {
-      const { id } = initialTeam;
-      const response = await axios.put(`/teams/update/${id}`, initialTeam);
-      return response?.data;
+      const { teamId } = initialTeam;
+      const response = await axios.put(`/teams/update/${teamId}`, initialTeam);
+      return response?.data?.data;
     } catch (err) {
       return err.message;
     }
@@ -60,9 +60,9 @@ export const updateTeam = createAsyncThunk(
 export const deleteTeam = createAsyncThunk(
   "/delete/{teamId}",
   async (initiaTeam) => {
-    const { id } = initiaTeam;
+    const { teamId } = initiaTeam;
     try {
-      const response = await axios.delete(`/teams/delete/${id}`);
+      const response = await axios.delete(`/teams/delete/${teamId}`);
       if (response?.status === 200) return initiaTeam;
       return `${response?.status}: ${response?.statusText}`;
     } catch (err) {
@@ -119,19 +119,18 @@ const teamSlice = createSlice({
       .addCase(deleteTeam.fulfilled, (state, action) => {
         if (!action.payload?.id) {
           console.log("Delete could not complete");
-          console.log(action.payload);
           return;
         }
         const { id } = action.payload;
-        const teams = state.teams.filter((team) => team?.id !== id);
+        const teams = state.teams?.filter((team) => team?.id !== id);
         state.teams = teams;
       });
   },
 });
 
-export const selectAllTeams = (state) => state.teams.teams;
-export const getTeamsStatus = (state) => state.teams.status;
-export const getTeamsError = (state) => state.teams.error;
+export const selectAllTeams = (state) => state?.teams?.teams;
+export const getTeamsStatus = (state) => state?.teams?.status;
+export const getTeamsError = (state) => state?.teams?.error;
 
 export const selectTeamById = (state, id) =>
   state.teams?.teams?.find((team) => team?.id === id); //Takim bulunuyor.

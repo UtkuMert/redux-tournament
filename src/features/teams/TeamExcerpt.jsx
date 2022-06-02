@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
-import { Table, Group } from "@mantine/core";
+import { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteTeam } from "./teamSlice";
 import { IoIosAddCircle } from "react-icons/io";
+import { AddPlayerForm } from "../players/AddPlayerForm";
+import { Table, Modal, Group } from "@mantine/core";
 
 export function TeamExcerpt({ teams }) {
   const dispatch = useDispatch();
+
+
+  const [opened, setOpened] = useState(false);
+  const [teamId, setTeamId] = useState("");
 
   const onDeleteTeamClicked = (id) => {
     try {
@@ -27,7 +33,7 @@ export function TeamExcerpt({ teams }) {
         </tr>
       </thead>
       <tbody>
-        {teams?.map((team,index) => (
+        {teams?.map((team, index) => (
           <tr key={team?.id}>
             <td>{index}</td>
             <td>{team?.teamName}</td>
@@ -40,13 +46,23 @@ export function TeamExcerpt({ teams }) {
               </Link>
             </td>
             <td>
-              <Link to={`/team/addplayer/${team?.id}`}>
-                {" "}
-                <button className="btn btn-sm btn-outline">
-                  Add Player
-                  <IoIosAddCircle />
-                </button>
-              </Link>
+              <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Add New Player"
+              >
+                <AddPlayerForm teamId={teamId} />
+              </Modal>{" "}
+              <button
+                className="btn btn-sm btn-outline"
+                onClick={() => {
+                  setOpened(true);
+                  setTeamId(team?.id);
+                }}
+              >
+                Add Player
+                <IoIosAddCircle />
+              </button>
             </td>
             <td>
               <Group position="center">

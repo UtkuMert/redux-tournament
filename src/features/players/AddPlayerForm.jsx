@@ -7,12 +7,12 @@ import { addNewPlayer, addNewPlayerToPlayer } from "./playerSlice";
 import { Box, Select, TextInput, Button, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export const AddPlayerForm = () => {
+export const AddPlayerForm = ({teamId}) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  
   const navigate = useNavigate();
 
-  const team = useSelector((state) => selectTeamById(state, Number(id)));
+  const team = useSelector((state) => selectTeamById(state, Number(teamId)));
 
   const [teamName, setTeamName] = useState(team?.teamName);
 
@@ -36,7 +36,7 @@ export const AddPlayerForm = () => {
           playerLastName,
           playerAddress,
           position,
-          id,
+          teamId,
         })
       ).unwrap();
 

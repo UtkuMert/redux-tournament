@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Table, Modal, Button, Group } from "@mantine/core";
+import { Table, Modal, Group } from "@mantine/core";
 import { AddStageFrom } from "../stages/AddStageFrom";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteTournament } from "./tournamentSlice";
-
+import { AddTeamForm } from "../teams/AddTeamForm";
 export const TournamentExcerpt = ({ tournaments }) => {
   const dispatch = useDispatch();
   const [opened, setOpened] = useState(false);
+  const [openedTeam, setOpenedTeam] = useState(false);
   const [tournamentId, setTournamentId] = useState("");
   const onDeleteTournamentClicked = (id) => {
     try {
@@ -44,13 +45,23 @@ export const TournamentExcerpt = ({ tournaments }) => {
               </Link>
             </td>
             <td>
-              <Link to={`tournament/addteam/${tournament.id}`}>
-                {" "}
-                <button className="btn btn-sm btn-outline">
-                  Add Team
-                  <IoIosAddCircle />
-                </button>
-              </Link>
+              <Modal
+                opened={openedTeam}
+                onClose={() => setOpenedTeam(false)}
+                title="Add New Stage"
+              >
+                <AddTeamForm tournamentId={tournamentId} />
+              </Modal>{" "}
+              <button
+                className="btn btn-sm btn-outline"
+                onClick={() => {
+                  setOpenedTeam(true);
+                  setTournamentId(tournament.id);
+                }}
+              >
+                Add Team
+                <IoIosAddCircle />
+              </button>
             </td>
             <td>
               {" "}

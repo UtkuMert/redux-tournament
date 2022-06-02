@@ -37,9 +37,9 @@ export const addNewPlayer = createAsyncThunk(
   "/playertoadd/save/{teamId}",
   async (initialPlayer) => {
     try {
-      const { id } = initialPlayer;
+      const { teamId } = initialPlayer;
       const response = await axios.post(
-        `/playertoadd/save/${id}`,
+        `/playertoadd/save/${teamId}`,
         initialPlayer
       );
       return response?.data?.data;

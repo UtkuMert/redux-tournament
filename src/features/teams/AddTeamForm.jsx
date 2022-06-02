@@ -7,13 +7,13 @@ import { useForm } from "@mantine/form";
 import { addNewTeam } from "./teamSlice";
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 
-export const AddTeamForm = () => {
+export const AddTeamForm = ({tournamentId}) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const tournament = useSelector((state) =>
-    selectTournamentById(state, Number(id))
+    selectTournamentById(state, Number(tournamentId))
   );
   const [tournamentName, setTournamentName] = useState(
     tournament?.tournamentName
@@ -26,7 +26,7 @@ export const AddTeamForm = () => {
     try {
       const teamName = value.teamName;
       setAddRequestStatus("pending");
-      dispatch(addNewTeam({ teamName, id })).unwrap();
+      dispatch(addNewTeam({ teamName, tournamentId })).unwrap();
 
       setTeamName("");
       navigate("/");

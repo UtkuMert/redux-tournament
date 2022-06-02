@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteTeam, selectTeamById, updateTeam } from "./teamSlice";
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 import { Box, TextInput, Button, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export const EditTeamForm = () => {
-  const { id } = useParams();
+export const EditTeamForm = ({ teamId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const team = useSelector((state) => selectTeamById(state, Number(id)));
+  const team = useSelector((state) => selectTeamById(state, Number(teamId)));
 
   const [teamName, setTeamName] = useState(team?.teamName);
   const tournament = useSelector((state) =>
@@ -27,7 +26,7 @@ export const EditTeamForm = () => {
     try {
       const teamName = value.teamName;
       setRequestStatus("pending");
-      dispatch(updateTeam({ teamName, id })).unwrap();
+      dispatch(updateTeam({ teamName, teamId })).unwrap();
 
       setTeamName("");
       navigate("/");
@@ -41,7 +40,7 @@ export const EditTeamForm = () => {
   const onDeleteTeamClicked = () => {
     try {
       setRequestStatus("pending");
-      dispatch(deleteTeam({ id })).unwrap();
+      dispatch(deleteTeam({ teamId })).unwrap();
 
       setTeamName("");
 
@@ -91,56 +90,21 @@ export const EditTeamForm = () => {
             value={tournamentName}
           />
           <Group position="right" mt="md">
-            <Button type="submit">Update Team</Button>
-            <Button onClick={onDeleteTeamClicked}>Delete Team</Button>
+            <button
+              className="btn btn-sm btn-outline btn-warning"
+              type="submit"
+            >
+              Update Team
+            </button>
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={onDeleteTeamClicked}
+            >
+              Delete Team
+            </button>
           </Group>
         </form>
       </Box>
     </div>
   );
 };
-
-// <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-// <h2>Edit Team</h2>
-// <form>
-//   <div className="mb-6">
-//     <label
-//       htmlFor="teamName"
-//       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-//     >
-//       Team Name
-//     </label>
-//     <input
-//       type="text"
-//       id="teamName"
-//       name="teamName"
-//       value={teamName}
-//       onChange={onTeamNameChanged}
-//       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-//       placeholder="Enter A Team Name"
-//       required=""
-//     />
-//   </div>
-//   <div className="mb-6">
-//     <label htmlFor="tournament">Tournament:</label>
-//     <input readOnly value={tournamentName} />
-//   </div>
-
-//   <button
-//     type="button"
-//     onClick={onSaveTeamClicked}
-//     disabled={!canSave}
-//     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-//   >
-//     Update Team
-//   </button>
-
-//   <button
-//     type="button"
-//     onClick={onDeleteTeamClicked}
-//     className=" btn-warning text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-//   >
-//     Delete Tournament
-//   </button>
-// </form>
-// </div>
