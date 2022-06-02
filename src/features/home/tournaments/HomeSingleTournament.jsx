@@ -9,6 +9,7 @@ import {
 } from "../../admin/teams/teamSlice";
 import { Card } from "@mantine/core";
 import { CardShow } from "../CardShow";
+import { HomeTeamExcerpt } from "../teams/HomeTeamExcerpt";
 
 const HomeSingleTournament = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const HomeSingleTournament = () => {
   const teams = useSelector((state) =>
     selectTeamByTournamentId(state, Number(id))
   );
-
+  
   useEffect(() => {
     if (teams?.teamsStatus === "idle") {
       dispatch(fetchTeamsByTournamentId({ id }));
@@ -62,7 +63,7 @@ const HomeSingleTournament = () => {
           Stage
         </Link>
       </div>
-      <CardShow teams={teams} />
+      <HomeTeamExcerpt teams={teams} />
     </div>
   );
 };

@@ -13,7 +13,7 @@ export const HomeTeamList = () => {
   const teams = useSelector(selectAllTeams);
   const teamsStatus = useSelector(getTeamsStatus);
   const teamsError = useSelector(getTeamsError);
-
+  console.log(teams)
   useEffect(() => {
     if (teamsStatus === "idle") {
       dispatch(fetchTeams());

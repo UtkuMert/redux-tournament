@@ -10,7 +10,7 @@ import {
   fetchTeamsByTournamentId,
   selectTeamByTournamentId,
 } from "../teams/teamSlice";
-import { TeamExcerpt } from "../teams/TeamExcerpt";
+import { HomeTeamExcerpt } from "../../home/teams/HomeTeamExcerpt";
 
 export const SingleTournamentPage = () => {
   const { id } = useParams();
@@ -19,15 +19,15 @@ export const SingleTournamentPage = () => {
     selectTournamentById(state, Number(id))
   );
 
-  const teams = useSelector((state) =>
-    selectTeamByTournamentId(state, Number(id))
+  const teams = useSelector(() =>
+  dispatch(fetchTeamsByTournamentId({ id }))
   );
 
-  useEffect(() => {
-    if (teams?.teamsStatus === "idle") {
-      dispatch(fetchTeamsByTournamentId({ id }));
-    }
-  }, [teams?.teamsStatus, dispatch]);
+  // useEffect(() => {
+  //   if (teams?.teamsStatus === "idle") {
+  //     dispatch(fetchTeamsByTournamentId({ id }));
+  //   }
+  // }, [teams?.teamsStatus, dispatch]);
 
   if (!tournament) {
     return (
@@ -64,7 +64,7 @@ export const SingleTournamentPage = () => {
           Stage
         </Link>
       </div>
-      <TeamExcerpt teams={teams} />
+      <HomeTeamExcerpt teams={teams} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ export const HomeNavbar = () => {
     <div className="w-full h-max flex justify-between items-center py-6 px-5 bg-gray-700">
       <div className="flex items-center space-x-6 divide-x-2 divide-white">
         <p className="text-white text-2xl font-sans font-medium">
-          <Link to={"/admin"}>TURNUVAMVAR</Link>
+          <Link to={"/"}>TURNUVAMVAR</Link>
         </p>
         <div className="flex items-end space-x-2 md:space-x-4 pl-6">
           <p className="text-white text-lg font-sans hover:text-gray-300">

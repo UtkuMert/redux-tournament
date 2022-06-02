@@ -14,7 +14,7 @@ const HomeTournamentList = () => {
   const tournaments = useSelector(selectAllTournaments);
   const tournamentsStatus = useSelector(getTournamentsStatus);
   const error = useSelector(getTournamentsError);
-
+ 
   useEffect(() => {
     if (tournamentsStatus === "idle") {
       dispatch(fetchTournaments());

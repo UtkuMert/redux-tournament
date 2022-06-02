@@ -71,7 +71,7 @@ export default function App() {
 
         <Route path="tournaments">
           <Route index element={<HomeTournamentList />} />
-          <Route path=":id" element={<SingleTournamentPage />} />
+          <Route path=":id" element={<HomeSingleTournament />} />
         </Route>
         <Route path="teams">
           <Route index element={<HomeTeamList />} />
