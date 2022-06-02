@@ -24,10 +24,7 @@ export const addGamePerformance = createAsyncThunk(
   "/gamesperformed/save",
   async (initialPerformance) => {
     try {
-      const response = await axios.post(
-        "/gamesperformed",
-        initialPerformance
-      );
+      const response = await axios.post("/gamesperformed", initialPerformance);
       return response?.data?.data;
     } catch (err) {
       return err.message;
@@ -61,9 +58,18 @@ const gamePerformancesSlice = createSlice({
 });
 export const selectAllGamePerformances = (state) =>
   state?.gamePerformances?.gamePerformances;
-export const getGamePerformancesStatus = (state) => state?.gamePerformances?.status;
-export const getGamePerformancesError = (state) => state?.gamePerformances?.error;
+export const getGamePerformancesStatus = (state) =>
+  state?.gamePerformances?.status;
+export const getGamePerformancesError = (state) =>
+  state?.gamePerformances?.error;
+
+export const selectGamePerformanceById = (state, id) =>
+  state.gamePerformances?.gamePerformances?.find(
+    (gamePerformance) => gamePerformance.id === id
+  ); //Turnuva bulunuyor.
 
 export const selectGamePerformanceByStageIdId = (state, id) =>
-  state.gamePerformances?.gamePerformances?.filter((gamePerformance) => gamePerformance?.stageId === id); //Turnuva idsine gore team geliyor.
+  state.gamePerformances?.gamePerformances?.filter(
+    (gamePerformance) => gamePerformance?.stageId === id
+  ); //Turnuva idsine gore team geliyor.
 export default gamePerformancesSlice.reducer;

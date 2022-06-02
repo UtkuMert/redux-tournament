@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Table, Modal, Button, Group } from "@mantine/core";
+import { Table, Modal, Group } from "@mantine/core";
 import { AddStageTeamsForm } from "../stageTeams/AddStageTeamsForm";
 import EditStageForm from "./EditStageForm";
 import { deleteStage } from "./stageSlice";
@@ -49,7 +49,8 @@ export const StageExcerpt = ({ stages }) => {
                 <EditStageForm tournamentId={tournamentId} stageId={stageId} />
               </Modal>
               <Group position="center">
-                <Button
+                <button
+                  className="btn btn-sm btn-outline btn-warning"
                   onClick={() => {
                     setOpenedSecond(true);
                     setTournamentId(stage?.tournamentId);
@@ -57,7 +58,7 @@ export const StageExcerpt = ({ stages }) => {
                   }}
                 >
                   Edit Stage
-                </Button>
+                </button>
               </Group>
             </td>
             <td>
@@ -69,14 +70,15 @@ export const StageExcerpt = ({ stages }) => {
                 <AddStageTeamsForm stageId={stageId} />
               </Modal>
               <Group position="center">
-                <Button
+                <button
+                  className="btn btn-sm btn-outline"
                   onClick={() => {
                     setOpened(true);
                     setStageId(stage?.id);
                   }}
                 >
                   Add Team To Stage
-                </Button>
+                </button>
               </Group>
             </td>
             <td>
@@ -99,10 +101,3 @@ export const StageExcerpt = ({ stages }) => {
   );
 };
 
-{
-  /* <div>
-{stages?.map((stage) => (
-  <p key={stage?.id}>{stage?.stageName}</p>
-))}
-</div> */
-}

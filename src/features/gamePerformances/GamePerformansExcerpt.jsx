@@ -6,6 +6,7 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
   const [opened, setOpened] = useState(false);
   const [firstTeamId, setFirstTeamId] = useState("");
   const [secondTeamId, setSecondTeamId] = useState("");
+  const [gamePerformanceId, setGamePerformanceId] = useState("");
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -36,6 +37,7 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                 <AddScorePlayerForm
                   firstTeamId={firstTeamId}
                   secondTeamId={secondTeamId}
+                  gamePerformanceId={gamePerformanceId}
                 />
               </Modal>
               <Group position="center">
@@ -44,6 +46,7 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                     setOpened(true);
                     setFirstTeamId(gamePerformance?.firstTeamId);
                     setSecondTeamId(gamePerformance?.secondTeamId);
+                    setGamePerformanceId(gamePerformance?.id);
                   }}
                 >
                   Edit Match

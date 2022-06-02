@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
-import { Box, TextInput, Button, Modal, Select, Group } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
+import { Box, TextInput, Select, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { selectTournamentById } from "../tournaments/tournamentSlice";

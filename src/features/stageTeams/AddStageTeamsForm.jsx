@@ -6,7 +6,7 @@ import { addTeamToStage } from "./stageTeamsSlice";
 
 import { selectTeamByTournamentId } from "../teams/teamSlice";
 import { selectStageById } from "../stages/stageSlice";
-import { Box, MultiSelect, TextInput, Button, Group } from "@mantine/core";
+import { Box, MultiSelect, TextInput, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 export const AddStageTeamsForm = ({ stageId }) => {
@@ -69,17 +69,18 @@ export const AddStageTeamsForm = ({ stageId }) => {
             key={teams?.map((team) => team.teamId)}
             mt="md"
             data={data}
-            label="deneem"
+            label="Teams"
             {...form.getInputProps("teams")}
           />
           <TextInput readOnly label="Stage" value={stageName} />
 
           <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">
+              Add Teams To Stage
+            </button>
           </Group>
         </form>
       </Box>
     </div>
   );
 };
-

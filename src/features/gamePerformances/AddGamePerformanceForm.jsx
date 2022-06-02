@@ -93,7 +93,6 @@ export const AddGamePerformanceForm = ({
               stepHoldDelay={500}
               stepHoldInterval={100}
             />
-            ;
             <Group position="right" mt="md">
               <Button
                 onClick={onSaveScoreClicked}

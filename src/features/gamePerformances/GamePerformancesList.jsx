@@ -10,7 +10,6 @@ import { GamePerformansExcerpt } from "./GamePerformansExcerpt";
 
 export const GamePerformancesList = ({stageId}) => {
   const dispatch = useDispatch();
-
  
   const gamePerformances = useSelector((state) =>
   selectGamePerformanceByStageIdId(state, Number(stageId))
@@ -35,7 +34,7 @@ export const GamePerformancesList = ({stageId}) => {
 
   return (
     <section>
-      <h2>Gecmis Maclar</h2>
+      <h2>Oynanmis Maclar</h2>
       <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
         {content}
       </div>
