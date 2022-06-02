@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
-    selectAllPlayers,
-    getPlayersStatus,
-    getPlayersError,
+  selectAllPlayers,
+  getPlayersStatus,
+  getPlayersError,
   fetchPlayers,
 } from "./playerSlice";
 import { useEffect } from "react";
@@ -13,7 +13,7 @@ export const PlayerList = () => {
   const players = useSelector(selectAllPlayers);
   const playersStatus = useSelector(getPlayersStatus);
   const playersError = useSelector(getPlayersError);
-  
+
   useEffect(() => {
     if (playersStatus === "idle") {
       dispatch(fetchPlayers());
@@ -24,20 +24,15 @@ export const PlayerList = () => {
   if (playersStatus === "loading") {
     content = <p>"Loading"</p>;
   } else if (playersStatus === "succeeded") {
-    content  = (
-      <PlayerExcerpt players={players} />
-    );
+    content = <PlayerExcerpt players={players} />;
   } else if (playersStatus === "failed") {
     content = <p>{playersError}</p>;
   }
 
   return (
-    <section>
-      <h2 className="flex justify-items-center">Players</h2>
-      <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
-        {content}
-      </div>
-    </section>
-    
+    <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2">
+      <p className="text-2xl font-sans font-medium pb-4">Player To Add</p>
+      <div className="p-10 flex flex-wrap items-center">{content}</div>
+    </div>
   );
 };

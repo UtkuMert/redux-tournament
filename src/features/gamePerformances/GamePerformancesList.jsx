@@ -33,11 +33,11 @@ export const GamePerformancesList = ({stageId}) => {
   }
 
   return (
-    <section>
-      <h2>Oynanmis Maclar</h2>
-      <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
-        {content}
-      </div>
-    </section>
+    <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2">
+    <p className="text-2xl font-sans font-medium pb-4">Oynanmıs Maclar</p>
+    <div className="p-10 flex flex-wrap items-center">
+      {content}
+    </div>
+  </div>
   );
 };

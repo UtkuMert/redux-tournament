@@ -40,7 +40,7 @@ export function TeamExcerpt({ teams }) {
             <td>{team?.tournamentId}</td>
             <td>
               {" "}
-              <Link to={`/team/${team?.id}`}>
+              <Link to={`/admin/team/${team?.id}`}>
                 {" "}
                 <button className="btn btn-sm btn-info">View Team</button>
               </Link>

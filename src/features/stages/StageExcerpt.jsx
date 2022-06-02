@@ -38,7 +38,7 @@ export const StageExcerpt = ({ stages }) => {
             <td>{stage.id}</td>
             <td>{stage.stageName}</td>
             <td>
-              <Link to={`${stage.id}`}>View Stage</Link>
+              <Link to={`/admin/${stage.id}`}>View Stage</Link>
             </td>
             <td>
               <Modal

@@ -30,12 +30,12 @@ export const ConfirmedPlayerList = () => {
     content = <p>{playersError}</p>;
   }
   return (
-    <section>
-      <h2 className="flex justify-items-center">Players</h2>
-      <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
-        {content}
-      </div>
-    </section>
+    <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2">
+    <p className="text-2xl font-sans font-medium pb-4">Players</p>
+    <div className="p-10 flex flex-wrap items-center">
+      {content}
+    </div>
+  </div>
   );
 };
 
