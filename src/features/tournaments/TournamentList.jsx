@@ -31,7 +31,7 @@ export const TournamentList = () => {
   }
   return (
     
-      <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2">
+      <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2 max-w-6xl">
         <p className="text-2xl font-sans font-medium pb-4">Tournaments</p>
         <div className="p-10 flex flex-wrap items-center">
           {content}

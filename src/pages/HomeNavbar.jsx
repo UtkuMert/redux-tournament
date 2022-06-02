@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const HomeNavbar = () => {
   return (
     <div className="w-full h-max flex justify-between items-center py-6 px-5 bg-gray-700">
       <div className="flex items-center space-x-6 divide-x-2 divide-white">
@@ -22,7 +22,9 @@ export const Navbar = () => {
           </p>
         </div>
       </div>
-      <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans"><Link to={"/admin/tournament/addTournament"}>Add Tournament</Link> </button>
+      <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans">
+        <Link to={"/admin"}>Admin Panel</Link>{" "}
+      </button>
     </div>
   );
 };

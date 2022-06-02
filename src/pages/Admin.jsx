@@ -3,7 +3,7 @@ import { TournamentList } from "../features/tournaments/TournamentList";
 import { TeamList } from "../features/teams/TeamList";
 import { PlayerList } from "../features/players/PlayerList";
 import { ConfirmedPlayerList } from "../features/playersList/ConfirmedPlayerList";
-const Admin = () => {
+export const Admin = () => {
   return (
     <>
     <TournamentList />
@@ -13,5 +13,3 @@ const Admin = () => {
   </>
   )
 }
-
-export default Admin

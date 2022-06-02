@@ -6,9 +6,9 @@ import { PlayerList } from "./features/players/PlayerList";
 
 import { SingleTournamentPage } from "./features/tournaments/SingleTournamentPage";
 import { SingleTeamPage } from "./features/teams/SingleTeamPage";
-import { Layout } from "./components/Layout";
+import { Layout } from "./pages/Layout";
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./components/Home";
+import { Home } from "./pages/Home";
 import { EditTeamForm } from "./features/teams/EditTeamForm";
 import { AddPlayerForm } from "./features/players/AddPlayerForm";
 import { EditPlayerForm } from "./features/players/EditPlayerForm";
@@ -20,12 +20,14 @@ import {AddStageFrom} from "./features/stages/AddStageFrom";
 import {GamePlayList} from "./features/gamePlays/GamePlayList";
 import {SingleStagePage} from "./features/stages/SingleStagePage.jsx";
 import { TournamentList } from "./features/tournaments/TournamentList.jsx";
+import { Admin } from "./pages/Admin.jsx";
+import { HomeLayout } from "./pages/HomeLayout.jsx";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/admin" element={<Layout />}>
-        <Route index element={<Home />} />
+        <Route index element={<Admin />} />
 
         <Route path="tournament">
           <Route index element={<TournamentList />} />
@@ -60,6 +62,9 @@ export default function App() {
         </Route>
         <Route path="matchteams" element={<AddTeamsMatchForm />} />
         <Route path="gameplay" element={<GamePlayList />} />
+      </Route>
+      <Route path="/" element={<HomeLayout />}>
+
       </Route>
     </Routes>
   );
