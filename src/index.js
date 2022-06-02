@@ -7,10 +7,11 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchTournaments } from "./features/admin/tournaments/tournamentSlice";
 import { fetchTeams } from "./features/admin/teams/teamSlice";
+import { fetchPlayers } from "./features/admin/players/playerSlice";
 
 store.dispatch(fetchTournaments());
 store.dispatch(fetchTeams());
-
+store.dispatch(fetchPlayers());
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

@@ -9,7 +9,7 @@ import {
 } from "../../admin/tournaments/tournamentSlice";
 import {HomeTournamentExcerpt} from "./HomeTournamentExcerpt";
 
-const HomeTournamentList = () => {
+export const HomeTournamentList = () => {
   const dispatch = useDispatch();
   const tournaments = useSelector(selectAllTournaments);
   const tournamentsStatus = useSelector(getTournamentsStatus);
@@ -38,4 +38,3 @@ const HomeTournamentList = () => {
   );
 };
 
-export default HomeTournamentList;

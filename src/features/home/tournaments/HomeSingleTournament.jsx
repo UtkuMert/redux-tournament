@@ -11,7 +11,7 @@ import { Card } from "@mantine/core";
 import { CardShow } from "../CardShow";
 import { HomeTeamExcerpt } from "../teams/HomeTeamExcerpt";
 
-const HomeSingleTournament = () => {
+export const HomeSingleTournament = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const tournament = useSelector((state) =>
@@ -68,4 +68,3 @@ const HomeSingleTournament = () => {
   );
 };
 
-export default HomeSingleTournament;

@@ -22,9 +22,11 @@ import { SingleStagePage } from "./features/admin/stages/SingleStagePage.jsx";
 import { TournamentList } from "./features/admin/tournaments/TournamentList.jsx";
 import { Admin } from "./pages/Admin.jsx";
 import { HomeLayout } from "./pages/HomeLayout.jsx";
-import HomeTournamentList from "./features/home/tournaments/HomeTournamentList.jsx";
-import HomeSingleTournament from "./features/home/tournaments/HomeSingleTournament.jsx";
+import { HomeTournamentList } from "./features/home/tournaments/HomeTournamentList.jsx";
+import { HomeSingleTournament } from "./features/home/tournaments/HomeSingleTournament.jsx";
 import { HomeTeamList } from "./features/home/teams/HomeTeamList.jsx";
+import { HomeSingleTeamPage } from "./features/home/teams/HomeSingleTeamPage.jsx";
+import { HomePlayerList } from "./features/home/players/HomePlayerList.jsx";
 
 export default function App() {
   return (
@@ -75,7 +77,10 @@ export default function App() {
         </Route>
         <Route path="teams">
           <Route index element={<HomeTeamList />} />
-          <Route path=":id" element={<SingleTournamentPage />} />
+          <Route path=":id" element={<HomeSingleTeamPage />} />
+        </Route>
+        <Route path="players">
+          <Route index element={<HomePlayerList />} />
         </Route>
       </Route>
     </Routes>

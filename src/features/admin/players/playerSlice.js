@@ -96,6 +96,17 @@ const playerSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(fetchPlayersByTeamId.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPlayersByTeamId.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.players = action?.payload?.data;
+      })
+      .addCase(fetchPlayersByTeamId.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
       .addCase(addNewPlayer.fulfilled, (state, action) => {
         console.log(action.payload);
         return { ...state, players: [...state.players, action.payload] };
@@ -129,6 +140,7 @@ export const getPlayersStatus = (state) => state?.players?.status;
 export const getPlayersError = (state) => state?.teams?.error;
 
 export const selectPlayerById = (state, id) =>
-  state.players.players.find((player) => player.id === id); //Takim bulunuyor.
-
+  state.players?.players?.find((player) => player.id === id);
+export const selectPlayerByTeamId = (state, id) =>
+  state.players?.players?.filter((player) => player?.teamId === id);
 export default playerSlice.reducer;
