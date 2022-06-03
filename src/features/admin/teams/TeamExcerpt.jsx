@@ -14,9 +14,9 @@ export function TeamExcerpt({ teams }) {
   const [opened, setOpened] = useState(false);
   const [teamId, setTeamId] = useState("");
 
-  const onDeleteTeamClicked = (id) => {
+  const onDeleteTeamClicked = (teamId) => {
     try {
-      dispatch(deleteTeam({ id })).unwrap();
+      dispatch(deleteTeam({ teamId })).unwrap();
     } catch (err) {
       console.error("Failed to delete the team", err);
     }

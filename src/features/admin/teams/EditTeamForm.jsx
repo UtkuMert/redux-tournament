@@ -29,7 +29,7 @@ export const EditTeamForm = ({ teamId }) => {
       dispatch(updateTeam({ teamName, teamId })).unwrap();
 
       setTeamName("");
-      navigate("/");
+      navigate(`/admin/team`);
     } catch (error) {
       console.error("Failed to save the team", error);
     } finally {

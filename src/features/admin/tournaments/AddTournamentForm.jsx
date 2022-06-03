@@ -25,7 +25,7 @@ export const AddTournamentForm = () => {
 
       setTournamentName("");
       setDescription("");
-      navigate("/")
+      navigate("/admin")
     } catch (error) {
       console.error("Failed to save the tournament", error);
     } finally {

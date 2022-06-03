@@ -1,4 +1,4 @@
-import { selectTournamentById } from "./tournamentSlice";
+import { fetchTournaments, selectTournamentById } from "./tournamentSlice";
 
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Card } from "@mantine/core";
 import {
-  fetchTeamsByTournamentId,
   selectTeamByTournamentId,
 } from "../teams/teamSlice";
-import { HomeTeamExcerpt } from "../../home/teams/HomeTeamExcerpt";
+
 import { TeamExcerpt } from "../teams/TeamExcerpt";
 
 export const SingleTournamentPage = () => {
@@ -26,7 +25,7 @@ export const SingleTournamentPage = () => {
 
   // useEffect(() => {
   //   if (teams?.teamsStatus === "idle") {
-  //     dispatch(fetchTeamsByTournamentId({ id }));
+  //     dispatch(fetchTournaments({ id }));
   //   }
   // }, [teams?.teamsStatus, dispatch]);
 
