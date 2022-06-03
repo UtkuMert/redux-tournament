@@ -21,12 +21,12 @@ export const HomeSingleTournament = () => {
   const teams = useSelector((state) =>
     selectTeamByTournamentId(state, Number(id))
   );
-  
-  useEffect(() => {
-    if (teams?.teamsStatus === "idle") {
-      dispatch(fetchTeamsByTournamentId({ id }));
-    }
-  }, [teams?.teamsStatus, dispatch]);
+  console.log(teams);
+  // useEffect(() => {
+  //   if (teams?.teamsStatus === "idle") {
+  //     dispatch(fetchTeamsByTournamentId({ id }));
+  //   }
+  // }, [teams?.teamsStatus, dispatch]);
 
   if (!tournament) {
     return (
@@ -57,7 +57,7 @@ export const HomeSingleTournament = () => {
         </div>
 
         <Link
-          to={`/tournament/${id}/stage`}
+          to={`/tournaments/${id}/stage`}
           className="text-white bg-orange-500 border border-orange-700 hover:bg-orange-400 py-4 px-6 rounded-xl font-sans font-medium text-lg"
         >
           Stage

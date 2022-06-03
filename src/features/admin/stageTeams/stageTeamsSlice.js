@@ -64,7 +64,6 @@ const stageTeamsSlice = createSlice({
       })
       .addCase(addTeamToStage.rejected, (state, action) => {
         state.error = action.payload.message
-        
       });
   },
 });
@@ -74,8 +73,6 @@ export const getStageTeamsStatus = (state) => state?.stageTeams?.status;
 export const getStageTeamsError = (state) => state?.stageTeams?.error;
 
 export const selectStageTeamByStageId = (state, id) =>
-  state?.stageTeams?.stageTeams?.filter(
-    (stageTeam) => stageTeam.stageId === id
-  );
+state?.stageTeams?.stageTeams?.filter((stageTeam) => stageTeam?.stageId === id)
 
 export default stageTeamsSlice.reducer;

@@ -11,11 +11,12 @@ import { useState } from "react";
 
 export const SingleStagePage = () => {
   const { stageId } = useParams();
+  console.log(stageId)
   const [opened, setOpened] = useState(false);
   const teams = useSelector((state) =>
     selectStageTeamByStageId(state, Number(stageId))
   );
-
+  console.log(teams)
   return (
     <>
       <Modal
@@ -30,7 +31,6 @@ export const SingleStagePage = () => {
           className="btn btn-sm btn-outline btn-accent"
           onClick={() => {
             setOpened(true);
-           
           }}
         >
           Match Teams

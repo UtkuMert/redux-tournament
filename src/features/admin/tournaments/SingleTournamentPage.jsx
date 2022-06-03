@@ -11,6 +11,7 @@ import {
   selectTeamByTournamentId,
 } from "../teams/teamSlice";
 import { HomeTeamExcerpt } from "../../home/teams/HomeTeamExcerpt";
+import { TeamExcerpt } from "../teams/TeamExcerpt";
 
 export const SingleTournamentPage = () => {
   const { id } = useParams();
@@ -19,9 +20,9 @@ export const SingleTournamentPage = () => {
     selectTournamentById(state, Number(id))
   );
 
-  const teams = useSelector(() =>
-  dispatch(fetchTeamsByTournamentId({ id }))
-  );
+  const teams = useSelector((state) =>
+  selectTeamByTournamentId(state, Number(id))
+);
 
   // useEffect(() => {
   //   if (teams?.teamsStatus === "idle") {
@@ -64,7 +65,7 @@ export const SingleTournamentPage = () => {
           Stage
         </Link>
       </div>
-      <HomeTeamExcerpt teams={teams} />
+      <TeamExcerpt teams={teams} />
     </div>
   );
 };

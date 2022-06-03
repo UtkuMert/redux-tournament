@@ -40,7 +40,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
             <td>{tournament.description}</td>
             <td>
               {" "}
-              <Link to={`/admin/tournament/${tournament.id}`}>
+              <Link to={`/admin/tournament/${tournament?.id}`}>
                 <button className="btn btn-sm btn-info">View Tournament</button>
               </Link>
             </td>

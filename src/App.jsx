@@ -27,6 +27,8 @@ import { HomeSingleTournament } from "./features/home/tournaments/HomeSingleTour
 import { HomeTeamList } from "./features/home/teams/HomeTeamList.jsx";
 import { HomeSingleTeamPage } from "./features/home/teams/HomeSingleTeamPage.jsx";
 import { HomePlayerList } from "./features/home/players/HomePlayerList.jsx";
+import { HomeStageList } from "./features/home/stages/HomeStageList.jsx";
+import { HomeSingleStagePage } from "./features/home/stages/HomeSingleStagePage.jsx";
 
 export default function App() {
   return (
@@ -74,6 +76,8 @@ export default function App() {
         <Route path="tournaments">
           <Route index element={<HomeTournamentList />} />
           <Route path=":id" element={<HomeSingleTournament />} />
+          <Route path=":id/stage" element={<HomeStageList />} />
+          <Route path=":id/stage/:stageId" element={<HomeSingleStagePage />} />
         </Route>
         <Route path="teams">
           <Route index element={<HomeTeamList />} />
@@ -81,6 +85,9 @@ export default function App() {
         </Route>
         <Route path="players">
           <Route index element={<HomePlayerList />} />
+        </Route>
+        <Route path="stages">
+          <Route index element={<HomeStageList />} />
         </Route>
       </Route>
     </Routes>

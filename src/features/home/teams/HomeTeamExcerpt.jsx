@@ -2,6 +2,7 @@ import React from 'react'
 import { CardShow } from '../CardShow';
 
 export const HomeTeamExcerpt = ({teams}) => {
+  console.log(teams);
   return (
     <div className="p-10 flex flex-wrap gap-5 justify-between items-center">
       {teams?.map((team) => {

@@ -1,13 +1,13 @@
 import { Table } from '@mantine/core';
 import React from 'react'
-import { useDispatch } from 'react-redux';
+
 
 export const HomePlayerExcerpt = ({players}) => {
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
         <tr>
-          <th>Player Id</th>
+          <th></th>
           <th>Player Name</th>
           <th>Team id</th>
           <th>Player Address</th>
@@ -15,9 +15,9 @@ export const HomePlayerExcerpt = ({players}) => {
         </tr>
       </thead>
       <tbody>
-        {players?.map((player) => (
+        {players?.map((player, index) => (
           <tr key={player.id}>
-            <td>{player.id}</td>
+            <td>{index+1}</td>
             <td>{player.playerFirstName + " " + player.playerLastName}</td>
             <td>{player.teamId}</td>
             <td>{player.playerAddress}</td>
