@@ -90,7 +90,7 @@ const tournamentSlice = createSlice({
       })
       .addCase(addNewTournament.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.tournaments.push(action.payload);
+        return { ...state, tournaments: [...state.tournaments, action.payload] };
       })
       .addCase(addNewTournament.rejected, (state, action) => {
         state.status = "failed";
