@@ -51,7 +51,7 @@ export const AddGamePerformanceForm = ({
   return (
     <div>
       <div>
-        <Box sx={{ maxWidth: 340 }} mx="auto">
+        <Box sx={{ maxWidth: 640 }} mx="auto">
           <form>
             <TextInput
               label="Team 1"

@@ -77,7 +77,7 @@ export const AddTeamsMatchForm = ({stageId}) => {
             {...form.getInputProps("secondStageTeamId")}
           />
           <Group position="right" mt="md">
-            <Button type="submit">Match Team</Button>
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">Match Team</button>
           </Group>
         </form>
       </Box>

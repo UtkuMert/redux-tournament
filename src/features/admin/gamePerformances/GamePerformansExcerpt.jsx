@@ -41,7 +41,8 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                 />
               </Modal>
               <Group position="center">
-                <Button
+                <button
+                  className="btn btn-sm btn-outline btn-warning"
                   onClick={() => {
                     setOpened(true);
                     setFirstTeamId(gamePerformance?.firstTeamId);
@@ -50,7 +51,7 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                   }}
                 >
                   Edit Match
-                </Button>
+                </button>
               </Group>
             </td>
           </tr>
