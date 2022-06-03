@@ -68,7 +68,7 @@ export const selectGamePerformanceById = (state, id) =>
     (gamePerformance) => gamePerformance.id === id
   ); //Turnuva bulunuyor.
 
-export const selectGamePerformanceByStageIdId = (state, id) =>
+export const selectGamePerformanceByStageId = (state, id) =>
   state.gamePerformances?.gamePerformances?.filter(
     (gamePerformance) => gamePerformance?.stageId === id
   ); //Turnuva idsine gore team geliyor.

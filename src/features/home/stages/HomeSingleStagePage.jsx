@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectStageTeamByStageId } from "../../admin/stageTeams/stageTeamsSlice";
+import { HomeGamePlayedList } from "../gamePlayed/HomeGamePlayedList";
 import { HomeGameWillPlayList } from "../gamesWillPlay/HomeGameWillPlayList";
 
 import { HomeTeamExcerpt } from "../teams/HomeTeamExcerpt";
@@ -10,13 +11,16 @@ export const HomeSingleStagePage = () => {
   const teams = useSelector((state) =>
     selectStageTeamByStageId(state, Number(stageId))
   );
-  console.log(stageId);
   return (
     <div>
       <HomeTeamExcerpt teams={teams} />
       <div>
-        <HomeGameWillPlayList />
-      {/* <GamePerformancesList stageId={stageId} />  */}
+        <div className="bg-red-50">
+          <HomeGameWillPlayList />
+        </div>
+        <div className="pt-3 mt-5 bg-red-50">
+          <HomeGamePlayedList stageId={stageId} />
+        </div>
       </div>
     </div>
   );
