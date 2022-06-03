@@ -4,10 +4,9 @@ import { GamePerformancesList } from "../gamePerformances/GamePerformancesList";
 import { GamePlayList } from "../gamePlays/GamePlayList";
 import { selectStageTeamByStageId } from "../stageTeams/stageTeamsSlice";
 import { TeamExcerpt } from "../teams/TeamExcerpt";
-import { Link } from "react-router-dom";
-import { AddTeamsMatchForm } from "../gamePlays/AddTeamsMatchForm";
 import { Modal, Group } from "@mantine/core";
 import { useState } from "react";
+import { AddStageTeamsForm } from "../stageTeams/AddStageTeamsForm";
 
 export const SingleStagePage = () => {
   const { stageId } = useParams();
@@ -22,9 +21,9 @@ export const SingleStagePage = () => {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Introduce yourself!"
+        title="Match Teams"
       >
-        <AddTeamsMatchForm stageId={stageId} />
+        <AddStageTeamsForm stageId={stageId} />
       </Modal>
       <Group position="center">
         <button
