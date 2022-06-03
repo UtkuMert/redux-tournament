@@ -71,7 +71,7 @@ export default function App() {
         <Route path="gameplay" element={<GamePlayList />} />
       </Route>
       <Route path="/" element={<HomeLayout />}>
-        <Route element={<Home />} />
+        <Route index element={<Home />} />
 
         <Route path="tournaments">
           <Route index element={<HomeTournamentList />} />
