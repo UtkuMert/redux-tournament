@@ -35,7 +35,10 @@ export const addNewTeam = createAsyncThunk(
   async (initialTeam) => {
     try {
       const { tournamentId } = initialTeam;
-      const response = await axios.post(`/teams/save/${tournamentId}`, initialTeam);
+      const response = await axios.post(
+        `/teams/save/${tournamentId}`,
+        initialTeam
+      );
       console.log(response?.data);
       return response?.data?.data;
     } catch (err) {
@@ -101,9 +104,19 @@ const teamSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(addNewTeam.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(addNewTeam.fulfilled, (state, action) => {
         console.log(action.payload);
         return { ...state, teams: [...state.teams, action.payload] };
+      })
+      .addCase(addNewTeam.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(updateTeam.pending, (state, action) => {
+        state.status = "loading";
       })
       .addCase(updateTeam.fulfilled, (state, action) => {
         if (!action.payload?.id) {
@@ -116,6 +129,13 @@ const teamSlice = createSlice({
         state.team = [...teams, action.payload];
         console.log(action.payload);
       })
+      .addCase(updateTeam.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteTeam.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(deleteTeam.fulfilled, (state, action) => {
         if (!action.payload?.id) {
           console.log("Delete could not complete");
@@ -124,6 +144,10 @@ const teamSlice = createSlice({
         const { id } = action.payload;
         const teams = state.teams?.filter((team) => team?.id !== id);
         state.teams = teams;
+      })
+      .addCase(deleteTeam.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
