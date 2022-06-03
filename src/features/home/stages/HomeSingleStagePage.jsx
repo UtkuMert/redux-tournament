@@ -1,7 +1,8 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectStageTeamByStageId } from "../../admin/stageTeams/stageTeamsSlice";
+import { HomeGameWillPlayList } from "../gamesWillPlay/HomeGameWillPlayList";
+
 import { HomeTeamExcerpt } from "../teams/HomeTeamExcerpt";
 
 export const HomeSingleStagePage = () => {
@@ -14,8 +15,8 @@ export const HomeSingleStagePage = () => {
     <div>
       <HomeTeamExcerpt teams={teams} />
       <div>
-        {/* <GamePlayList />
-      <GamePerformancesList stageId={stageId} /> */}
+        <HomeGameWillPlayList />
+      {/* <GamePerformancesList stageId={stageId} />  */}
       </div>
     </div>
   );
