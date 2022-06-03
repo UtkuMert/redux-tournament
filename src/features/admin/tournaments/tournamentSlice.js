@@ -23,17 +23,17 @@ export const fetchTournaments = createAsyncThunk(
 
 export const addNewTournament = createAsyncThunk(
   "/tournaments/save",
-  async (initialTournament, {rejectWithValue}) => {
+  async (initialTournament, { rejectWithValue }) => {
     console.log("eklendi", initialTournament);
     try {
-      const response = await axios.post("/tournaments/save", initialTournament); 
+      const response = await axios.post("/tournaments/save", initialTournament);
       return response?.data?.data;
     } catch (err) {
-      if(!err?.response){
-        throw err
+      if (!err?.response) {
+        throw err;
       }
 
-      return rejectWithValue(err?.response.data)
+      return rejectWithValue(err?.response.data);
     }
   }
 );
@@ -42,8 +42,11 @@ export const updateTournament = createAsyncThunk(
   "/tournaments/update",
   async (initialTournament) => {
     try {
-      const { id } = initialTournament 
-      const response = await axios.put(`/tournaments/update/${id}`, initialTournament);
+      const { id } = initialTournament;
+      const response = await axios.put(
+        `/tournaments/update/${id}`,
+        initialTournament
+      );
       return response.data;
     } catch (err) {
       return err.message;
@@ -82,20 +85,39 @@ const tournamentSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(addNewTournament.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(addNewTournament.fulfilled, (state, action) => {
         console.log(action.payload);
         state.tournaments.push(action.payload);
       })
+      .addCase(addNewTournament.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(updateTournament.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(updateTournament.fulfilled, (state, action) => {
-        if(!action.payload?.id){
-          console.log("Update could not complete")
-          console.log(action.payload)
+        if (!action.payload?.id) {
+          console.log("Update could not complete");
+          console.log(action.payload);
           return;
         }
-        const {id} = action.payload;
-        const tournaments = state.tournaments.filter(tournament => tournament.id !== id);
-        state.tournament = [...tournaments, action.payload]
+        const { id } = action.payload;
+        const tournaments = state.tournaments.filter(
+          (tournament) => tournament.id !== id
+        );
+        state.tournament = [...tournaments, action.payload];
         console.log(action.payload);
+      })
+      .addCase(updateTournament.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteTournament.pending, (state, action) => {
+        state.status = "loading";
       })
       .addCase(deleteTournament.fulfilled, (state, action) => {
         if (!action.payload?.id) {
@@ -104,12 +126,17 @@ const tournamentSlice = createSlice({
           return;
         }
         const { id } = action.payload;
-        const tournaments = state.tournaments.filter((tournament) => tournament?.id !== id);
+        const tournaments = state.tournaments.filter(
+          (tournament) => tournament?.id !== id
+        );
         state.tournaments = tournaments;
+      })
+      .addCase(deleteTournament.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
-
 
 export const selectAllTournaments = (state) => state?.tournaments?.tournaments;
 export const getTournamentsStatus = (state) => state?.tournaments?.status;
@@ -117,6 +144,5 @@ export const getTournamentsError = (state) => state?.tournaments?.error;
 
 export const selectTournamentById = (state, id) =>
   state.tournaments.tournaments.find((tournament) => tournament.id === id); //Turnuva bulunuyor.
-
 
 export default tournamentSlice.reducer;
