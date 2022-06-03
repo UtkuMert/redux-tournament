@@ -1,4 +1,4 @@
-import React from "react";
+import Background from '../../img/saha.jpg'
 import {
   Card,
   Image,
@@ -29,8 +29,8 @@ export const CardShow = ({ parameter }) => {
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Image
-            src="https://api.lorem.space/image/shoes?w=400&h=225"
-            alt="Shoes"
+            src={Background}
+            alt="Tournament"
             height={160}
           />
         </Card.Section>
