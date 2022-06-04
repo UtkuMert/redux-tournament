@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, Modal, Button, Group } from "@mantine/core";
+import { Table, Modal, Group } from "@mantine/core";
 import { AddScorePlayerForm } from "../scorePlayers/AddScorePlayerForm";
 
 export const GamePerformansExcerpt = ({ gamePerformances }) => {

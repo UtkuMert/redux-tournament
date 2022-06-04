@@ -35,9 +35,9 @@ export const HomeGameWillPlayList = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2 w-full border border-red-400">
+    <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 divide-y-2 w-full">
       <p className="text-2xl font-sans font-medium pb-4">Next Games</p>
-      <div className="p-10 flex flex-wrap items-center w-full border border-red-400">{content}</div>
+      <div className="p-10 flex flex-wrap items-center w-full ">{content}</div>
     </div>
   );
 };

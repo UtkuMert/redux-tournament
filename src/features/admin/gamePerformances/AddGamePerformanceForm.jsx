@@ -6,8 +6,6 @@ import {
   Box,
   NumberInput,
   TextInput,
-  Button,
-  Modal,
   Group,
 } from "@mantine/core";
 export const AddGamePerformanceForm = ({
@@ -94,15 +92,14 @@ export const AddGamePerformanceForm = ({
               stepHoldInterval={100}
             />
             <Group position="right" mt="md">
-              <Button
+              <button
+                className="btn btn-sm btn-wide btn-secondary"
                 onClick={onSaveScoreClicked}
                 type="button"
                 disabled={!canSave}
-                color="teal"
-                className="btn btn-active"
               >
                 Save Score
-              </Button>
+              </button>
             </Group>
           </form>
         </Box>

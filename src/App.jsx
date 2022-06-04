@@ -16,7 +16,6 @@ import { StageList } from "./features/admin/stages/StageList";
 import { AddStageTeamsForm } from "./features/admin/stageTeams/AddStageTeamsForm";
 import { AddTeamsMatchForm } from "./features/admin/gamePlays/AddTeamsMatchForm";
 import { StageTeamList } from "./features/admin/stageTeams/StageTeamList";
-import { AddStageFrom } from "./features/admin/stages/AddStageFrom";
 import { GamePlayList } from "./features/admin/gamePlays/GamePlayList";
 import { SingleStagePage } from "./features/admin/stages/SingleStagePage.jsx";
 import { TournamentList } from "./features/admin/tournaments/TournamentList.jsx";
@@ -45,7 +44,6 @@ export default function App() {
           <Route path=":id/stage" element={<StageList />} />
           <Route path=":id/stage/:stageId" element={<SingleStagePage />} />
         </Route>
-
         <Route path="team">
           <Route index element={<TeamList />} />
           <Route path=":id" element={<SingleTeamPage />} />
@@ -67,9 +65,8 @@ export default function App() {
           <Route index element={<StageTeamList />} />
           <Route path="addteamtostage" element={<AddStageTeamsForm />} />
         </Route>
-        <Route path="matchteams" element={<AddTeamsMatchForm />} />
-        <Route path="gameplay" element={<GamePlayList />} />
       </Route>
+
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
 

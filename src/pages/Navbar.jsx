@@ -23,8 +23,12 @@ export const Navbar = () => {
         </div>
       </div>
       <div className="flex space-x-3 ">
-      <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans"><Link to={"/"}>Go To Home</Link> </button>
-      <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans"><Link to={"/admin/tournament/addTournament"}>Add Tournament</Link> </button>
+        <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans">
+          <Link to={"/"}>Go To Home</Link>{" "}
+        </button>
+        <button className="py-3 px-5 rounded-lg border border-gray-400 text-white bg-slate-700 hover:bg-slate-900 font-sans">
+          <Link to={"/admin/tournament/addTournament"}>Add Tournament</Link>{" "}
+        </button>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
         <tr>
-          <th>Tournament Id</th>
+          <th></th>
           <th>Tournament Name</th>
           <th>Tournament Description</th>
           <th></th>
@@ -33,9 +33,9 @@ export const TournamentExcerpt = ({ tournaments }) => {
         </tr>
       </thead>
       <tbody>
-        {tournaments?.map((tournament) => (
+        {tournaments?.map((tournament, index) => (
           <tr key={tournament.id}>
-            <td>{tournament.id}</td>
+            <td>{index}</td>
             <td>{tournament.tournamentName}</td>
             <td>{tournament.description}</td>
             <td>
@@ -48,7 +48,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
               <Modal
                 opened={openedTeam}
                 onClose={() => setOpenedTeam(false)}
-                title="Add New Stage"
+                title="Add New Team"
               >
                 <AddTeamForm tournamentId={tournamentId} />
               </Modal>{" "}

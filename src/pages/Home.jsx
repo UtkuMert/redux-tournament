@@ -54,7 +54,7 @@ export const Home = () => {
               />
 
               <Group position="right" mt="md">
-                <button type="submit">Register</button>
+                <button className="btn btn-primary" type="submit">Register</button>
               </Group>
             </form>
           </Box>
