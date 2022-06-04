@@ -63,4 +63,8 @@ const scorePlayerSlice = createSlice({
 export const selectAllScorePlayers = (state) => state?.scorePlayers?.scorePlayers;
 export const getScorePlayersStatus = (state) => state?.scorePlayers?.status;
 export const getScorePlayersError = (state) => state?.scorePlayers?.error;
+
+export const selectScorePlayerByScoreId = (state, id) =>
+  state.scorePlayers?.scorePlayers?.filter((scorePlayer) => scorePlayer?.scoreId === id); //Turnuva idsine gore team geliyor.
+
 export default scorePlayerSlice.reducer;
