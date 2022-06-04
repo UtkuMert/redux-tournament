@@ -15,10 +15,10 @@ export const HomeSingleStagePage = () => {
     <div>
       <HomeTeamExcerpt teams={teams} />
       <div>
-        <div className="bg-red-50">
+        <div className="bg-red-50 mt-5 w-3/6 mx-auto">
           <HomeGameWillPlayList />
         </div>
-        <div className="pt-3 mt-5 bg-red-50">
+        <div className="pt-3 mt-5 w-3/6 mx-auto bg-red-50">
           <HomeGamePlayedList stageId={stageId} />
         </div>
       </div>

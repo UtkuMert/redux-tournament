@@ -53,7 +53,7 @@ export const CardShow = ({ parameter }) => {
           style={{ marginTop: 14 }}
           onClick={handleButtonClick}
         >
-         {parameter?.description ? 'Turnuva Detay' : 'Takim Detayi'}
+         {parameter?.description ? 'Tournament Detail' : 'Team Detail'}
         </Button>
       </Card>
     </div>

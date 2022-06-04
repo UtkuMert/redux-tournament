@@ -7,17 +7,19 @@ export const HomeStageExcerpt = ({ stages }) => {
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
         <tr>
-          <th>Stage Id</th>
+          <th></th>
           <th>Stage Name</th>
+          <th>Tournament Name</th>
         </tr>
       </thead>
       <tbody>
-        {stages?.map((stage) => (
+        {stages?.map((stage,index) => (
           <tr key={stage.id}>
-            <td>{stage.id}</td>
-            <td>{stage.stageName}</td>
+            <td>{index}</td>
+            <td>{stage?.stageName}</td>
+            <td>{stage.tournamentName}</td>
             <td>
-              <Link to={`/tournaments/${stage?.tournamentId}/stage/${stage.id}`}>View Stage</Link>
+              <Link to={`/tournaments/${stage?.tournamentId}/stage/${stage.id}`}><button className="btn btn-sm btn-info">View Stage</button></Link>
             </td>
           </tr>
         ))}

@@ -19,14 +19,13 @@ export const SingleStagePage = () => {
     selectStageTeamByStageId(state, Number(stageId))
   );
   const stage = useSelector((state) => selectStageById(state, Number(stageId)));
-  console.log(teams);
   return (
     <div className="flex flex-col items-center justify-center container mx-auto px-4 pt-10 space-y-8">
       <div className="flex justify-between items-start w-full">
         <Modal
           opened={opened}
           onClose={() => setOpened(false)}
-          title="Match Teams"
+          title="Add Teams To Stage"
         >
           <AddStageTeamsForm stageId={stageId} />
         </Modal>

@@ -21,13 +21,13 @@ export function TeamExcerpt({ teams }) {
       console.error("Failed to delete the team", err);
     }
   };
+  console.log('bbbbbbbbbbb',teams)
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
         <tr>
-          <th>Team Id</th>
+          <th></th>
           <th>Team Name</th>
-          <th>Tournament id</th>
           <th></th>
           <th></th>
         </tr>
@@ -35,9 +35,8 @@ export function TeamExcerpt({ teams }) {
       <tbody>
         {teams?.map((team, index) => (
           <tr key={team?.id}>
-            <td>{index}</td>
+            <td>{index+1}</td>
             <td>{team?.teamName}</td>
-            <td>{team?.tournamentId}</td>
             <td>
               {" "}
               <Link to={`/admin/team/${team?.id}`}>

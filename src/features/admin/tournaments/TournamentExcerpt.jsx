@@ -35,7 +35,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
       <tbody>
         {tournaments?.map((tournament, index) => (
           <tr key={tournament.id}>
-            <td>{index}</td>
+            <td>{index+1}</td>
             <td>{tournament.tournamentName}</td>
             <td>{tournament.description}</td>
             <td>

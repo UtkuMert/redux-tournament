@@ -9,7 +9,7 @@ export const HomePlayerExcerpt = ({players}) => {
         <tr>
           <th></th>
           <th>Player Name</th>
-          <th>Team id</th>
+          <th>Team Name</th>
           <th>Player Address</th>
           <th>Position</th>
         </tr>
@@ -19,7 +19,7 @@ export const HomePlayerExcerpt = ({players}) => {
           <tr key={player.id}>
             <td>{index+1}</td>
             <td>{player.playerFirstName + " " + player.playerLastName}</td>
-            <td>{player.teamId}</td>
+            <td>{player.teamName}</td>
             <td>{player.playerAddress}</td>
             <td>{player.position}</td>
           </tr>

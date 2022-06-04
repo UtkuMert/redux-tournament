@@ -51,7 +51,6 @@ export const AddTeamForm = ({tournamentId}) => {
   return (
     <div>
       <Toaster />
-      <h2>Add Team</h2>
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onSaveTeamClicked(value))}>
           <TextInput

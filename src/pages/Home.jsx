@@ -31,7 +31,7 @@ export const Home = () => {
         <Drawer
           opened={opened}
           onClose={() => setOpened(false)}
-          title="Register"
+          title=""
           padding="xl"
           size="xl"
         >
@@ -41,20 +41,20 @@ export const Home = () => {
                 placeholder="Your name"
                 label="Full name"
                 size="md"
-                required
+               
                 {...form.getInputProps("userName")}
               />
 
               <PasswordInput
                 placeholder="Password"
                 label="Password"
-                description="Password must include at least one letter, number and special character"
-                required
+                size="md"
+                
                 {...form.getInputProps("password")}
               />
 
               <Group position="right" mt="md">
-                <button className="btn btn-primary" type="submit">Register</button>
+                <button className="btn btn-primary" type="submit">Log in</button>
               </Group>
             </form>
           </Box>
@@ -76,7 +76,10 @@ export const Home = () => {
               gidişatını sitemiz üzerinden takip edebilirsiniz.
             </p>
             <button onClick={() => setOpened(true)} className="btn btn-primary">
-              KAYIT OL
+              Register
+            </button>
+            <button onClick={() => setOpened(true)} className="btn btn-primary m-3">
+              Log in
             </button>
           </div>
         </div>
