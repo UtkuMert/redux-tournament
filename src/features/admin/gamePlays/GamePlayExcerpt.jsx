@@ -37,6 +37,17 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
               </Modal>
               <Group position="center">
                 <button
+                  className="btn btn-sm btn-outline"
+                  onClick={() => {
+                    setOpened(true);
+                    setGameToPlayId(gamePlay?.id);
+                    setFirstTeamName(gamePlay?.firstTeamName);
+                    setSecondTeamName(gamePlay?.secondTeamName);
+                  }}
+                >
+                  Add Score
+                </button>
+                <button
                   className="btn btn-sm btn-outline btn-warning"
                   onClick={() => {
                     setOpened(true);
@@ -48,6 +59,7 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
                   Edit Score
                 </button>
               </Group>
+              
             </td>
           </tr>
         ))}
