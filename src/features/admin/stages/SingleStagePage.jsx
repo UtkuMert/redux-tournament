@@ -12,7 +12,6 @@ import { AddTeamsMatchForm } from "../gamePlays/AddTeamsMatchForm";
 
 export const SingleStagePage = () => {
   const { stageId } = useParams();
-  console.log(stageId);
   const [opened, setOpened] = useState(false);
   const [openedTeams, setOpenedTeams] = useState(false);
   const teams = useSelector((state) =>

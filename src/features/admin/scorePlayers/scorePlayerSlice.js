@@ -9,10 +9,10 @@ const initialState = {
 };
 
 export const fetchScorePlayers = createAsyncThunk(
-  "/scoreplayers/get/list",
+  "/scoresplayers/get/list",
   async () => {
     try {
-      const response = await axios.get("/scoreplayers/get/list");
+      const response = await axios.get("/scoresplayers/get/list");
       console.log(response?.data);
       return response?.data;
     } catch (err) {
@@ -21,10 +21,14 @@ export const fetchScorePlayers = createAsyncThunk(
   }
 );
 export const addNewScorePlayers = createAsyncThunk(
-  "/scoreplayers/save",
+  "/scoresplayers/save",
   async (initialScore) => {
+    console.log("BURADYIM", initialScore)
     try {
-      const response = await axios.post("/scoreplayers/save", initialScore);
+      const response = await axios.post("/scoresplayers/save", {
+        playerId: initialScore?.value,
+        scoreId : initialScore?.id
+      });
       return response?.data?.data;
     } catch (err) {
       return err.message;
@@ -54,6 +58,8 @@ const scorePlayerSlice = createSlice({
       })
   },
 });
+
+
 export const selectAllScorePlayers = (state) => state?.scorePlayers?.scorePlayers;
 export const getScorePlayersStatus = (state) => state?.scorePlayers?.status;
 export const getScorePlayersError = (state) => state?.scorePlayers?.error;

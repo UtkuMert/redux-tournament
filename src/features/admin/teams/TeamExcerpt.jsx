@@ -21,7 +21,7 @@ export function TeamExcerpt({ teams }) {
       console.error("Failed to delete the team", err);
     }
   };
-  console.log('bbbbbbbbbbb',teams)
+  
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>

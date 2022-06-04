@@ -32,7 +32,7 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
               <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title="Add Team To Stage"
+                title="Score-Player"
               >
                 <AddScorePlayerForm
                   firstTeamId={firstTeamId}

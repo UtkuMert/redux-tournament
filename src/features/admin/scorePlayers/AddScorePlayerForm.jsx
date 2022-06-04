@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { useForm } from "@mantine/form";
 import React from "react";
 import { selectTeamById } from "../teams/teamSlice";
 import { selectPlayersListByTeamId } from "../playersList/playerListSlice";
 import { selectGamePerformanceById } from "../gamePerformances/gamePerformances";
+import { Box, MultiSelect, Group } from "@mantine/core";
+import { addNewScorePlayers } from "./scorePlayerSlice";
 
 export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const [playerId, setPlayerId] = useState("");
 
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const gamePerformance = useSelector((state) =>
     selectGamePerformanceById(state, Number(gamePerformanceId))
   );
-
+  console.log("aaaaaaaaaaaaaaaaaaaa", gamePerformance);
   const firstTeam = useSelector((state) =>
     selectTeamById(state, Number(gamePerformance?.firstTeamId))
   );
@@ -24,70 +26,98 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
     selectTeamById(state, Number(gamePerformance?.secondTeamId))
   );
 
-  const onFirstNameChange = (e) => setPlayerId(e.target.value);
-
-  console.log(gamePerformance);
   const firstTeamScore = gamePerformance?.scoreOfFirstTeam;
   const secondTeamScore = gamePerformance?.scoreOfSecondTeam;
 
   const firstTeamPlayers = useSelector((state) =>
     selectPlayersListByTeamId(state, Number(firstTeam?.id))
   );
+  console.log(firstTeamPlayers);
 
+  const firstTeamPlayersData = [];
+
+  firstTeamPlayers?.map((player) =>
+    firstTeamPlayersData.push({
+      value: player?.id,
+      label: player?.playerFirstName,
+    })
+  );
+  console.log(firstTeamPlayersData);
   const secondTeamPlayers = useSelector((state) =>
     selectPlayersListByTeamId(state, Number(secondTeam?.id))
   );
+  const secondTeamPlayersData = [];
+  secondTeamPlayers?.map((player) =>
+    secondTeamPlayersData.push({
+      value: player?.id,
+      label: player?.playerFirstName,
+    })
+  );
 
-  const firstTeamPlayersOptions = firstTeamPlayers.map((firstTeamPlayer) => (
-    <option key={firstTeamPlayer.id} value={firstTeamPlayer.id}>
-      {firstTeamPlayer.playerFirstName}
-    </option>
-  ));
-  const secondTeamPlayersOptions = secondTeamPlayers.map((secondTeamPlayer) => (
-    <option key={secondTeamPlayer.id} value={secondTeamPlayer.id}>
-      {secondTeamPlayer.playerFirstName}
-    </option>
-  ));
+  const onSaveScorePlayerClicked = (values) => {
+    const firstTeamScoreId = gamePerformance?.scoreOfFirstTeam;
+    const secondTeamScoreId = gamePerformance?.scoreOfSecondTeam;
 
-  const scoreFirstTeamArray = [];
+    try {
+      setAddRequestStatus("pending");
+      console.log("Values", values);
 
-  for (let i = 0; i < firstTeamScore; i++) {
-    scoreFirstTeamArray.push(i);
-  }
-  const scoreSecondTeamArray = [];
+      values?.firstTeamPlayers?.map((value) => {
+        const id = gamePerformance?.scoreOfFirstTeam;
+        dispatch(addNewScorePlayers({ value, id })).unwrap();
+      });
 
-  for (let i = 0; i < secondTeamScore; i++) {
-    scoreSecondTeamArray.push(i);
-  }
+      values?.secondTeamPlayers?.map((value) => {
+        const id = gamePerformance?.scoreOfSecondTeam;
+        dispatch(addNewScorePlayers({ value, id })).unwrap();
+      });
+    } catch (error) {
+      console.error("Failed to save the score player", error);
+    } finally {
+    }
+  };
 
+  const form = useForm({
+    initialValues: {
+      firstTeamPlayers: "",
+      secondTeamPlayers: "",
+    },
+  });
   return (
-    <div className="flex w-full items-start justify-between">
-      <div className="flex flex-col gap-3">
-        <p>First Team</p>
-        {scoreFirstTeamArray?.map((score) => (
-          <>
-            <label htmlFor="Team 1 Player">Player for score {score + 1}:</label>
+    <div>
+      <Box sx={{ maxWidth: 340 }} mx="auto">
+        <form
+          onSubmit={form.onSubmit((values) => onSaveScorePlayerClicked(values))}
+        >
+          {firstTeamScore === 0 ? null : (
+            <MultiSelect
+              data={firstTeamPlayersData}
+              label="Players for score"
+              placeholder="Select Players"
+              searchable
+              maxSelectedValues={firstTeamScore}
+              {...form.getInputProps("firstTeamPlayers")}
+            />
+          )}
 
-            <select id="player" value={playerId} onChange={onFirstNameChange}>
-              <option value=""></option>
-              {firstTeamPlayersOptions}
-            </select>
-          </>
-        ))}
-      </div>
-      <div className="flex flex-col gap-3">
-        <p>Second Team</p>
-        {scoreSecondTeamArray?.map((score) => (
-          <>
-            <label htmlFor="Team 1 Player">Player for score {score + 1}:</label>
+          {secondTeamScore === 0 ? null : (
+            <MultiSelect
+              data={secondTeamPlayersData}
+              label="Players for score"
+              placeholder="Select Players"
+              searchable
+              maxSelectedValues={secondTeamScore}
+              {...form.getInputProps("secondTeamPlayers")}
+            />
+          )}
 
-            <select id="player" value={playerId} onChange={onFirstNameChange}>
-              <option value=""></option>
-              {secondTeamPlayersOptions}
-            </select>
-          </>
-        ))}
-      </div>
+          <Group position="right" mt="md">
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">
+              Score Player
+            </button>
+          </Group>
+        </form>
+      </Box>
     </div>
   );
 };
