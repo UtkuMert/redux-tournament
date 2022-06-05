@@ -26,7 +26,6 @@ export const AddStageTeamsForm = ({ stageId }) => {
     selectTeamByTournamentId(state, Number(tournamentId))
   );
 
-  const onTeamChange = (e) => setTeamId(e.target.value);
 
   const onSaveTeamToStageClicked = (values) => {
     try {
@@ -38,7 +37,7 @@ export const AddStageTeamsForm = ({ stageId }) => {
 
       setTeamId("");
 
-      navigate(`/tournament/${tournamentId}/stage`);
+      navigate(`/admin/tournament/${tournamentId}/stage`);
     } catch (error) {
       console.error("Failed to save the team", error);
     } finally {

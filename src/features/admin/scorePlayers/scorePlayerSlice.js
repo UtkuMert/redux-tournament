@@ -23,7 +23,6 @@ export const fetchScorePlayers = createAsyncThunk(
 export const addNewScorePlayers = createAsyncThunk(
   "/scoresplayers/save",
   async (initialScore) => {
-    console.log("BURADYIM", initialScore)
     try {
       const response = await axios.post("/scoresplayers/save", {
         playerId: initialScore?.value,

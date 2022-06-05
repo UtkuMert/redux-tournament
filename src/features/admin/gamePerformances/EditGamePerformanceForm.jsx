@@ -1,25 +1,30 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { addGamePerformance } from "./gamePerformances";
+import { addGamePerformance, selectGamePerformedByGameToPlayId, updateGamePerformance } from "./gamePerformances";
 import { Box, NumberInput, TextInput, Group } from "@mantine/core";
-export const AddGamePerformanceForm = ({
+
+export const EditGamePerformanceForm = ({
   gameToPlayId,
-  firstTeamName,
-  secondTeamName,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const gamePerformance = useSelector((state) =>
+    selectGamePerformedByGameToPlayId(state, Number(gameToPlayId))
+  );
+  const [scoreOfFirstTeam, setScoreOfFirstTeam] = useState(gamePerformance?.scoreOfFirstTeam);
+  const [scoreOfSecondTeam, setScoreOfSecondTeam] = useState(gamePerformance?.scoreOfSecondTeam);
 
-  const [scoreOfFirstTeam, setScoreOfFirstTeam] = useState("");
-  const [scoreOfSecondTeam, setScoreOfSecondTeam] = useState("");
+  const [firstTeamName, setFirstTeamName] = useState(gamePerformance?.firstTeamName);
+  const [secondTeamName, setSecondTeamName] = useState(gamePerformance?.secondTeamName);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-
+  const gamePerformanceId = gamePerformance?.id
   const onSaveScoreClicked = () => {
     try {
       setAddRequestStatus("pending");
       dispatch(
-        addGamePerformance({
+        updateGamePerformance({
+          gamePerformanceId,
           gameToPlayId,
           scoreOfFirstTeam,
           scoreOfSecondTeam,
@@ -33,7 +38,6 @@ export const AddGamePerformanceForm = ({
       setAddRequestStatus("idle");
     }
   };
-
   return (
     <div>
       <div>
@@ -46,7 +50,7 @@ export const AddGamePerformanceForm = ({
               value={firstTeamName}
             />
             <NumberInput
-              defaultValue={0}
+              defaultValue={scoreOfFirstTeam}
               min={0}
               id="scoreOfFirstTeam"
               label="Team 1 Score"
@@ -66,7 +70,7 @@ export const AddGamePerformanceForm = ({
               value={secondTeamName}
             />
             <NumberInput
-              defaultValue={0}
+              defaultValue={scoreOfSecondTeam}
               min={0}
               id="scoreOfSecondTeam"
               label="Team 2 Score"
@@ -85,7 +89,7 @@ export const AddGamePerformanceForm = ({
                 onClick={onSaveScoreClicked}
                 type="button"
               >
-                Save Score
+                Update Score
               </button>
             </Group>
           </form>

@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 import { addNewStage } from "./stageSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 export const AddStageFrom = ({ tournamentId }) => {
   const dispatch = useDispatch();
@@ -23,13 +24,12 @@ export const AddStageFrom = ({ tournamentId }) => {
   const onSaveStageClicked = (value) => {
     try {
       const stageName = value.stageName;
-      console.log(stageName);
-      console.log(tournamentId);
       setAddRequestStatus("pending");
       dispatch(addNewStage({ stageName, tournamentId })).unwrap();
-
+      toast("Aşama Eklendi.");
       setStageName("");
-      navigate("/");
+      toast("Takım aşamaya eklendi.");
+      navigate("/admin");
     } catch (error) {
       console.error("Failed to save the stage", error);
     } finally {
@@ -50,6 +50,7 @@ export const AddStageFrom = ({ tournamentId }) => {
   });
   return (
     <div>
+      <Toaster />
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onSaveStageClicked(value))}>
           <Select

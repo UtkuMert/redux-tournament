@@ -9,9 +9,9 @@ import {
   selectStageTeamByStageId,
   selectAllStageTeams,
 } from "../stageTeams/stageTeamsSlice";
+import toast, { Toaster } from "react-hot-toast";
 
-
-export const AddTeamsMatchForm = ({stageId}) => {
+export const AddTeamsMatchForm = ({ stageId }) => {
   const dispatch = useDispatch();
   //const { id } = useParams();
   const navigate = useNavigate();
@@ -21,8 +21,10 @@ export const AddTeamsMatchForm = ({stageId}) => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [date, setDate] = useState("Yarin");
 
-  const stagesTeams = useSelector((state) => selectStageTeamByStageId(state, Number(stageId)));
-
+  const stagesTeams = useSelector((state) =>
+    selectStageTeamByStageId(state, Number(stageId))
+  );
+console.log(stagesTeams);
 
   const onMatchTeamsClicked = (value) => {
     const firstStageTeamId = value.firstStageTeamId;
@@ -35,7 +37,8 @@ export const AddTeamsMatchForm = ({stageId}) => {
 
       setFirstStageTeamId("");
       setSecondStageTeamId("");
-      navigate("/");
+      toast("Takımlar eşleştirildi.");
+     
     } catch (error) {
       console.error("Failed to match the team", error);
     } finally {
@@ -58,6 +61,7 @@ export const AddTeamsMatchForm = ({stageId}) => {
   });
   return (
     <div>
+      <Toaster />
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onMatchTeamsClicked(value))}>
           <Select
@@ -77,7 +81,9 @@ export const AddTeamsMatchForm = ({stageId}) => {
             {...form.getInputProps("secondStageTeamId")}
           />
           <Group position="right" mt="md">
-            <button className="btn btn-sm btn-wide btn-secondary" type="submit">Match Team</button>
+            <button className="btn btn-sm btn-wide btn-secondary" type="submit">
+              Match Team
+            </button>
           </Group>
         </form>
       </Box>

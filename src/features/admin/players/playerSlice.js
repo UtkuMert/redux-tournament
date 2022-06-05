@@ -108,7 +108,6 @@ const playerSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addNewPlayer.fulfilled, (state, action) => {
-        console.log(action.payload);
         return { ...state, players: [...state.players, action.payload] };
       })
       .addCase(updateNewPlayer.fulfilled, (state, action) => {

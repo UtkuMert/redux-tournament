@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { Box, TextInput, Button, Group } from "@mantine/core";
+import { Box, TextInput, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { addNewTeam } from "./teamSlice";

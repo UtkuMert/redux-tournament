@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Table, Modal, Button, Group } from "@mantine/core";
 import { AddGamePerformanceForm } from "../gamePerformances/AddGamePerformanceForm";
+import { EditGamePerformanceForm } from "../gamePerformances/EditGamePerformanceForm";
 
 export const GamePlayExcerpt = ({ gamePlays }) => {
   const [opened, setOpened] = useState(false);
+  const [openedEdit, setOpenedEdit] = useState(false);
   const [gameToPlayId, setGameToPlayId] = useState("");
   const [firstTeamName, setFirstTeamName] = useState("");
   const [secondTeamName, setSecondTeamName] = useState("");
@@ -27,7 +29,7 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
               <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title="Edit Score"
+                title="Add Score"
               >
                 <AddGamePerformanceForm
                   gameToPlayId={gameToPlayId}
@@ -47,13 +49,20 @@ export const GamePlayExcerpt = ({ gamePlays }) => {
                 >
                   Add Score
                 </button>
+                <Modal
+                opened={openedEdit}
+                onClose={() => setOpenedEdit(false)}
+                title="Edit Score"
+              >
+                <EditGamePerformanceForm
+                  gameToPlayId={gameToPlayId}
+                />
+              </Modal>
                 <button
                   className="btn btn-sm btn-outline btn-warning"
                   onClick={() => {
-                    setOpened(true);
+                    setOpenedEdit(true);
                     setGameToPlayId(gamePlay?.id);
-                    setFirstTeamName(gamePlay?.firstTeamName);
-                    setSecondTeamName(gamePlay?.secondTeamName);
                   }}
                 >
                   Edit Score

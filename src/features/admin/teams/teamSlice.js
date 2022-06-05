@@ -108,7 +108,6 @@ const teamSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addNewTeam.fulfilled, (state, action) => {
-        console.log(action.payload);
         return { ...state, teams: [...state.teams, action.payload] };
       })
       .addCase(addNewTeam.rejected, (state, action) => {

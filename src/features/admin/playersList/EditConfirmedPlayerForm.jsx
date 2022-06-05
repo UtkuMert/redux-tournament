@@ -9,6 +9,7 @@ import {
 } from "./playerListSlice";
 import { Box, TextInput, Select, Button, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditConfirmedPlayerForm = ({playerId}) => {
   const navigate = useNavigate();
@@ -50,7 +51,8 @@ const EditConfirmedPlayerForm = ({playerId}) => {
       setPlayerLastName("");
 
       setPosition("");
-      navigate("/");
+      toast("Oyuncu Bilgileri Güncellendi.");
+      navigate("/admin");
     } catch (error) {
       console.error("Failed to update the player", error);
     } finally {
@@ -65,7 +67,8 @@ const EditConfirmedPlayerForm = ({playerId}) => {
       setPlayerFirstName("");
       setPlayerLastName("");
       setPosition("");
-      navigate("/");
+      toast("Oyuncu Bilgileri Silindi.");
+      navigate("/admin");
     } catch (err) {
       console.error("Failed to delete the player", err);
     } finally {
@@ -98,6 +101,7 @@ const EditConfirmedPlayerForm = ({playerId}) => {
 
   return (
     <div>
+       <Toaster />
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onSavePlayerClicked(value))}>
           <TextInput

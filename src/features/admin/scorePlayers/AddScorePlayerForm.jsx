@@ -18,7 +18,6 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const gamePerformance = useSelector((state) =>
     selectGamePerformanceById(state, Number(gamePerformanceId))
   );
-  console.log("aaaaaaaaaaaaaaaaaaaa", gamePerformance);
   const firstTeam = useSelector((state) =>
     selectTeamById(state, Number(gamePerformance?.firstTeamId))
   );
@@ -32,8 +31,7 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const firstTeamPlayers = useSelector((state) =>
     selectPlayersListByTeamId(state, Number(firstTeam?.id))
   );
-  console.log(firstTeamPlayers);
-
+ 
   const firstTeamPlayersData = [];
 
   firstTeamPlayers?.map((player) =>
@@ -55,12 +53,8 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   );
 
   const onSaveScorePlayerClicked = (values) => {
-    const firstTeamScoreId = gamePerformance?.scoreOfFirstTeam;
-    const secondTeamScoreId = gamePerformance?.scoreOfSecondTeam;
-
     try {
       setAddRequestStatus("pending");
-      console.log("Values", values);
 
       values?.firstTeamPlayers?.map((value) => {
         const id = gamePerformance?.scoreOfFirstTeam;

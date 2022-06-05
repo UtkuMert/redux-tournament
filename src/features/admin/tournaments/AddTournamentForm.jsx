@@ -46,9 +46,10 @@ export const AddTournamentForm = () => {
     },
   });
   return (
-    <div>
+    <div className="p-3 mx-auto">
+      
+      <Box sx={{ maxWidth: 340 }} mx="auto" className="border border-slate-900 p-2">
       <h2>Add Tournament</h2>
-      <Box sx={{ maxWidth: 340 }} mx="auto">
         <form
           onSubmit={form.onSubmit((values) => onSaveTournamentClicked(values))}
         >

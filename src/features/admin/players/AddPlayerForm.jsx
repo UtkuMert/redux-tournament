@@ -6,10 +6,10 @@ import { selectTeamById } from "../teams/teamSlice";
 import { addNewPlayer, addNewPlayerToPlayer } from "./playerSlice";
 import { Box, Select, TextInput, Button, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
-
-export const AddPlayerForm = ({teamId}) => {
+import toast, { Toaster } from "react-hot-toast";
+export const AddPlayerForm = ({ teamId }) => {
   const dispatch = useDispatch();
-  
+
   const navigate = useNavigate();
 
   const team = useSelector((state) => selectTeamById(state, Number(teamId)));
@@ -44,7 +44,8 @@ export const AddPlayerForm = ({teamId}) => {
       setPlayerLastName("");
       setPlayerAddress("");
       setPosition("");
-      navigate("/");
+      toast("Oyuncu Eklendi.");
+      navigate("/admin");
     } catch (error) {
       console.error("Failed to save the player", error);
     } finally {
@@ -72,6 +73,7 @@ export const AddPlayerForm = ({teamId}) => {
   });
   return (
     <div>
+      <Toaster />
       <Box sx={{ maxWidth: 340 }} mx="auto">
         <form onSubmit={form.onSubmit((value) => onSavePlayerClicked(value))}>
           <TextInput

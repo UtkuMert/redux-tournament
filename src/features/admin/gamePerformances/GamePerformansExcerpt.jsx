@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Table, Modal, Group } from "@mantine/core";
 import { AddScorePlayerForm } from "../scorePlayers/AddScorePlayerForm";
+import { EditGamePerformanceForm } from "./EditGamePerformanceForm";
 
 export const GamePerformansExcerpt = ({ gamePerformances }) => {
   const [opened, setOpened] = useState(false);
+  const [openedEdit, setOpenedEdit] = useState(false);
   const [firstTeamId, setFirstTeamId] = useState("");
+  const [firstTeamName, setFirstTeamName] = useState("");
   const [secondTeamId, setSecondTeamId] = useState("");
+  const [secondTeamName, setSecondTeamName] = useState("");
   const [gamePerformanceId, setGamePerformanceId] = useState("");
+  const [gameToPlayId, setGameToPlayId] = useState("");
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -40,6 +45,20 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                   gamePerformanceId={gamePerformanceId}
                 />
               </Modal>
+
+              <Modal
+                opened={openedEdit}
+                onClose={() => setOpenedEdit(false)}
+                title="Edit Score"
+              >
+                <EditGamePerformanceForm
+                  firstTeamId={firstTeamId}
+                  secondTeamId={secondTeamId}
+                  gameToPlayId={gameToPlayId}
+                  firstTeamName={firstTeamName}
+                  secondTeamName={secondTeamName}
+                />
+              </Modal>
               <Group position="center">
                 <button
                   className="btn btn-sm btn-outline"
@@ -62,6 +81,19 @@ export const GamePerformansExcerpt = ({ gamePerformances }) => {
                   }}
                 >
                  Edit Player For Score
+                </button>
+                <button
+                  className="btn btn-sm btn-outline btn-warning"
+                  onClick={() => {
+                    setOpenedEdit(true);
+                    setFirstTeamId(gamePerformance?.firstTeamId);
+                    setSecondTeamId(gamePerformance?.secondTeamId);
+                    setGameToPlayId(gamePerformance?.gameToPlayId);
+                    setFirstTeamName(gamePerformance?.firstTeamName);
+                    setSecondTeamName(gamePerformance?.secondTeamName);
+                  }}
+                >
+                  Edit Score
                 </button>
               </Group>
             </td>
