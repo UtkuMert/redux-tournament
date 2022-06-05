@@ -77,36 +77,3 @@ export const AddTournamentForm = () => {
     </div>
   );
 };
-
-{
-  /* <form>
-<TextInput
-  type="text"
-  id="tournamentName"
-  label="Tournament Name"
-  placeholder="Tournament Name"
-  value={tournamentName}
-  onChange={onTournamentNameChanged}
-  required=""
-/>
-<TextInput
-  type="text"
-  id="description"
-  label="Description"
-  placeholder="Description"
-  value={description}
-  onChange={onDescriptionChanged}
-/>
-<Group position="right" mt="md">
-  <Button
-    onClick={onSaveTournamentClicked}
-    type="button"
-    disabled={!canSave}
-    color="teal"
-    className="btn btn-active"
-  >
-    Add Tournament
-  </Button>
-</Group>
-</form> */
-}

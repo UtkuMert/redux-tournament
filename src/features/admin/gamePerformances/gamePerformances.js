@@ -32,6 +32,23 @@ export const addGamePerformance = createAsyncThunk(
   }
 );
 
+export const updateGamePerformance = createAsyncThunk(
+  "/gamesperformed/update",
+  async (initialPerformance) => {
+    const id = initialPerformance.gamePerformanceId;
+    console.log("Aaaaaaa",initialPerformance);
+    try {
+      const response = await axios.post(
+        `/gamesperformed/update/${id}`,
+        initialPerformance
+      );
+      return response?.data?.data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
 const gamePerformancesSlice = createSlice({
   name: "gamePerformances",
   initialState,
@@ -53,6 +70,17 @@ const gamePerformancesSlice = createSlice({
       .addCase(addGamePerformance.fulfilled, (state, action) => {
         console.log(action.payload);
         state.gamePerformances?.push(action?.payload);
+      })
+      .addCase(updateGamePerformance.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Update could not complete");
+          console.log(action.payload);
+          return;
+        }
+        const { id } = action.payload;
+        const gamePerformances = state.gamePerformances.filter((gamePerformance) => gamePerformance.id !== id);
+        state.gamePerformance = [...gamePerformances, action.payload];
+        console.log(action.payload);
       });
   },
 });
@@ -72,4 +100,7 @@ export const selectGamePerformanceByStageId = (state, id) =>
   state.gamePerformances?.gamePerformances?.filter(
     (gamePerformance) => gamePerformance?.stageId === id
   ); //Turnuva idsine gore team geliyor.
+
+  export const selectGamePerformedByGameToPlayId = (state, id) =>
+  state.gamePerformances?.gamePerformances?.find((gamePerformance) => gamePerformance?.gameToPlayId === id); //Takim bulunuyor.
 export default gamePerformancesSlice.reducer;

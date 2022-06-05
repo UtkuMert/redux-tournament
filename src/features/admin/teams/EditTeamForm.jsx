@@ -44,7 +44,7 @@ export const EditTeamForm = ({ teamId }) => {
 
       setTeamName("");
 
-      navigate("/");
+      navigate("/admin");
     } catch (err) {
       console.error("Failed to delete the team", err);
     } finally {

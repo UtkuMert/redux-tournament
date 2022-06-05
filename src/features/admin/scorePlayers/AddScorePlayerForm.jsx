@@ -18,6 +18,7 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const gamePerformance = useSelector((state) =>
     selectGamePerformanceById(state, Number(gamePerformanceId))
   );
+  console.log('lOOOO2',gamePerformance)
   const firstTeam = useSelector((state) =>
     selectTeamById(state, Number(gamePerformance?.firstTeamId))
   );
@@ -31,7 +32,7 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const firstTeamPlayers = useSelector((state) =>
     selectPlayersListByTeamId(state, Number(firstTeam?.id))
   );
- 
+
   const firstTeamPlayersData = [];
 
   firstTeamPlayers?.map((player) =>
@@ -40,7 +41,7 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
       label: player?.playerFirstName,
     })
   );
-  console.log(firstTeamPlayersData);
+
   const secondTeamPlayers = useSelector((state) =>
     selectPlayersListByTeamId(state, Number(secondTeam?.id))
   );
@@ -56,15 +57,17 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
     try {
       setAddRequestStatus("pending");
 
-      values?.firstTeamPlayers?.map((value) => {
-        const id = gamePerformance?.scoreOfFirstTeam;
-        dispatch(addNewScorePlayers({ value, id })).unwrap();
-      });
+      values?.firstTeamPlayers?.map((value) =>
+        dispatch(
+          addNewScorePlayers({ value, id: gamePerformance?.scoreOfFirstTeamId })
+        ).unwrap()
+      );
 
-      values?.secondTeamPlayers?.map((value) => {
-        const id = gamePerformance?.scoreOfSecondTeam;
-        dispatch(addNewScorePlayers({ value, id })).unwrap();
-      });
+      values?.secondTeamPlayers?.map((value) =>
+        dispatch(
+          addNewScorePlayers({ value, id: gamePerformance?.scoreOfSecondTeamId })
+        ).unwrap()
+      );
     } catch (error) {
       console.error("Failed to save the score player", error);
     } finally {

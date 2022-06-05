@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Modal, Group } from "@mantine/core";
 import { AddStageFrom } from "../stages/AddStageFrom";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { deleteTournament } from "./tournamentSlice";
+import { deleteTournament, fetchTournaments } from "./tournamentSlice";
 import { AddTeamForm } from "../teams/AddTeamForm";
 export const TournamentExcerpt = ({ tournaments }) => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
       console.error("Failed to delete the tournament", err);
     }
   };
+
   return (
     <Table highlightOnHover horizontalSpacing="md" verticalSpacing="xs">
       <thead>
@@ -35,7 +36,7 @@ export const TournamentExcerpt = ({ tournaments }) => {
       <tbody>
         {tournaments?.map((tournament, index) => (
           <tr key={tournament.id}>
-            <td>{index+1}</td>
+            <td>{index + 1}</td>
             <td>{tournament.tournamentName}</td>
             <td>{tournament.description}</td>
             <td>

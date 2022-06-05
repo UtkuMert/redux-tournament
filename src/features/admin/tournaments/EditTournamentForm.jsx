@@ -52,7 +52,7 @@ export const EditTournamentForm = () => {
 
       setTournamentName("");
       setDescription("");
-      navigate("/");
+      navigate("/admin");
     } catch (err) {
       console.error("Failed to delete the tournament", err);
     } finally {
