@@ -35,10 +35,10 @@ export const addGamePerformance = createAsyncThunk(
 export const updateGamePerformance = createAsyncThunk(
   "/gamesperformed/update",
   async (initialPerformance) => {
-    const id = initialPerformance.gamePerformanceId;
+    const id = initialPerformance.gamePerformedId;
     console.log("Aaaaaaa",initialPerformance);
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `/gamesperformed/update/${id}`,
         initialPerformance
       );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Table, Modal, Group } from "@mantine/core";
 import { AddStageTeamsForm } from "../stageTeams/AddStageTeamsForm";
 import EditStageForm from "./EditStageForm";
@@ -9,7 +9,6 @@ import { MdCancel } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 export const StageExcerpt = ({ stages }) => {
   const dispatch = useDispatch();
-
   const [opened, setOpened] = useState(false);
   const [openedSecond, setOpenedSecond] = useState(false);
   const [stageId, setStageId] = useState("");
@@ -19,7 +18,8 @@ export const StageExcerpt = ({ stages }) => {
     try {
       console.log(id);
       dispatch(deleteStage({ id })).unwrap();
-      toast("Oyuncu Silindi.");
+      toast("Aşama Silindi.");
+      
     } catch (err) {
       console.error("Failed to delete the tournament", err);
     }

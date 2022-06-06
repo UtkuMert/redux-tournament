@@ -18,13 +18,14 @@ export const EditGamePerformanceForm = ({
   const [firstTeamName, setFirstTeamName] = useState(gamePerformance?.firstTeamName);
   const [secondTeamName, setSecondTeamName] = useState(gamePerformance?.secondTeamName);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-  const gamePerformanceId = gamePerformance?.id
+  const gamePerformedId = gamePerformance?.id
   const onSaveScoreClicked = () => {
+    
     try {
       setAddRequestStatus("pending");
       dispatch(
         updateGamePerformance({
-          gamePerformanceId,
+          gamePerformedId,
           gameToPlayId,
           scoreOfFirstTeam,
           scoreOfSecondTeam,

@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 
 import { selectTournamentById } from "../tournaments/tournamentSlice";
 import { deleteStage, selectStageById, updateStage } from "./stageSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditStageForm = ({ tournamentId, stageId }) => {
   const dispatch = useDispatch();
@@ -43,8 +44,8 @@ const EditStageForm = ({ tournamentId, stageId }) => {
       dispatch(deleteStage({ stageId })).unwrap();
 
       setStageName("");
-
-      navigate("/");
+      toast("Aşama Silindi.");
+      navigate("/admin");
     } catch (err) {
       console.error("Failed to delete the tournament", err);
     } finally {
@@ -63,43 +64,47 @@ const EditStageForm = ({ tournamentId, stageId }) => {
     },
   });
   return (
-    <div>
-      <Box sx={{ maxWidth: 340 }} mx="auto">
-        <form onSubmit={form.onSubmit((value) => onSaveStageClicked(value))}>
-          <Select
-            label="Stage Name"
-            data={data}
-            value={stageName}
-            placeholder="Select Stage Name"
-            nothingFound="Nothing found"
-            searchable
-            required=""
-            {...form.getInputProps("stageName")}
-          />
+    <>
+      <Toaster />
 
-          <TextInput
-            label="Tournament"
-            placeholder="Tournament Name"
-            readOnly
-            value={tournamentName}
-          />
-          <Group position="right" mt="md">
-            <button
-              className="btn btn-sm btn-outline btn-warning"
-              type="submit"
-            >
-              Edit Stage
-            </button>
-            <button
-              className="btn btn-sm btn-outline btn-error"
-              onClick={onDeleteStageClicked}
-            >
-              Delete Stage
-            </button>
-          </Group>
-        </form>
-      </Box>
-    </div>
+      <div>
+        <Box sx={{ maxWidth: 340 }} mx="auto">
+          <form onSubmit={form.onSubmit((value) => onSaveStageClicked(value))}>
+            <Select
+              label="Stage Name"
+              data={data}
+              value={stageName}
+              placeholder="Select Stage Name"
+              nothingFound="Nothing found"
+              searchable
+              required=""
+              {...form.getInputProps("stageName")}
+            />
+
+            <TextInput
+              label="Tournament"
+              placeholder="Tournament Name"
+              readOnly
+              value={tournamentName}
+            />
+            <Group position="right" mt="md">
+              <button
+                className="btn btn-sm btn-outline btn-warning"
+                type="submit"
+              >
+                Edit Stage
+              </button>
+              <button
+                className="btn btn-sm btn-outline btn-error"
+                onClick={onDeleteStageClicked}
+              >
+                Delete Stage
+              </button>
+            </Group>
+          </form>
+        </Box>
+      </div>
+    </>
   );
 };
 

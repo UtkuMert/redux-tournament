@@ -25,7 +25,7 @@ export const matchTeams = createAsyncThunk(
   "/gamestoplay/save",
   async (initialMatch) => {
     try {
-      console.log(initialMatch);
+      console.log('AAA',initialMatch);
       const response = await axios.post("/gamestoplay/save", initialMatch);
       console.log(response?.data)
       return response?.data?.data;

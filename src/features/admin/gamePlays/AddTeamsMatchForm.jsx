@@ -29,6 +29,7 @@ console.log(stagesTeams);
   const onMatchTeamsClicked = (value) => {
     const firstStageTeamId = value.firstStageTeamId;
     const secondStageTeamId = value.secondStageTeamId;
+
     try {
       setAddRequestStatus("pending");
       dispatch(
@@ -48,7 +49,7 @@ console.log(stagesTeams);
   const data = [];
   stagesTeams?.map((stagesTeam) =>
     data.push({
-      value: stagesTeam.teamId,
+      value: stagesTeam.id,
       label: stagesTeam.teamName,
     })
   );

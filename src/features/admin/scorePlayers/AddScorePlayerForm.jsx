@@ -18,7 +18,6 @@ export const AddScorePlayerForm = ({ gamePerformanceId }) => {
   const gamePerformance = useSelector((state) =>
     selectGamePerformanceById(state, Number(gamePerformanceId))
   );
-  console.log('lOOOO2',gamePerformance)
   const firstTeam = useSelector((state) =>
     selectTeamById(state, Number(gamePerformance?.firstTeamId))
   );
